@@ -8,6 +8,9 @@ import com.mitchellbosecke.pebble.template.PebbleTemplate
 private val SHORTER_URL_REGEXES = mapOf(
     Regex("https://furaffinity\\.net/user/([^/]+)/?($| )") to "FA: $1",
     Regex("https://twitter\\.com/([^/]+)($| )") to "TT: $1",
+    Regex("^https://www\\.instagram\\.com/([^/]+)/?$") to "In: $1",
+    Regex("^https://www\\.facebook\\.com/([^/]+)/?$") to "FB: $1",
+
     Regex("^https://aminoapps\\.com/c/fursuit-maker-amino/page/user/([^/]+)(/[^/]+)?$") to "FM Amino: $1",
     Regex("^https://aminoapps\\.com/c/furry-amino/page/user/([^/]+)(/[^/]+)?$") to "F Amino: $1",
 
