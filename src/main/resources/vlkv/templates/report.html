@@ -23,8 +23,8 @@
                         {% endfor %}
                     </td>
                     <td>
-                        {% for name in subject.where %}
-                            <span class="badge rounded-pill bg-secondary">{{ name }}</span>
+                        {% for where in subject.where %}
+                            <a href="{{ where }}" target="_blank"><span class="badge rounded-pill bg-secondary">{{ where|shorter_url }}</span></a>
                         {% endfor %}
                     </td>
                     <td>

@@ -1,6 +1,6 @@
 package vlkv.json
 
-private val TITLE_PREFIX = Regex("^(Customer |Fursuiter )?(Beware|Caution)[ .:-]*", RegexOption.IGNORE_CASE)
+private val TITLE_PREFIX = Regex("^(Commissioner|Client|Customer|Fursuiter|Artist)? ?(Beware|Caution)[ .:-]*", RegexOption.IGNORE_CASE)
 private val NAMES_SPLIT = Regex("( - |(?<!u)/|,)")
 
 fun getNames(title: String, who: String): List<String> {

@@ -2,6 +2,7 @@ package vlkv
 
 private val SPLIT_REGEXES = listOf(
     Regex("\n"),
+    Regex(", "),
     Regex("\\s+(?=https?://)", RegexOption.IGNORE_CASE),
 )
 

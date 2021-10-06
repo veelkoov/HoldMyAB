@@ -5,6 +5,7 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import vlkv.json.Record
 import vlkv.json.RecordsPage
+import vlkv.pebble.Extension
 import java.io.File
 
 
@@ -37,8 +38,8 @@ private fun readInputFilesFromDir(inputDirPath: String): Database {
 }
 
 private fun renderToFile(database: Database, outputFilePath: String) {
-    val engine = PebbleEngine.Builder().build()
-    val compiledTemplate = engine.getTemplate("vlkv/report.html")
+    val engine = PebbleEngine.Builder().extension(Extension()).build()
+    val compiledTemplate = engine.getTemplate("vlkv/templates/report.html")
     val outputFile = File(outputFilePath)
 
     compiledTemplate.evaluate(
