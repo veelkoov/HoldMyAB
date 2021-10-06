@@ -45,7 +45,6 @@ private fun renderToFile(database: Database, outputFilePath: String) {
     compiledTemplate.evaluate(
         outputFile.writer(), mapOf<String, Any>(
             "subjects" to database.getRecords(),
-            "strip_url_desc_prefix" to "https://artistsbeware.info/beware",
         )
     )
 }

@@ -11,11 +11,11 @@ fun recordToBeware(record: Record): Beware {
     val (whoWithoutUrls, urlsFromWho) = extractUrlsFromWho(record.fields.field_5)
 
     val names = getNames(record.title, whoWithoutUrls)
-    val isResolved = isResolved(record)
-
     val where = getTidyWhere(record.fields.getWhere(), urlsFromWho)
+    val isResolved = isResolved(record)
+    val isBeware = isBeware(record)
 
-    return Beware(names, where, record.url, isResolved) // TODO: Other stuff
+    return Beware(names, where, record.url, isResolved, isBeware) // TODO: Other stuff
 }
 
 private fun extractUrlsFromWho(who: String): Pair<String, List<String>> {
@@ -41,4 +41,18 @@ private fun validate(record: Record) {
 
 private fun isResolved(record: Record): Boolean {
     return record.tags.contains(TAG_RESOLVED) || record.fields.isResolved()
+}
+
+private fun isBeware(record: Record): Boolean {
+    if (record.category.name.contains("beware", true)
+        && !record.category.name.contains("caution", true)
+    ) {
+        return true
+    }
+
+    if (record.category.name.contains("caution", true)) {
+        return false
+    }
+
+    error("Failed to decide if a beware or a caution: " + record.title)
 }

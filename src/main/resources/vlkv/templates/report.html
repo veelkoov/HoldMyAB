@@ -32,8 +32,16 @@
                             {% for beware in subject.bewares %}
                                 <li>
                                     {%- if beware.resolved %}<s>{% endif -%}
-                                    <a href="{{ beware.url }}" target="_blank">{{ beware.url|replace({ strip_url_desc_prefix: '' }) }}</a>
-                                    {%- if beware.resolved %}</s> <span class="badge rounded-pill bg-success">resolved ❤️</span>{% endif -%}
+
+                                    <a href="{{ beware.url }}" target="_blank">{{ beware.url|shorter_ab_url }}</a>
+
+                                    {%- if beware.resolved -%}
+                                        </s>&nbsp;<span class="badge rounded-pill bg-success">R ❤️</span>
+                                    {%- elseif beware.isBeware -%}
+                                        &nbsp;<span class="badge rounded-pill bg-danger">B️</span>
+                                    {%- else -%}
+                                    &nbsp;<span class="badge rounded-pill bg-warning">C️</span>
+                                    {%- endif -%}
                                 </li>
                             {% endfor %}
                         </ul>

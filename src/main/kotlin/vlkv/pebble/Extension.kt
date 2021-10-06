@@ -5,20 +5,7 @@ import com.mitchellbosecke.pebble.extension.Filter
 import com.mitchellbosecke.pebble.template.EvaluationContext
 import com.mitchellbosecke.pebble.template.PebbleTemplate
 
-private val SHORTER_URL_REGEXES = mapOf(
-    Regex("https://furaffinity\\.net/user/([^/]+)/?($| )") to "FA: $1",
-    Regex("https://twitter\\.com/([^/]+)($| )") to "TT: $1",
-    Regex("^https://www\\.instagram\\.com/([^/]+)/?$") to "In: $1",
-    Regex("^https://www\\.facebook\\.com/([^/]+)/?$") to "FB: $1",
-
-    Regex("^https://aminoapps\\.com/c/fursuit-maker-amino/page/user/([^/]+)(/[^/]+)?$") to "FM Amino: $1",
-    Regex("^https://aminoapps\\.com/c/furry-amino/page/user/([^/]+)(/[^/]+)?$") to "F Amino: $1",
-
-    Regex("^https?://([^.]+)\\.deviantart\\.com/$") to "DA: $1",
-    Regex("^https?://www\\.deviantart\\.com/([^/]+)/?$") to "DA: $1",
-)
-
-private val shorterUrlFilter = object : Filter {
+private class ShorterUrlFilter(vararg val regexes: Pair<Regex, String>) : Filter {
     override fun getArgumentNames(): List<String> {
         return listOf();
     }
@@ -30,7 +17,7 @@ private val shorterUrlFilter = object : Filter {
 
         var result: String = input
 
-        for ((regex, replacement) in SHORTER_URL_REGEXES) {
+        for ((regex, replacement) in regexes) {
             result = regex.replace(result, replacement)
         }
 
@@ -40,6 +27,22 @@ private val shorterUrlFilter = object : Filter {
 
 class Extension : AbstractExtension() {
     override fun getFilters(): Map<String, Filter> {
-        return mapOf<String, Filter>("shorter_url" to shorterUrlFilter)
+        return mapOf<String, Filter>(
+            "shorter_url" to ShorterUrlFilter(
+                Regex("https://furaffinity\\.net/user/([^/]+)/?($| )") to "FA: $1",
+                Regex("https://twitter\\.com/([^/]+)($| )") to "TT: $1",
+                Regex("^https://www\\.instagram\\.com/([^/]+)/?$") to "In: $1",
+                Regex("^https://www\\.facebook\\.com/([^/]+)/?$") to "FB: $1",
+
+                Regex("^https://aminoapps\\.com/c/fursuit-maker-amino/page/user/([^/]+)(/[^/]+)?$") to "FM Amino: $1",
+                Regex("^https://aminoapps\\.com/c/furry-amino/page/user/([^/]+)(/[^/]+)?$") to "F Amino: $1",
+
+                Regex("^https?://([^.]+)\\.deviantart\\.com/$") to "DA: $1",
+                Regex("^https?://www\\.deviantart\\.com/([^/]+)/?$") to "DA: $1",
+            ),
+            "shorter_ab_url" to ShorterUrlFilter(
+                Regex("^https://artistsbeware.info/beware/[^/]+/[^/]+(cautions?|bewares?)(-archives)?") to "",
+            ),
+        )
     }
 }

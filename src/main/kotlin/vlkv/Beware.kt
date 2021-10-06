@@ -5,4 +5,5 @@ data class Beware(
     val where: List<String>,
     val url: String,
     val resolved: Boolean,
+    val isBeware: Boolean,
 )
