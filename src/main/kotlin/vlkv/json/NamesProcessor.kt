@@ -19,7 +19,7 @@ fun getNames(title: String, who: String): List<String> {
 }
 
 fun getUniqueNames(names: List<String>): List<String> {
-    val result = mutableMapOf<String, String>();
+    val result = mutableMapOf<String, String>()
 
     names.forEach {
         val lc = it.lowercase()
@@ -36,9 +36,9 @@ fun getUniqueNames(names: List<String>): List<String> {
         }
     }
 
-    return result.values.toList();
+    return result.values.toList()
 }
 
 fun getVal(string: String): Int {
-    return string.toByteArray().map { it.toInt() }.reduce { i1, i2 -> i1 + i2 }
+    return string.toByteArray().map { it.toInt() }.reduceOrNull { i1, i2 -> i1 + i2 } ?: 0
 }

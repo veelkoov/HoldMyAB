@@ -2,9 +2,6 @@ package vlkv.json.record
 
 import kotlinx.serialization.Serializable
 
-private const val FLD_VAL_YES = "Yes"
-private const val FLD_VAL_NO = "No"
-
 @Serializable
 data class Fields(
     val field_3: String,
@@ -18,14 +15,11 @@ data class Fields(
     val field_28: String?,
 ) {
     fun isResolved(): Boolean {
-        return if (FLD_VAL_YES == field_17) {
-            true
-        } else if (FLD_VAL_NO == field_17) {
-            false
-        } else if (null == field_17) {
-            false // null means no "Yes"
-        } else {
-            error("field_17 has unexpected value")
+        return when (field_17) {
+            "Yes", "Resolved" -> true
+            "No", "Not Resolved", null -> false // null means no "Yes"
+            else -> error("field_17 has unexpected value: '$field_17'")
+
         }
     }
 
