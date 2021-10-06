@@ -58,9 +58,9 @@ fun isProperRecord(record: Record): Boolean {
         return false
     }
 
-    if (CATEGORY_ID_HIDDEN == record.category.id) {
+    if (CATEGORY_ID_HIDDEN == record.category.id) { // Should be already filtered out during fetch
         return false
     }
 
-    return true
+    return !record.hidden // Should be already filtered out during fetch
 }
