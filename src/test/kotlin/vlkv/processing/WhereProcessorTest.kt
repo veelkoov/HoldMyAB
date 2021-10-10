@@ -17,6 +17,7 @@ internal class WhereProcessorTest {
     @TestFactory
     fun testGetTidyWhere() = listOf(
         GTWI("Abcdefghij on DA, FA", listOf(), listOf("https://furaffinity.net/user/Abcdefghij/", "https://www.deviantart.com/Abcdefghij")),
+        GTWI("Abcdefghij@FA", listOf(), listOf("https://furaffinity.net/user/Abcdefghij/")),
     ).map { (where, urlsFromWho, expected) ->
         dynamicTest("getTidyWhere") {
             assertEquals(expected, getTidyWhere(where, urlsFromWho))
