@@ -1,5 +1,8 @@
 package vlkv.processing
 
+import vlkv.processing.regexes.Removables
+import vlkv.processing.regexes.Replacements
+
 private val URL_UNIFICATIONS = Replacements(
     Regex("\\?(lang|s|hl|ref)=(en|\\d{2}|pr_profile)($| )", RegexOption.MULTILINE) to "",
     Regex("(https?://)?(www\\.)?(?<!forums\\.)furaffi?nity\\.net/") to "https://furaffinity.net/",

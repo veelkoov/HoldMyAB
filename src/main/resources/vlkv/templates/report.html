@@ -48,6 +48,20 @@
                         </ul>
                     </td>
                 </tr>
+                {% if not subject.issues.empty %}
+                    <tr>
+                        <td>
+                            Encountered apparent issues during above record(s) processing:
+                        </td>
+                        <td colspan="2">
+                            <ul>
+                                {% for issue in subject.issues %}
+                                    <li>{{ issue }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                    </tr>
+                {% endif %}
             {% endfor %}
         </tbody>
     </table>

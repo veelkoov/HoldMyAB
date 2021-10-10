@@ -15,7 +15,7 @@ fun recordToBeware(record: Record): Beware {
     val isResolved = isResolved(record)
     val isBeware = isBeware(record)
 
-    return Beware(names, where, record.url, isResolved, isBeware) // TODO: Other stuff
+    return Beware(names.result, where, record.url, isResolved, isBeware, names.issues) // TODO: Other stuff
 }
 
 private fun extractUrlsFromWho(who: String): Pair<String, List<String>> {

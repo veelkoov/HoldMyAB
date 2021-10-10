@@ -1,5 +1,7 @@
 package vlkv.processing
 
+import vlkv.processing.regexes.Replacements
+
 private val SPLIT_REGEXES = listOf(
     Regex("\n"),
     Regex("[,;] "),

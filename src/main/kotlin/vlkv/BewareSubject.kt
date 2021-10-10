@@ -6,6 +6,7 @@ class BewareSubject {
     private var names = listOf<String>()
     private val bewares = mutableListOf<Beware>()
     private val where = mutableListOf<String>()
+    private val issues = mutableListOf<String>()
 
     fun getNames(): List<String> {
         return names.toList()
@@ -19,6 +20,10 @@ class BewareSubject {
         return where.toList()
     }
 
+    fun getIssues(): List<String> {
+        return issues.toList()
+    }
+
     fun extend(beware: Beware) {
         bewares.add(beware)
 
@@ -29,5 +34,7 @@ class BewareSubject {
                 where.add(it)
             }
         }
+
+        issues.addAll(beware.issues)
     }
 }
