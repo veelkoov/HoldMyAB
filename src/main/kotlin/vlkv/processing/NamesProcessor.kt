@@ -1,10 +1,15 @@
 package vlkv.processing
 
-private val TITLE_PREFIX = Regex("^(Commissioner|Client|Customer|Fursuiter|Artist)? ?(Beware|Caution)[ .:-]*", RegexOption.IGNORE_CASE)
+private const val PREFIX_SUBJECTS = "commissioner|client|customer|fursuiter|artist|contest artist participants|resubmit -"
+
+private val TITLE_REMOVABLES = Removables(
+    Regex("^($PREFIX_SUBJECTS)? ?(Beware|Caution)[ .:-]*", RegexOption.IGNORE_CASE),
+)
+
 private val NAMES_SPLIT = Regex("( - |(?<!u)/|,)")
 
 fun getNames(title: String, who: String): List<String> {
-    val titleWithoutPrefix = fixNames(TITLE_PREFIX.replace(title, ""))
+    val titleWithoutPrefix = fixNames(TITLE_REMOVABLES.run(title))
 
     val names: MutableList<String> = if (titleWithoutPrefix != title) { // PREFIX matched and removed
         NAMES_SPLIT.split(titleWithoutPrefix).map { it.trim() }
