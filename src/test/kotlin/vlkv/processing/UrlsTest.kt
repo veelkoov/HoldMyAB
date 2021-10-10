@@ -13,6 +13,7 @@ internal class UrlsTest {
         "http://www.facebook.com/AbcdefGhijklmnop" to "https://www.facebook.com/AbcdefGhijklmnop",
         "Old Fa Account: http://www.furaffinity.net/user/abcdefghijk0011\r\nNew Fa Account: http://www.furaffinity.net/user/abcdefg\r\nDeviantArt Account: http://abcdefg.deviantart.com/" to "https://furaffinity.net/user/abcdefghijk0011/\r\nhttps://furaffinity.net/user/abcdefg/\r\nhttps://abcdefg.deviantart.com/",
         "www.furaffinity.com/user/abcdefghijklm" to "https://furaffinity.net/user/abcdefghijklm/",
+        "https://www.furaffinity.net/user/abcde.fghij, https://www.instagram.com/asdfghjkl/" to "https://furaffinity.net/user/abcde.fghij/ https://www.instagram.com/asdfghjkl/"
     ).map { (input, expected) ->
         dynamicTest("fixUrl $input -> $expected") {
             assertEquals(expected, Urls.tidy(input))
