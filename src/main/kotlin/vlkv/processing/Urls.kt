@@ -41,5 +41,13 @@ object Urls {
 
         return UrlsExtractionResult(urls.toList(), remaining)
     }
-}
 
+    private val EXPANSIONS = Replacements(
+        Regex("([a-z0-9]+) on DA, FA", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/ https://www.deviantart.com/$1",
+        Regex("([a-z0-9]+)@FA", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/",
+    )
+
+    fun expand(input: String): String {
+        return EXPANSIONS.run(input)
+    }
+}

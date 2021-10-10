@@ -1,6 +1,6 @@
 package vlkv.processing
 
-import vlkv.processing.regexes.Replacements
+import vlkv.processing.regexes.Removables
 
 private val SPLIT_REGEXES = listOf(
     Regex("\n"),
@@ -9,15 +9,17 @@ private val SPLIT_REGEXES = listOf(
     Regex("\\s+(?=https?://)", RegexOption.IGNORE_CASE),
 )
 
-private val REPLACEMENTS = Replacements(
-    Regex("^(links:|where:)", RegexOption.IGNORE_CASE) to "",
-    Regex("([a-z0-9]+) on DA, FA", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/ https://www.deviantart.com/$1",
-    Regex("([a-z0-9]+)@FA", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/",
+private val REMOVABLES = Removables(
+    Regex("^(links:|where:)", RegexOption.IGNORE_CASE),
 )
 
 fun getTidyWhere(where: String, urlsFromWho: List<String>): List<String> {
-    val element = REPLACEMENTS.run(where.trim())
-    return split(urlsFromWho.plus(Urls.removeLabels(Urls.fix(element))), SPLIT_REGEXES.toMutableList())
+    var subject = REMOVABLES.run(where.trim())
+    subject = Urls.expand(subject)
+    subject = Urls.fix(subject)
+    subject = Urls.removeLabels(subject)
+
+    return split(urlsFromWho.plus(subject), SPLIT_REGEXES.toMutableList())
 }
 
 private fun split(tokens: List<String>, withRegexes: MutableList<Regex>): List<String> {
