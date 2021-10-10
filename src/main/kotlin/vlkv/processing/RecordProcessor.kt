@@ -18,7 +18,7 @@ fun recordToBeware(record: Record): Beware {
 
     extend(names, urls, fixedTitle.result)
     extend(names, urls, record.fields.getWho())
-    extend(names, urls, record.fields.getWhere())
+    extend(names, urls, fixWhere(record.fields.getWhere()))
 
     val isResolved = isResolved(record)
     val isBeware = isBeware(record)
@@ -34,11 +34,7 @@ private fun extend(names: MutableList<String>, urls: MutableList<String>, input:
 }
 
 fun getNamesUrls(input: String): NamesUrls {
-    var subject = Urls.expand(input)
-    subject = Urls.fix(subject)
-    subject = Urls.removeLabels(subject)
-
-    val (urls, remaining) = Urls.extract(subject)
+    val (urls, remaining) = Urls.extract(Urls.tidy(input))
 
     return NamesUrls(getNames(remaining), urls)
 }
