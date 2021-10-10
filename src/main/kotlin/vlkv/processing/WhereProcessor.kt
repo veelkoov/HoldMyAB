@@ -12,7 +12,7 @@ private val SPLIT_REGEXES = listOf(
 
 private val REPLACEMENTS = Replacements(
     Regex("^(links:|where:)", RegexOption.IGNORE_CASE) to "",
-    Regex("([a-z0-9]+) on FA, DA") to "https://furaffinity.net/$1/ https://deviantart.com/$1",
+    Regex("([a-z0-9]+) on DA, FA", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/ https://www.deviantart.com/$1",
 )
 
 fun getTidyWhere(where: String, urlsFromWho: List<String>): List<String> {

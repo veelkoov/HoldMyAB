@@ -7,7 +7,7 @@ import org.junit.jupiter.api.TestFactory
 import vlkv.processing.getNames
 import kotlin.test.assertEquals
 
-data class GNI(
+private data class GNI(
     val title: String,
     val who: String,
     val expected: List<String>,
