@@ -23,7 +23,7 @@ fun recordToBeware(record: Record): Beware {
     val isResolved = isResolved(record)
     val isBeware = isBeware(record)
 
-    return Beware(names, urls, record.url, isResolved, isBeware, issues)
+    return Beware(record.id, names, urls, record.url, isResolved, isBeware, issues)
 }
 
 private fun extend(names: MutableList<String>, urls: MutableList<String>, input: String) {

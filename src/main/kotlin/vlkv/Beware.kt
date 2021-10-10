@@ -1,6 +1,7 @@
 package vlkv
 
 data class Beware(
+    val id: Int,
     val names: List<String>,
     val urls: List<String>,
     val url: String,

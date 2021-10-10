@@ -24,6 +24,6 @@ class Database {
     }
 
     fun getRecords(): List<BewareSubject> {
-        return records.values.distinct()
+        return records.values.distinct().sortedBy { it.getLowestBewareId() }
     }
 }

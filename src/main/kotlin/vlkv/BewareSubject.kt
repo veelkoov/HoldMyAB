@@ -15,7 +15,7 @@ class BewareSubject {
 
     @Suppress("unused") // Pebble uses it
     fun getBewares(): List<Beware> {
-        return bewares.toList()
+        return bewares.sortedBy { it.id }
     }
 
     @Suppress("unused") // Pebble uses it
@@ -40,5 +40,9 @@ class BewareSubject {
         }
 
         issues.addAll(beware.issues)
+    }
+
+    fun getLowestBewareId(): Int {
+        return bewares.minOf { it.id }
     }
 }
