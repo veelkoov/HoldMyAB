@@ -10,7 +10,7 @@ object Urls {
         Regex("furaffinity\\.com") to "furaffinity.net",
         Regex("\\?(lang|s|hl|ref|utm_medium)=(en|\\d{2}|pr_profile|copy_link)($|\\s)", RegexOption.MULTILINE) to "",
         Regex("(https?://)?(www\\.)?(?<!forums\\.)furaffi?nity\\.net/") to "https://furaffinity.net/",
-        Regex("https://furaffinity\\.net/user/([^/\\s]+)/?") to "https://furaffinity.net/user/$1/",
+        Regex("https?://furaffinity\\.net/user/([^/\\s]+)/?") to "https://furaffinity.net/user/$1/",
         Regex("(https?://)?twitter\\.com/") to "https://twitter.com/",
         Regex("(https?://)?(www\\.|m\\.)?facebook\\.com/") to "https://www.facebook.com/",
         Regex("(https?://)?([^./\\s]+)(?<!www)\\.deviantart\\.com/") to "https://$2.deviantart.com/",
@@ -25,10 +25,11 @@ object Urls {
         Regex("DeviantArt( Account)? *[-:] *(?=https://[^.]+\\.deviantart\\.com/)", RegexOption.IGNORE_CASE),
         Regex("Twitter *[-:] *(?=https://twitter\\.com/)", RegexOption.IGNORE_CASE),
         Regex("YouTube *[-:] *(?=https://www\\.youtube\\.com/)", RegexOption.IGNORE_CASE),
-        Regex("(new |old )?FA( account)? *[-:] *(?=https://furaffinity\\.net/)", RegexOption.IGNORE_CASE),
+        Regex("(new |old )?(FA|furaffinity)( account)? *[-:] *(?=https://furaffinity\\.net/)", RegexOption.IGNORE_CASE),
         Regex("Instagram *[-:] *(?=https://www\\.instagram\\.com/)", RegexOption.IGNORE_CASE),
         Regex("Facebook *[-:] *(?=https://www\\.facebook\\.com/)", RegexOption.IGNORE_CASE),
         Regex("Toyhou\\.se *[-:] *(?=https://toyhou\\.se/)", RegexOption.IGNORE_CASE),
+        Regex("Picarto *[-:] *(?=https://picarto\\.tv/)", RegexOption.IGNORE_CASE),
     )
 
     private fun removeLabels(input: String): String {
