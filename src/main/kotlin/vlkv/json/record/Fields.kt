@@ -26,4 +26,16 @@ data class Fields(
     fun getWhere(): String {
         return field_6
     }
+
+    fun getWho(): String {
+        return field_5
+    }
+
+    fun getTitle(): String {
+        return field_3
+    }
+
+    fun getDescription(): String {
+        return field_4
+    }
 }

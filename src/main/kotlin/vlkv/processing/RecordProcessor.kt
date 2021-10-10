@@ -8,7 +8,7 @@ private const val TAG_RESOLVED = "resolved"
 fun recordToBeware(record: Record): Beware {
     validate(record)
 
-    val (urlsFromWho, whoWithoutUrls) = Urls.extract(record.fields.field_5)
+    val (urlsFromWho, whoWithoutUrls) = Urls.extract(record.fields.getWho())
     val fixedTitle = fixTitle(record.title)
     val names = getNames(fixedTitle.result, whoWithoutUrls)
     val where = getTidyWhere(record.fields.getWhere(), urlsFromWho)
@@ -18,16 +18,15 @@ fun recordToBeware(record: Record): Beware {
     return Beware(names, where, record.url, isResolved, isBeware, fixedTitle.issues) // TODO: Other stuff
 }
 
-private fun validate(record: Record) {
-    val field4 = Regex("<([^>]+) />").replace(record.fields.field_4, "<$1>")
-    val description = record.description
+private fun validate(record: Record) { // If any of these fire, there may be something I've overseen
+    val description = Regex("<([^>]+) />").replace(record.fields.getDescription(), "<$1>")
 
-    if (field4 != description) {
-        error("field_4 is different that the description") // If this fires, there may be something I've overseen
+    if (description != record.description) {
+        error("Description field is different than the record description")
     }
 
-    if (record.fields.field_3 != record.title) {
-        error("field_3 is different that the title") // If this fires, there may be something I've overseen
+    if (record.fields.getTitle() != record.title) {
+        error("Title field is different than the record title")
     }
 }
 
