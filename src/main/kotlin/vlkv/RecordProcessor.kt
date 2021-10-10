@@ -35,7 +35,11 @@ private fun validate(record: Record) {
     val description = record.description
 
     if (field4 != description) {
-        error("field_4 is different that description") // If this fires, there may be something I've overseen
+        error("field_4 is different that the description") // If this fires, there may be something I've overseen
+    }
+
+    if (record.fields.field_3 != record.title) {
+        error("field_3 is different that the title") // If this fires, there may be something I've overseen
     }
 }
 

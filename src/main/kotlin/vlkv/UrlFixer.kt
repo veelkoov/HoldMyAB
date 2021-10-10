@@ -1,23 +1,35 @@
 package vlkv
 
-private val FUR_AFFINITY_BASE_URL_REGEX = Regex("(https?://)?(www\\.)?(?<!forums\\.)furaffi?nity\\.net/")
-private val TWITTER_BASE_URL_REGEX = Regex("(https?://)?twitter\\.com/")
-
-private val FUR_AFFINITY_LABEL_REGEX = Regex("(new |old )?FA( account)? *[:-] *(?=https://furaffinity\\.net/)", RegexOption.IGNORE_CASE)
-private val TWITTER_LABEL_REGEX = Regex("Twitter *[:-] *(?=https://twitter\\.com/)")
-private val YOUTUBE_LABEL_REGEX = Regex("YouTube *[:-] *(?=https://www\\.youtube\\.com/)")
-
-private val USELESS_PARAMS_REGEX = Regex("\\?(lang|s|hl|ref)=(en|\\d{2}|pr_profile)$")
+private val UNIFICATIONS_REGEXES = linkedMapOf(
+    Regex("\\?(lang|s|hl|ref)=(en|\\d{2}|pr_profile)($| )", RegexOption.MULTILINE) to "",
+    Regex("(https?://)?(www\\.)?(?<!forums\\.)furaffi?nity\\.net/") to "https://furaffinity.net/",
+    Regex("https://furaffinity\\.net/user/([^/]+)/?") to "https://furaffinity.net/user/$1/",
+    Regex("(https?://)?twitter\\.com/") to "https://twitter.com/",
+    Regex("(https?://)?(www\\.)?facebook\\.com/") to "https://www.facebook.com/",
+)
 
 fun fixUrls(input: String): String {
-    return input
-        .replace(FUR_AFFINITY_BASE_URL_REGEX, "https://furaffinity.net/")
-        .replace(TWITTER_BASE_URL_REGEX, "https://twitter.com/")
+    var result = input
 
-        .replace(FUR_AFFINITY_LABEL_REGEX, "")
-        .replace(TWITTER_LABEL_REGEX, "")
-        .replace(YOUTUBE_LABEL_REGEX, "")
+    UNIFICATIONS_REGEXES.forEach { (regex, replacement) -> result = result.replace(regex, replacement) }
 
-        .replace(USELESS_PARAMS_REGEX, "")
-    // TODO: Other
+    return result
+}
+
+private val LABELS_REGEXES = listOf(
+    Regex("DeviantArt( Account)? *[-:] *https://[^.]+]\\.deviantart\\.com/", RegexOption.IGNORE_CASE),
+    Regex("Twitter *[-:] *(?=https://twitter\\.com/)", RegexOption.IGNORE_CASE),
+    Regex("YouTube *[-:] *(?=https://www\\.youtube\\.com/)", RegexOption.IGNORE_CASE),
+    Regex("(new |old )?FA( account)? *[-:] *(?=https://furaffinity\\.net/)", RegexOption.IGNORE_CASE),
+    Regex("Instagram *[-:] *(?=https://www\\.instagram\\.com/)", RegexOption.IGNORE_CASE),
+    Regex("Facebook *[-:] *(?=https://www\\.facebook\\.com/)", RegexOption.IGNORE_CASE),
+    Regex("Toyhou\\.se *[-:] *(?=https://toyhou\\.se/)", RegexOption.IGNORE_CASE),
+)
+
+fun removeUrlLabels(input: String): String {
+    var result = input
+
+    LABELS_REGEXES.forEach { regex -> result = result.replace(regex, "") }
+
+    return result
 }

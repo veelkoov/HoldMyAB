@@ -7,12 +7,12 @@ import com.mitchellbosecke.pebble.template.PebbleTemplate
 
 private class ShorterUrlFilter(vararg val regexes: Pair<Regex, String>) : Filter {
     override fun getArgumentNames(): List<String> {
-        return listOf();
+        return listOf()
     }
 
     override fun apply(input: Any?, args: Map<String, Any>?, self: PebbleTemplate?, context: EvaluationContext?, lineNumber: Int): String {
         if (input !is String) {
-            return "";
+            return ""
         }
 
         var result: String = input

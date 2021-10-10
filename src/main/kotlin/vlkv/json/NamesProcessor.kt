@@ -4,7 +4,7 @@ private val TITLE_PREFIX = Regex("^(Commissioner|Client|Customer|Fursuiter|Artis
 private val NAMES_SPLIT = Regex("( - |(?<!u)/|,)")
 
 fun getNames(title: String, who: String): List<String> {
-    val titleWithoutPrefix = TITLE_PREFIX.replace(title, "")
+    val titleWithoutPrefix = fixNames(TITLE_PREFIX.replace(title, ""))
 
     val names: MutableList<String> = if (titleWithoutPrefix != title) { // PREFIX matched and removed
         NAMES_SPLIT.split(titleWithoutPrefix).map { it.trim() }
@@ -16,6 +16,12 @@ fun getNames(title: String, who: String): List<String> {
     names.addAll(NAMES_SPLIT.split(who).map { it.trim() })
 
     return names.distinct()
+}
+
+private val NAME_FIX_REGEX = Regex("@/(?=[a-z])", RegexOption.IGNORE_CASE)
+
+fun fixNames(input: String): String {
+    return NAME_FIX_REGEX.replace(input, "@")
 }
 
 fun getUniqueNames(names: List<String>): List<String> {

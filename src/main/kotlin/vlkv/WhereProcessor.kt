@@ -2,12 +2,14 @@ package vlkv
 
 private val SPLIT_REGEXES = listOf(
     Regex("\n"),
-    Regex(", "),
+    Regex("[,;] "),
+    Regex(" and ", RegexOption.IGNORE_CASE),
     Regex("\\s+(?=https?://)", RegexOption.IGNORE_CASE),
 )
 
 fun getTidyWhere(where: String, urlsFromWho: List<String>): List<String> {
-    return split(urlsFromWho.plus(where), SPLIT_REGEXES.toMutableList())
+    val element = where.trim().replace(Regex("^(links:|where:)", RegexOption.IGNORE_CASE), "")
+    return split(urlsFromWho.plus(removeUrlLabels(fixUrls(element))), SPLIT_REGEXES.toMutableList())
 }
 
 private fun split(tokens: List<String>, withRegexes: MutableList<Regex>): List<String> {
