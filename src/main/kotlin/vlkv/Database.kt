@@ -12,7 +12,7 @@ class Database {
     }
 
     private fun getBewareSubject(beware: Beware): BewareSubject {
-        val existing: List<BewareSubject> = beware.names.mapNotNull { records[it] }.distinct()
+        val existing: List<BewareSubject> = beware.names.mapNotNull { records[it.lowercase()] }.distinct()
 
         return if (existing.isEmpty()) {
             BewareSubject()

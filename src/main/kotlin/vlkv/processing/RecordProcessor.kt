@@ -16,27 +16,29 @@ fun recordToBeware(record: Record): Beware {
     val fixedTitle = fixTitle(record.title)
     issues.addAll(fixedTitle.issues)
 
-    extend(names, urls, fixedTitle.result)
-    extend(names, urls, record.fields.getWho())
-    extend(names, urls, fixWhere(record.fields.getWhere()))
+    extend(names, urls, issues, fixedTitle.result)
+    extend(names, urls, issues, record.fields.getWho())
+    extend(names, urls, issues, fixWhere(record.fields.getWhere()))
 
     val isResolved = isResolved(record)
     val isBeware = isBeware(record)
 
-    return Beware(record.id, names, urls, record.url, isResolved, isBeware, issues)
+    return Beware(record.id, names.distinct(), urls, record.url, isResolved, isBeware, issues)
 }
 
-private fun extend(names: MutableList<String>, urls: MutableList<String>, input: String) {
-    val (newNames, newUrls) = getNamesUrls(input)
+private fun extend(names: MutableList<String>, urls: MutableList<String>, issues: MutableList<String>, input: String) {
+    val (newNames, newUrls, newIssues) = getNamesUrls(input)
 
     names.addAll(newNames)
     urls.addAll(newUrls)
+    issues.addAll(newIssues)
 }
 
 fun getNamesUrls(input: String): NamesUrls {
     val (urls, remaining) = Urls.extract(Urls.tidy(input))
+    val names = getNames(remaining)
 
-    return NamesUrls(getNames(remaining), urls)
+    return NamesUrls(names.result, urls, names.issues)
 }
 
 private fun validate(record: Record) { // If any of these fire, there may be something I've overseen
