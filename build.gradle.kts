@@ -24,7 +24,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
     implementation("io.pebbletemplates:pebble:3.1.5")
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.5.31")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:5.0.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.1")
 }
 
 tasks.test {
