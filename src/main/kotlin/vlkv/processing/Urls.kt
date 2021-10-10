@@ -5,6 +5,8 @@ import vlkv.processing.regexes.Replacements
 
 object Urls {
     private val URL_UNIFICATIONS = Replacements(
+        Regex("(\\s|^)www\\.") to "http://www.",
+        Regex("furaffinity\\.com") to "furaffinity.net",
         Regex("\\?(lang|s|hl|ref)=(en|\\d{2}|pr_profile)($| )", RegexOption.MULTILINE) to "",
         Regex("(https?://)?(www\\.)?(?<!forums\\.)furaffi?nity\\.net/") to "https://furaffinity.net/",
         Regex("https://furaffinity\\.net/user/([^/\\s]+)/?") to "https://furaffinity.net/user/$1/",
