@@ -8,11 +8,11 @@ object Urls {
         Regex("(\\s|^)www\\.") to "http://www.",
         Regex("(https?://[^\\s]+),\\s*(https?://[^\\s]+)") to "$1 $2",
         Regex("furaffinity\\.com") to "furaffinity.net",
-        Regex("\\?(lang|s|hl|ref)=(en|\\d{2}|pr_profile)($| )", RegexOption.MULTILINE) to "",
+        Regex("\\?(lang|s|hl|ref|utm_medium)=(en|\\d{2}|pr_profile|copy_link)($|\\s)", RegexOption.MULTILINE) to "",
         Regex("(https?://)?(www\\.)?(?<!forums\\.)furaffi?nity\\.net/") to "https://furaffinity.net/",
         Regex("https://furaffinity\\.net/user/([^/\\s]+)/?") to "https://furaffinity.net/user/$1/",
         Regex("(https?://)?twitter\\.com/") to "https://twitter.com/",
-        Regex("(https?://)?(www\\.)?facebook\\.com/") to "https://www.facebook.com/",
+        Regex("(https?://)?(www\\.|m\\.)?facebook\\.com/") to "https://www.facebook.com/",
         Regex("(https?://)?([^./\\s]+)(?<!www)\\.deviantart\\.com/") to "https://$2.deviantart.com/",
     )
 
