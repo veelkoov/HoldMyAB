@@ -9,13 +9,13 @@ fun recordToBeware(record: Record): Beware {
     validate(record)
 
     val (urlsFromWho, whoWithoutUrls) = Urls.extract(record.fields.field_5)
-
-    val names = getNames(record.title, whoWithoutUrls)
+    val fixedTitle = fixTitle(record.title)
+    val names = getNames(fixedTitle.result, whoWithoutUrls)
     val where = getTidyWhere(record.fields.getWhere(), urlsFromWho)
     val isResolved = isResolved(record)
     val isBeware = isBeware(record)
 
-    return Beware(names.result, where, record.url, isResolved, isBeware, names.issues) // TODO: Other stuff
+    return Beware(names, where, record.url, isResolved, isBeware, fixedTitle.issues) // TODO: Other stuff
 }
 
 private fun validate(record: Record) {

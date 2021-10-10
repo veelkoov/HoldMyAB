@@ -18,7 +18,7 @@ internal class NamesProcessorTest {
         GNI("@/AbCdEfG", "@AbCdEfG", listOf("@AbCdEfG")),
     ).map { (title, who, expected) ->
         dynamicTest("getNames") {
-            assertEquals(expected, getNames(title, who).result)
+            assertEquals(expected, getNames(title, who))
         }
     }
 }

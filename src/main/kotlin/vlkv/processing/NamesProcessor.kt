@@ -1,31 +1,18 @@
 package vlkv.processing
 
-import vlkv.processing.regexes.Removables
 import vlkv.processing.regexes.Replacements
-import vlkv.processing.results.StringList
-
-private const val PREFIX_SUBJECTS = "commissioner|client|customer|fursuiter|artist|contest artist participants|resubmit -"
-
-private val TITLE_REMOVABLES = Removables(
-    Regex("^($PREFIX_SUBJECTS)? ?(Beware|Caution)[ .:-]*", RegexOption.IGNORE_CASE),
-)
 
 private val NAMES_SPLIT = Regex("( - |(?<!u)/|,)")
 
-fun getNames(title: String, who: String): StringList { // TODO: Refactor this crap
-    val issues = mutableListOf<String>()
-    val titleWithoutPrefix = fixNames(TITLE_REMOVABLES.run(title))
+fun getNames(title: String, who: String): List<String> {
+    var wipTitle = Urls.expand(title)
+    wipTitle = fixNames(wipTitle)
 
-    val names: MutableList<String> = if (titleWithoutPrefix != title) { // PREFIX matched and removed
-        NAMES_SPLIT.split(titleWithoutPrefix).map { it.trim() }
-    } else {
-        issues.add("Nonstandard title, possibly failed to properly handle names")
-        listOf(titleWithoutPrefix)
-    }.toMutableList()
+    val names = NAMES_SPLIT.split(wipTitle).map { it.trim() }.toMutableList()
 
     names.addAll(NAMES_SPLIT.split(who).map { it.trim() })
 
-    return StringList(names.distinct(), issues)
+    return names.distinct()
 }
 
 private val NAME_REPLACEMENTS = Replacements(
