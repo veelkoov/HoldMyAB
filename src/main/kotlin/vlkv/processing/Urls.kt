@@ -14,6 +14,7 @@ object Urls {
         Regex("(https?://)?twitter\\.com/") to "https://twitter.com/",
         Regex("(https?://)?(www\\.|m\\.)?facebook\\.com/") to "https://www.facebook.com/",
         Regex("(https?://)?([^./\\s]+)(?<!www)\\.deviantart\\.com/") to "https://$2.deviantart.com/",
+        Regex("(https?://)?(www\\.)?instagram.com/([^/\\s]+)/?") to "https://www.instagram.com/$3/",
     )
 
     private fun fix(input: String): String {

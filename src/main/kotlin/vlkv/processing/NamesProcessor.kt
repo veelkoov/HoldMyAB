@@ -3,7 +3,7 @@ package vlkv.processing
 import vlkv.processing.regexes.Replacements
 
 private val NAME_REPLACEMENTS = Replacements(
-    Regex("@/(?=[a-z])", RegexOption.IGNORE_CASE) to "@",
+    Regex("@[/\\\\](?=[a-z])", RegexOption.IGNORE_CASE) to "@",
 )
 
 private val NAMES_SPLIT = Regex("( - |(?<!u)/|,|\n)")
