@@ -8,7 +8,7 @@ private const val TAG_RESOLVED = "resolved"
 fun recordToBeware(record: Record): Beware {
     validate(record)
 
-    val (whoWithoutUrls, urlsFromWho) = extractUrlsFromWho(record.fields.field_5)
+    val (urlsFromWho, whoWithoutUrls) = Urls.extract(record.fields.field_5)
 
     val names = getNames(record.title, whoWithoutUrls)
     val where = getTidyWhere(record.fields.getWhere(), urlsFromWho)
@@ -16,18 +16,6 @@ fun recordToBeware(record: Record): Beware {
     val isBeware = isBeware(record)
 
     return Beware(names.result, where, record.url, isResolved, isBeware, names.issues) // TODO: Other stuff
-}
-
-private fun extractUrlsFromWho(who: String): Pair<String, List<String>> {
-    val urls = mutableListOf<String>()
-    var result = who
-
-    Regex("https?://[^ ]+", RegexOption.IGNORE_CASE).findAll(who).forEach {
-        result = result.replace(it.value, "")
-        urls.add(it.value)
-    }
-
-    return result to urls.toList()
 }
 
 private fun validate(record: Record) {

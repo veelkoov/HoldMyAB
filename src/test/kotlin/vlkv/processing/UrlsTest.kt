@@ -6,14 +6,14 @@ import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.TestFactory
 import kotlin.test.assertEquals
 
-internal class UrlFixerTest {
+internal class UrlsTest {
     @TestFactory
-    fun testFixUrls() = listOf(
+    fun testFix() = listOf(
         "http://www.furaffinity.net/user/abcdefghij" to "https://furaffinity.net/user/abcdefghij/",
         "http://www.facebook.com/AbcdefGhijklmnop" to "https://www.facebook.com/AbcdefGhijklmnop",
     ).map { (input, expected) ->
         dynamicTest("fixUrl $input -> $expected") {
-            assertEquals(expected, fixUrls(input))
+            assertEquals(expected, Urls.fix(input))
         }
     }
 }

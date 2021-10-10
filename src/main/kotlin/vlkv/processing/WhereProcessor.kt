@@ -17,7 +17,7 @@ private val REPLACEMENTS = Replacements(
 
 fun getTidyWhere(where: String, urlsFromWho: List<String>): List<String> {
     val element = REPLACEMENTS.run(where.trim())
-    return split(urlsFromWho.plus(removeUrlLabels(fixUrls(element))), SPLIT_REGEXES.toMutableList())
+    return split(urlsFromWho.plus(Urls.removeLabels(Urls.fix(element))), SPLIT_REGEXES.toMutableList())
 }
 
 private fun split(tokens: List<String>, withRegexes: MutableList<Regex>): List<String> {
@@ -33,7 +33,7 @@ private fun split(tokens: List<String>, withRegexes: MutableList<Regex>): List<S
     tokens.forEach { token ->
         val tokenAfterSplit = token.split(regex)
             .map { it.trim() }
-            .map { fixUrls(it) }
+            .map { Urls.fix(it) }
             .filter { "" != it }
 
         if (tokenAfterSplit.size > 1) {
