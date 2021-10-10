@@ -1,4 +1,7 @@
-package vlkv
+package vlkv.processing
+
+import vlkv.fixUrls
+import vlkv.removeUrlLabels
 
 private val SPLIT_REGEXES = listOf(
     Regex("\n"),
@@ -7,8 +10,13 @@ private val SPLIT_REGEXES = listOf(
     Regex("\\s+(?=https?://)", RegexOption.IGNORE_CASE),
 )
 
+private val REPLACEMENTS = Replacements(
+    Regex("^(links:|where:)", RegexOption.IGNORE_CASE) to "",
+    Regex("([a-z0-9]+) on FA, DA") to "https://furaffinity.net/$1/ https://deviantart.com/$1",
+)
+
 fun getTidyWhere(where: String, urlsFromWho: List<String>): List<String> {
-    val element = where.trim().replace(Regex("^(links:|where:)", RegexOption.IGNORE_CASE), "")
+    val element = REPLACEMENTS.run(where.trim())
     return split(urlsFromWho.plus(removeUrlLabels(fixUrls(element))), SPLIT_REGEXES.toMutableList())
 }
 

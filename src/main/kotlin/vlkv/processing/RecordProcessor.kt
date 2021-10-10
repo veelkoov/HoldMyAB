@@ -1,7 +1,7 @@
-package vlkv
+package vlkv.processing
 
+import vlkv.Beware
 import vlkv.json.Record
-import vlkv.json.getNames
 
 private const val TAG_RESOLVED = "resolved"
 

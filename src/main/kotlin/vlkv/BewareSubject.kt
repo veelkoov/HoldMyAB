@@ -1,6 +1,6 @@
 package vlkv
 
-import vlkv.json.getUniqueNames
+import vlkv.processing.getUniqueNames
 
 class BewareSubject {
     private var names = listOf<String>()

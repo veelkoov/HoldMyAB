@@ -1,4 +1,4 @@
-package vlkv.json
+package vlkv.processing
 
 private val TITLE_PREFIX = Regex("^(Commissioner|Client|Customer|Fursuiter|Artist)? ?(Beware|Caution)[ .:-]*", RegexOption.IGNORE_CASE)
 private val NAMES_SPLIT = Regex("( - |(?<!u)/|,)")

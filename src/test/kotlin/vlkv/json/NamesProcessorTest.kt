@@ -4,6 +4,7 @@ package vlkv.json
 
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.TestFactory
+import vlkv.processing.getNames
 import kotlin.test.assertEquals
 
 data class GNI(
