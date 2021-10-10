@@ -1,6 +1,6 @@
-package vlkv
+package vlkv.processing
 
-private val UNIFICATIONS_REGEXES = linkedMapOf(
+private val URL_UNIFICATIONS = Replacements(
     Regex("\\?(lang|s|hl|ref)=(en|\\d{2}|pr_profile)($| )", RegexOption.MULTILINE) to "",
     Regex("(https?://)?(www\\.)?(?<!forums\\.)furaffi?nity\\.net/") to "https://furaffinity.net/",
     Regex("https://furaffinity\\.net/user/([^/]+)/?") to "https://furaffinity.net/user/$1/",
@@ -9,14 +9,10 @@ private val UNIFICATIONS_REGEXES = linkedMapOf(
 )
 
 fun fixUrls(input: String): String {
-    var result = input
-
-    UNIFICATIONS_REGEXES.forEach { (regex, replacement) -> result = result.replace(regex, replacement) }
-
-    return result
+    return URL_UNIFICATIONS.run(input)
 }
 
-private val LABELS_REGEXES = listOf(
+private val LABELS = Removables(
     Regex("DeviantArt( Account)? *[-:] *https://[^.]+]\\.deviantart\\.com/", RegexOption.IGNORE_CASE),
     Regex("Twitter *[-:] *(?=https://twitter\\.com/)", RegexOption.IGNORE_CASE),
     Regex("YouTube *[-:] *(?=https://www\\.youtube\\.com/)", RegexOption.IGNORE_CASE),
@@ -27,9 +23,5 @@ private val LABELS_REGEXES = listOf(
 )
 
 fun removeUrlLabels(input: String): String {
-    var result = input
-
-    LABELS_REGEXES.forEach { regex -> result = result.replace(regex, "") }
-
-    return result
+    return LABELS.run(input)
 }

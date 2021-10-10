@@ -1,8 +1,5 @@
 package vlkv.processing
 
-import vlkv.fixUrls
-import vlkv.removeUrlLabels
-
 private val SPLIT_REGEXES = listOf(
     Regex("\n"),
     Regex("[,;] "),

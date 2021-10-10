@@ -4,7 +4,6 @@ package vlkv.processing
 
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.TestFactory
-import vlkv.fixUrls
 import kotlin.test.assertEquals
 
 private data class GTWI(

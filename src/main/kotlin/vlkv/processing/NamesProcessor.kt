@@ -18,10 +18,12 @@ fun getNames(title: String, who: String): List<String> {
     return names.distinct()
 }
 
-private val NAME_FIX_REGEX = Regex("@/(?=[a-z])", RegexOption.IGNORE_CASE)
+private val NAME_REPLACEMENTS = Replacements(
+    Regex("@/(?=[a-z])", RegexOption.IGNORE_CASE) to "@",
+)
 
 fun fixNames(input: String): String {
-    return NAME_FIX_REGEX.replace(input, "@")
+    return NAME_REPLACEMENTS.run(input)
 }
 
 fun getUniqueNames(names: List<String>): List<String> {

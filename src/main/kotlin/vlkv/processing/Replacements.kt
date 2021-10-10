@@ -1,6 +1,6 @@
 package vlkv.processing
 
-class Replacements(vararg val pairs: Pair<Regex, String>) {
+open class Replacements(private vararg val pairs: Pair<Regex, String>) {
     fun run(input: String): String {
         var result = input
 
