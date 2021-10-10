@@ -2,6 +2,8 @@ package vlkv.processing
 
 import vlkv.processing.regexes.Removables
 
+// FIXME: Unused, bring back
+
 private val SPLIT_REGEXES = listOf(
     Regex("\n"),
     Regex("[,;] "),

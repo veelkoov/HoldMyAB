@@ -11,7 +11,7 @@
         <thead>
             <tr>
                 <th>Names</th>
-                <th>Where</th>
+                <th>Urls</th>
                 <th>Bewares/cautions</th>
             </tr>
         </thead>
@@ -24,8 +24,8 @@
                         {% endfor %}
                     </td>
                     <td>
-                        {% for where in subject.where %}
-                            <a href="{{ where }}" target="_blank"><span class="badge rounded-pill bg-secondary">{{ where|shorter_url }}</span></a>
+                        {% for url in subject.urls %}
+                            <a href="{{ url }}" target="_blank"><span class="badge rounded-pill bg-secondary">{{ url|shorter_url }}</span></a>
                         {% endfor %}
                     </td>
                     <td>

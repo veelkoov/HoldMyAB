@@ -2,24 +2,17 @@ package vlkv.processing
 
 import vlkv.processing.regexes.Replacements
 
-private val NAMES_SPLIT = Regex("( - |(?<!u)/|,)")
+private val NAMES_SPLIT = Regex("( - |(?<!u)/|,|\n)")
 
-fun getNames(title: String, who: String): List<String> {
-    var wipTitle = Urls.expand(title)
-    wipTitle = fixNames(wipTitle)
-
-    val names = NAMES_SPLIT.split(wipTitle).map { it.trim() }.toMutableList()
-
-    names.addAll(NAMES_SPLIT.split(who).map { it.trim() })
-
-    return names.distinct()
+fun getNames(input: String): List<String> {
+    return NAMES_SPLIT.split(fixNames(input)).map { it.trim() }.filterNot { it == "" }.toMutableList()
 }
 
 private val NAME_REPLACEMENTS = Replacements(
     Regex("@/(?=[a-z])", RegexOption.IGNORE_CASE) to "@",
 )
 
-fun fixNames(input: String): String {
+fun fixNames(input: String): String { // FIXME: Possible inline?
     return NAME_REPLACEMENTS.run(input)
 }
 

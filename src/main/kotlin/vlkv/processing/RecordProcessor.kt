@@ -2,20 +2,45 @@ package vlkv.processing
 
 import vlkv.Beware
 import vlkv.json.Record
+import vlkv.processing.results.NamesUrls
 
 private const val TAG_RESOLVED = "resolved"
 
 fun recordToBeware(record: Record): Beware {
     validate(record)
 
-    val (urlsFromWho, whoWithoutUrls) = Urls.extract(record.fields.getWho())
+    val names = mutableListOf<String>()
+    val urls = mutableListOf<String>()
+    val issues = mutableListOf<String>()
+
     val fixedTitle = fixTitle(record.title)
-    val names = getNames(fixedTitle.result, whoWithoutUrls)
-    val where = getTidyWhere(record.fields.getWhere(), urlsFromWho)
+    issues.addAll(fixedTitle.issues)
+
+    extend(names, urls, fixedTitle.result)
+    extend(names, urls, record.fields.getWho())
+    extend(names, urls, record.fields.getWhere())
+
     val isResolved = isResolved(record)
     val isBeware = isBeware(record)
 
-    return Beware(names, where, record.url, isResolved, isBeware, fixedTitle.issues) // TODO: Other stuff
+    return Beware(names, urls, record.url, isResolved, isBeware, issues)
+}
+
+private fun extend(names: MutableList<String>, urls: MutableList<String>, input: String) {
+    val (newNames, newUrls) = getNamesUrls(input)
+
+    names.addAll(newNames)
+    urls.addAll(newUrls)
+}
+
+fun getNamesUrls(input: String): NamesUrls {
+    var subject = Urls.expand(input)
+    subject = Urls.fix(subject)
+    subject = Urls.removeLabels(subject)
+
+    val (urls, remaining) = Urls.extract(subject)
+
+    return NamesUrls(getNames(remaining), urls)
 }
 
 private fun validate(record: Record) { // If any of these fire, there may be something I've overseen

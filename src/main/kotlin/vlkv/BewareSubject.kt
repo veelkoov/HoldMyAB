@@ -5,21 +5,25 @@ import vlkv.processing.getUniqueNames
 class BewareSubject {
     private var names = listOf<String>()
     private val bewares = mutableListOf<Beware>()
-    private val where = mutableListOf<String>()
+    private val urls = mutableListOf<String>()
     private val issues = mutableListOf<String>()
 
+    @Suppress("unused") // Pebble uses it
     fun getNames(): List<String> {
         return names.toList()
     }
 
+    @Suppress("unused") // Pebble uses it
     fun getBewares(): List<Beware> {
         return bewares.toList()
     }
 
-    fun getWhere(): List<String> {
-        return where.toList()
+    @Suppress("unused") // Pebble uses it
+    fun getUrls(): List<String> {
+        return urls.toList()
     }
 
+    @Suppress("unused") // Pebble uses it
     fun getIssues(): List<String> {
         return issues.toList()
     }
@@ -29,9 +33,9 @@ class BewareSubject {
 
         names = getUniqueNames(names.plus(beware.names))
 
-        beware.where.forEach {
-            if (!where.contains(it)) {
-                where.add(it)
+        beware.urls.forEach {
+            if (!urls.contains(it)) {
+                urls.add(it)
             }
         }
 
