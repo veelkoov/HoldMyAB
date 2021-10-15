@@ -23,6 +23,11 @@ idea {
 dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
     implementation("io.pebbletemplates:pebble:3.1.5")
+
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.11.4")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.11.4")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.11.4")
+
     testImplementation("org.jetbrains.kotlin:kotlin-test:1.5.31")
     testImplementation("org.junit.jupiter:junit-jupiter-params:5.8.1")
 }

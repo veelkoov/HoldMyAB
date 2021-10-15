@@ -3,10 +3,12 @@ package vlkv
 import com.mitchellbosecke.pebble.PebbleEngine
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+import vlkv.fixes.Fixer
 import vlkv.json.Record
 import vlkv.json.RecordsPage
 import vlkv.pebble.Extension
 import vlkv.processing.recordToBeware
+import vlkv.processing.validate
 import java.io.File
 
 
@@ -27,14 +29,21 @@ fun main(args: Array<String>) {
 private fun readInputFilesFromDir(inputDirPath: String): Database {
     val database = Database()
 
+    val fixer = Fixer("$inputDirPath/fixes.yaml") // TODO: Possibly parametrize
+
     File(inputDirPath).walkTopDown()
         .filter { it.isFile && it.name.endsWith(".json") }
         .map { Json.decodeFromString<RecordsPage>(it.readText()) }
         .forEach { page ->
             page.results
+                .stream()
                 .filter { record -> isProperRecord(record) }
+                .map { record -> validate(record); fixer.fix(record) }
                 .forEach { record -> database.ingest(recordToBeware(record)) }
         }
+
+    fixer.assertAllDone()
+
     return database
 }
 

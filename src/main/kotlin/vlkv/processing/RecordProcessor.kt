@@ -7,8 +7,6 @@ import vlkv.processing.results.NamesUrls
 private const val TAG_RESOLVED = "resolved"
 
 fun recordToBeware(record: Record): Beware {
-    validate(record)
-
     val names = mutableListOf<String>()
     val urls = mutableListOf<String>()
     val issues = mutableListOf<String>()
@@ -41,7 +39,7 @@ fun getNamesUrls(input: String): NamesUrls {
     return NamesUrls(names.result, urls, names.issues)
 }
 
-private fun validate(record: Record) { // If any of these fire, there may be something I've overseen
+fun validate(record: Record) { // If any of these fire, there may be something I've overseen
     val description = Regex("<([^>]+) />").replace(record.fields.getDescription(), "<$1>")
 
     if (description != record.description) {
