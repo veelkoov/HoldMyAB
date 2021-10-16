@@ -24,7 +24,7 @@ internal class UrlsTest {
         "https://instagram.com/abcd_efgh\r\nhttps://toyhou.se/abcde_fghi"
                 to "https://www.instagram.com/abcd_efgh/\r\nhttps://toyhou.se/abcde_fghi",
         "Twitter: https://twitter.com/BigBadYote\r\nFuraffinity: https://www.furaffinity.net/user/badcoyote\r\nPicarto: https://picarto.tv/badcoyoteart\r\nTwitter: https://twitter.com/CritterCanvas"
-                to "https://twitter.com/BigBadYote\r\nhttp://furaffinity.net/user/badcoyote/\r\nhttps://picarto.tv/badcoyoteart\r\nhttps://twitter.com/CritterCanvas",
+                to "https://twitter.com/BigBadYote\r\nhttps://furaffinity.net/user/badcoyote/\r\nhttps://picarto.tv/badcoyoteart\r\nhttps://twitter.com/CritterCanvas",
     ).map { (input, expected) ->
         dynamicTest("fixUrl $input -> $expected") {
             assertEquals(expected, Urls.tidy(input))

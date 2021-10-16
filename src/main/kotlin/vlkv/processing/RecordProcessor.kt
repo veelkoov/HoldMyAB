@@ -15,8 +15,8 @@ fun recordToBeware(record: Record): Beware {
     issues.addAll(fixedTitle.issues)
 
     extend(names, urls, issues, fixedTitle.result)
-    extend(names, urls, issues, record.fields.getWho())
-    extend(names, urls, issues, fixWhere(record.fields.getWhere()))
+    extend(names, urls, issues, fixWho(record.fields.getWho(), issues))
+    extend(names, urls, issues, fixWhere(record.fields.getWhere(), issues))
 
     val isResolved = isResolved(record)
     val isBeware = isBeware(record)
@@ -32,7 +32,7 @@ private fun extend(names: MutableList<String>, urls: MutableList<String>, issues
     issues.addAll(newIssues)
 }
 
-fun getNamesUrls(input: String): NamesUrls {
+internal fun getNamesUrls(input: String): NamesUrls {
     val (urls, remaining) = Urls.extract(Urls.tidy(input))
     val names = getNames(remaining)
 

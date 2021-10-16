@@ -67,7 +67,7 @@ fun getNames(input: String): StringList {
         .split(NAME_REPLACEMENTS.run(input))
         .map { it.trim() }
         .filterNot { it == "" }
-        .filter { if (INVALID_NAMES.contains(it.lowercase())) { invalidNames.add(it.lowercase()); false } else true }
+        .filter { if (INVALID_NAMES.contains(it.lowercase())) { invalidNames.add(it); false } else true }
         .toMutableList()
 
     val issues: List<String> = if (invalidNames.isEmpty()) listOf() else listOf("Filtered out names: " + invalidNames.joinToString(", "))
