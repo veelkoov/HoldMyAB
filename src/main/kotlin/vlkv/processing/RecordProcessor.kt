@@ -39,7 +39,7 @@ internal fun getNamesUrls(input: String): NamesUrls {
     return NamesUrls(names.result, urls, names.issues)
 }
 
-fun validate(record: Record) { // If any of these fire, there may be something I've overseen
+internal fun validateAssumptions(record: Record) { // If any of these fire, there may be something I've overseen
     val description = Regex("<([^>]+) />").replace(record.fields.getDescription(), "<$1>")
 
     if (description != record.description) {

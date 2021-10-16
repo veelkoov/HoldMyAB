@@ -8,7 +8,7 @@ import vlkv.json.Record
 import vlkv.json.RecordsPage
 import vlkv.pebble.Extension
 import vlkv.processing.recordToBeware
-import vlkv.processing.validate
+import vlkv.processing.validateAssumptions
 import java.io.File
 
 
@@ -38,7 +38,7 @@ private fun readInputFilesFromDir(inputDirPath: String): Database {
             page.results
                 .stream()
                 .filter { record -> isProperRecord(record) }
-                .map { record -> validate(record); fixer.fix(record) }
+                .map { record -> validateAssumptions(record); fixer.fix(record) }
                 .forEach { record -> database.ingest(recordToBeware(record)) }
         }
 
