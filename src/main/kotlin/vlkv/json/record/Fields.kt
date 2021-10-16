@@ -6,8 +6,8 @@ import kotlinx.serialization.Serializable
 data class Fields(
     val field_3: String,
     val field_4: String,
-    val field_5: String,
-    val field_6: String,
+    var field_5: String,
+    var field_6: String,
     val field_8: Int,
     val field_9: String,
     val field_16: String?,
@@ -27,8 +27,16 @@ data class Fields(
         return field_6
     }
 
+    fun setWhere(newWhere: String) {
+        field_6 = newWhere
+    }
+
     fun getWho(): String {
         return field_5
+    }
+
+    fun setWho(newWho: String) {
+        field_5 = newWho
     }
 
     fun getTitle(): String {
