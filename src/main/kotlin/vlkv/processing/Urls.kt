@@ -24,11 +24,11 @@ object Urls {
     }
 
     private val LABELS = Removables(
-        Regex("DeviantArt( Account)? *[-:] *(?=https://[^.]+\\.deviantart\\.com/)", RegexOption.IGNORE_CASE),
+        Regex("Deviant ?Art( Account)? *[-:] *(?=https://[^.]+\\.deviantart\\.com/)", RegexOption.IGNORE_CASE),
         Regex("Tumblr? *[-:] *(?=https://[^.]+\\.tumblr\\.com/)", RegexOption.IGNORE_CASE),
         Regex("Twitter *[-:] *(?=https://twitter\\.com/)", RegexOption.IGNORE_CASE),
         Regex("YouTube *[-:] *(?=https://www\\.youtube\\.com/)", RegexOption.IGNORE_CASE),
-        Regex("(new |old )?(FA|furaffinity)( account)? *[-:] *(?=https://furaffinity\\.net/)", RegexOption.IGNORE_CASE),
+        Regex("(new |old )?(FA|fur ?affinity)( account)? *[-:] *(?=https://furaffinity\\.net/)", RegexOption.IGNORE_CASE),
         Regex("InkBunny *[-:] *(?=https://inkbunny\\.net/)", RegexOption.IGNORE_CASE),
         Regex("Instagram *[-:] *(?=https://www\\.instagram\\.com/)", RegexOption.IGNORE_CASE),
         Regex("eBay *[-:] *(?=https://www\\.ebay\\.com/)", RegexOption.IGNORE_CASE),

@@ -29,6 +29,8 @@ internal class UrlsTest {
                 to "https://www.ebay.com/usr/abcdefs\nhttps://twitter.com/Abcdef\nhttps://abcdefart.tumblr.com/\nand https://abcdefs.tumblr.com/\nhttps://www.facebook.com/abcdef\nhttps://inkbunny.net/abcdef",
         "FurAffinity: http://www.furaffinity.net/user/abcdefghi/\nPatreon: https://www.patreon.com/Abcdefghi\nTumblr: http://abcdefghi-artwork.tumblr.com/\nTwitter: https://twitter.com/AbcdEfGh\nDeviantArt: https://www.deviantart.com/abcdefghi\nWeasyl: https://www.weasyl.com/profile/abcdefghi\nTrello: https://trello.com/b/aa1BbCCd/abcdefghi-commissions-queue"
                 to "https://furaffinity.net/user/abcdefghi/\nhttps://www.patreon.com/Abcdefghi\nhttps://abcdefghi-artwork.tumblr.com/\nhttps://twitter.com/AbcdEfGh\nhttps://www.deviantart.com/abcdefghi\nhttps://www.weasyl.com/profile/abcdefghi\nhttps://trello.com/b/aa1BbCCd/abcdefghi-commissions-queue",
+        "https://www.patreon.com/AbcdEfghi,\nFur Affinity: http://www.furaffinity.net/user/abcd01/\nDeviant art: https://abcd-efghi.deviantart.com/"
+                to "https://www.patreon.com/AbcdEfghi,\nhttps://furaffinity.net/user/abcd01/\nhttps://abcd-efghi.deviantart.com/",
     ).map { (input, expected) ->
         dynamicTest("fixUrl $input -> $expected") {
             assertEquals(expected, Urls.tidy(input))
