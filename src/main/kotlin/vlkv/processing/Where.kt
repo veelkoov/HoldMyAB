@@ -7,27 +7,34 @@ private val REMOVABLES = Removables(
 )
 
 private val NON_INFORMATIVES = setOf(
+    "art commissions discord", // Possibly by fixes.yaml
     "discord",
+    "deviantart",
+    "deviant art",
     "email",
+    "etsy",
     "facebook",
     "fur affinity",
     "furaffinity",
     "furaffinity.net",
     "furry amino",
     "instagram",
+    "paypal",
+    "secondlife",
     "telegram",
     "toyhouse",
     "trello",
     "tumblr",
     "twitter",
+    "www.thedealersden.com",
 )
 
 fun fixWhere(input: String, issues: MutableList<String>): String {
     val result = REMOVABLES.run(input.trim())
 
     val items = result
-        .split(',', '.', '/')
-        .map { it.trim().lowercase() }
+        .split(",", "/", "\n", " and ")
+        .map { it.trim().trimEnd('.').lowercase() }
         .filter { it != "" }
 
     if (NON_INFORMATIVES.containsAll(items)) {
