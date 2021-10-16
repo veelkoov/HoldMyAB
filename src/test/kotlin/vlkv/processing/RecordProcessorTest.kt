@@ -18,6 +18,7 @@ internal class NamesProcessorTest {
         GNUI("Abcdefghij on DA, FA", listOf(), listOf("https://furaffinity.net/user/Abcdefghij/", "https://www.deviantart.com/Abcdefghij")),
         GNUI("Abcdefghij@FA", listOf(), listOf("https://furaffinity.net/user/Abcdefghij/")),
         GNUI("@/AbCdEfG", listOf("@AbCdEfG"), listOf()),
+        GNUI("@\\AbcdefgH", listOf("@AbcdefgH"), listOf()),
     ).map { (input, expectedNames, expectedUrls) ->
         dynamicTest("getNamesUrls") {
             val result = getNamesUrls(input)
