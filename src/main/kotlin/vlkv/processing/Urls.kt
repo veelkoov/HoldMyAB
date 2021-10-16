@@ -12,8 +12,10 @@ object Urls {
         Regex("(https?://)?(www\\.)?(?<!forums\\.)furaffi?nity\\.net/") to "https://furaffinity.net/",
         Regex("https?://furaffinity\\.net/user/([^/\\s]+)/?") to "https://furaffinity.net/user/$1/",
         Regex("(https?://)?twitter\\.com/") to "https://twitter.com/",
+        Regex("(https?://)?inkbunny\\.net/") to "https://inkbunny.net/",
         Regex("(https?://)?(www\\.|m\\.)?facebook\\.com/") to "https://www.facebook.com/",
         Regex("(https?://)?([^./\\s]+)(?<!www)\\.deviantart\\.com/") to "https://$2.deviantart.com/",
+        Regex("(https?://)?([^./\\s]+)(?<!www)\\.tumblr\\.com/?") to "https://$2.tumblr.com/",
         Regex("(https?://)?(www\\.)?instagram.com/([^/\\s]+)/?") to "https://www.instagram.com/$3/",
     )
 
@@ -23,13 +25,19 @@ object Urls {
 
     private val LABELS = Removables(
         Regex("DeviantArt( Account)? *[-:] *(?=https://[^.]+\\.deviantart\\.com/)", RegexOption.IGNORE_CASE),
+        Regex("Tumblr? *[-:] *(?=https://[^.]+\\.tumblr\\.com/)", RegexOption.IGNORE_CASE),
         Regex("Twitter *[-:] *(?=https://twitter\\.com/)", RegexOption.IGNORE_CASE),
         Regex("YouTube *[-:] *(?=https://www\\.youtube\\.com/)", RegexOption.IGNORE_CASE),
         Regex("(new |old )?(FA|furaffinity)( account)? *[-:] *(?=https://furaffinity\\.net/)", RegexOption.IGNORE_CASE),
+        Regex("InkBunny *[-:] *(?=https://inkbunny\\.net/)", RegexOption.IGNORE_CASE),
         Regex("Instagram *[-:] *(?=https://www\\.instagram\\.com/)", RegexOption.IGNORE_CASE),
+        Regex("eBay *[-:] *(?=https://www\\.ebay\\.com/)", RegexOption.IGNORE_CASE),
         Regex("Facebook *[-:] *(?=https://www\\.facebook\\.com/)", RegexOption.IGNORE_CASE),
+        Regex("Patreon *[-:] *(?=https://www\\.patreon\\.com/)", RegexOption.IGNORE_CASE),
+        Regex("Weasyl *[-:] *(?=https://www\\.weasyl\\.com/)", RegexOption.IGNORE_CASE),
         Regex("Toyhou\\.se *[-:] *(?=https://toyhou\\.se/)", RegexOption.IGNORE_CASE),
         Regex("Picarto *[-:] *(?=https://picarto\\.tv/)", RegexOption.IGNORE_CASE),
+        Regex("Trello *[-:] *(?=https://trello\\.com/)", RegexOption.IGNORE_CASE),
     )
 
     private fun removeLabels(input: String): String {

@@ -23,8 +23,12 @@ internal class UrlsTest {
                 to "https://www.deviantart.com/abc1d2ef\r\nhttps://toyhou.se/asdfghjk\r\nhttps://www.facebook.com/abcd.efgh.ijkl\r\nhttps://www.instagram.com/abcdefghijklm/",
         "https://instagram.com/abcd_efgh\r\nhttps://toyhou.se/abcde_fghi"
                 to "https://www.instagram.com/abcd_efgh/\r\nhttps://toyhou.se/abcde_fghi",
-        "Twitter: https://twitter.com/BigBadYote\r\nFuraffinity: https://www.furaffinity.net/user/badcoyote\r\nPicarto: https://picarto.tv/badcoyoteart\r\nTwitter: https://twitter.com/CritterCanvas"
-                to "https://twitter.com/BigBadYote\r\nhttps://furaffinity.net/user/badcoyote/\r\nhttps://picarto.tv/badcoyoteart\r\nhttps://twitter.com/CritterCanvas",
+        "Twitter: https://twitter.com/AbcdEfGhijk\r\nFuraffinity: https://www.furaffinity.net/user/abcdefghij\r\nPicarto: https://picarto.tv/abcdefghijart\r\nTwitter: https://twitter.com/AbcdeFghijkl"
+                to "https://twitter.com/AbcdEfGhijk\r\nhttps://furaffinity.net/user/abcdefghij/\r\nhttps://picarto.tv/abcdefghijart\r\nhttps://twitter.com/AbcdeFghijkl",
+        "eBay: https://www.ebay.com/usr/abcdefs\nTwitter: http://twitter.com/Abcdef\nTumblr: http://abcdefart.tumblr.com\nand http://abcdefs.tumblr.com\nFacebook: http://facebook.com/abcdef\nInkBunny: http://inkbunny.net/abcdef"
+                to "https://www.ebay.com/usr/abcdefs\nhttps://twitter.com/Abcdef\nhttps://abcdefart.tumblr.com/\nand https://abcdefs.tumblr.com/\nhttps://www.facebook.com/abcdef\nhttps://inkbunny.net/abcdef",
+        "FurAffinity: http://www.furaffinity.net/user/abcdefghi/\nPatreon: https://www.patreon.com/Abcdefghi\nTumblr: http://abcdefghi-artwork.tumblr.com/\nTwitter: https://twitter.com/AbcdEfGh\nDeviantArt: https://www.deviantart.com/abcdefghi\nWeasyl: https://www.weasyl.com/profile/abcdefghi\nTrello: https://trello.com/b/aa1BbCCd/abcdefghi-commissions-queue"
+                to "https://furaffinity.net/user/abcdefghi/\nhttps://www.patreon.com/Abcdefghi\nhttps://abcdefghi-artwork.tumblr.com/\nhttps://twitter.com/AbcdEfGh\nhttps://www.deviantart.com/abcdefghi\nhttps://www.weasyl.com/profile/abcdefghi\nhttps://trello.com/b/aa1BbCCd/abcdefghi-commissions-queue",
     ).map { (input, expected) ->
         dynamicTest("fixUrl $input -> $expected") {
             assertEquals(expected, Urls.tidy(input))
