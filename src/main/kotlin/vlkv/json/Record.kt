@@ -27,4 +27,18 @@ data class Record(
     val topic: String?,
     val url: String,
     val views: Int
-)
+) {
+    fun isBeware(): Boolean {
+        if (category.name.contains("beware", true)
+            && !category.name.contains("caution", true)
+        ) {
+            return true
+        }
+
+        if (category.name.contains("caution", true)) {
+            return false
+        }
+
+        error("Failed to decide if a beware or a caution: $title")
+    }
+}

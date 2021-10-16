@@ -11,7 +11,7 @@ fun recordToBeware(record: Record): Beware {
     val urls = mutableListOf<String>()
     val issues = mutableListOf<String>()
 
-    val fixedTitle = fixTitle(record.title)
+    val fixedTitle = getFixedTitle(record)
     issues.addAll(fixedTitle.issues)
 
     extend(names, urls, issues, fixedTitle.result)
@@ -19,9 +19,8 @@ fun recordToBeware(record: Record): Beware {
     extend(names, urls, issues, fixWhere(record.fields.getWhere(), issues))
 
     val isResolved = isResolved(record)
-    val isBeware = isBeware(record)
 
-    return Beware(record.id, names.distinct(), urls, record.url, isResolved, isBeware, issues)
+    return Beware(record.id, names.distinct(), urls, record.url, isResolved, record.isBeware(), issues)
 }
 
 private fun extend(names: MutableList<String>, urls: MutableList<String>, issues: MutableList<String>, input: String) {
@@ -53,18 +52,4 @@ internal fun validateAssumptions(record: Record) { // If any of these fire, ther
 
 private fun isResolved(record: Record): Boolean {
     return record.tags.contains(TAG_RESOLVED) || record.fields.isResolved()
-}
-
-private fun isBeware(record: Record): Boolean {
-    if (record.category.name.contains("beware", true)
-        && !record.category.name.contains("caution", true)
-    ) {
-        return true
-    }
-
-    if (record.category.name.contains("caution", true)) {
-        return false
-    }
-
-    error("Failed to decide if a beware or a caution: " + record.title)
 }
