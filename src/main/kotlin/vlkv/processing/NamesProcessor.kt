@@ -15,50 +15,29 @@ private val INVALID_NAMES = listOf( // FIXME: This list would not be needed if t
     ";",
     "also",
     "and",
-    "artist",
-    "buyer",
-    "da fa",
-    "deviant art:",
-    "deviantart",
     "discord",
-    "ebay:",
-    "email",
-    "fa",
     "fa)",
     "fa?",
     "facebook",
-    "fur affinity",
-    "fur affinity:",
-    "furaffinity",
-    "furaffinity:",
-    "furry amino",
-    "inkbunny:",
-    "instagram and paypal",
-    "instagram",
+    "furry amino:",
     "newgrounds:",
     "on discord",
     "on furry amino:",
     "or",
     "other social media",
-    "patreon:",
     "payment done with paypal.",
     "paypal.com",
-    "picarto:",
     "pixiv:",
     "t.me",
     "telegram channel",
     "telegram updates:",
     "telegram",
-    "trello.",
-    "trello:",
-    "tumblr",
-    "tumblr:",
     "twitter alt:",
     "twitter",
     "twitter.com",
-    "weasyl:",
     "website:",
 )
+private val usedInvalidNames = mutableSetOf<String>()
 
 fun getNames(input: String): StringList {
     val invalidNames = mutableListOf<String>()
@@ -67,7 +46,15 @@ fun getNames(input: String): StringList {
         .split(NAME_REPLACEMENTS.run(input))
         .map { it.trim() }
         .filterNot { it == "" }
-        .filter { if (INVALID_NAMES.contains(it.lowercase())) { invalidNames.add(it); false } else true }
+        .filter {
+            if (INVALID_NAMES.contains(it.lowercase())) {
+                usedInvalidNames.add(it.lowercase())
+                invalidNames.add(it)
+                false
+            } else {
+                true
+            }
+        }
         .toMutableList()
 
     val issues: List<String> = if (invalidNames.isEmpty()) listOf() else listOf("Filtered out names: " + invalidNames.joinToString(", "))
@@ -98,4 +85,8 @@ fun getUniqueNames(names: List<String>): List<String> {
 
 fun getVal(string: String): Int {
     return string.toByteArray().map { it.toInt() }.reduceOrNull { i1, i2 -> i1 + i2 } ?: 0
+}
+
+fun getUnusedInvalidNames(): List<String> {
+    return INVALID_NAMES.filterNot { usedInvalidNames.contains(it) }
 }

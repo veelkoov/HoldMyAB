@@ -7,6 +7,7 @@ import vlkv.fixes.Fixer
 import vlkv.json.Record
 import vlkv.json.RecordsPage
 import vlkv.pebble.Extension
+import vlkv.processing.getUnusedInvalidNames
 import vlkv.processing.recordToBeware
 import vlkv.processing.validateAssumptions
 import java.io.File
@@ -23,6 +24,7 @@ fun main(args: Array<String>) {
     val database = readInputFilesFromDir(inputDirPath)
     renderToFile(database, outputFilePath)
 
+    println("Unused invalid names: " + getUnusedInvalidNames().joinToString(", "))
     println("Finished!")
 }
 
