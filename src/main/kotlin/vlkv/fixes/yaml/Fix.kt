@@ -1,5 +1,8 @@
 package vlkv.fixes.yaml
 
+import vlkv.fixes.TitleManipulator
+import vlkv.fixes.WhereManipulator
+import vlkv.fixes.WhoManipulator
 import vlkv.json.Record
 
 class Fix {
@@ -12,23 +15,20 @@ class Fix {
         }
 
         for (change in this.change) {
-            if (change.what == "title") {
-                if (change.from == record.title) {
-                    record.title = change.to
-                    change.done = true
-                }
-            } else if (change.what == "who") {
-                if (change.from == record.fields.getWho()) {
-                    record.fields.setWho(change.to)
-                    change.done = true
-                }
-            } else if (change.what == "where") {
-                if (change.from == record.fields.getWhere()) {
-                    record.fields.setWhere(change.to)
-                    change.done = true
-                }
-            } else {
-                error("Unsupported `what` in $`in` fix: '${change.what}'")
+            val manipulator = when (change.what) {
+                "title" -> TitleManipulator
+                "who" -> WhoManipulator
+                "where" -> WhereManipulator
+                else -> error("Unsupported `what` in $`in` fix: '${change.what}'")
+            }
+
+            val recordValue = normalize(manipulator.get(record))
+            val oldValue = normalize(change.from)
+            val newValue = normalize(change.to)
+
+            if (oldValue == recordValue) {
+                manipulator.set(record, newValue)
+                change.done = true
             }
         }
     }
@@ -39,5 +39,9 @@ class Fix {
                 error("Unused change: $`in`, '${it.what}', '${it.from}'")
             }
         }
+    }
+
+    private fun normalize(input: String): String {
+        return input.replace("\r\n", "\n").trim()
     }
 }
