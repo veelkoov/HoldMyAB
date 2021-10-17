@@ -1,6 +1,6 @@
 package vlkv
 
-import vlkv.processing.getUniqueNames
+import vlkv.processing.getUniqueStrings
 
 class BewareSubject {
     private var names = listOf<String>()
@@ -31,7 +31,7 @@ class BewareSubject {
     fun extend(beware: Beware) {
         bewares.add(beware)
 
-        names = getUniqueNames(names.plus(beware.names))
+        names = getUniqueStrings(names.plus(beware.names))
 
         beware.urls.forEach {
             if (!urls.contains(it)) {

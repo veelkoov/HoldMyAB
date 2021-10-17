@@ -7,9 +7,7 @@ import vlkv.fixes.Fixer
 import vlkv.json.Record
 import vlkv.json.RecordsPage
 import vlkv.pebble.Extension
-import vlkv.processing.getUnusedInvalidNames
-import vlkv.processing.recordToBeware
-import vlkv.processing.validateAssumptions
+import vlkv.processing.RecordProcessor
 import java.io.File
 
 
@@ -26,12 +24,13 @@ fun main(args: Array<String>) {
     val database = readInputFilesFromDir(inputDirPath, fixer)
     renderToFile(database, outputFilePath)
 
-    println("Unused invalid names: " + getUnusedInvalidNames().joinToString(", "))
+    println("Unused invalid names: " + fixer.getUnusedIgnoredNames().joinToString(", "))
     println("Finished!")
 }
 
 private fun readInputFilesFromDir(inputDirPath: String, fixer: Fixer): Database {
     val database = Database()
+    val processor = RecordProcessor(fixer)
 
     File(inputDirPath).walkTopDown()
         .filter { it.isFile && it.name.endsWith(".json") }
@@ -40,8 +39,8 @@ private fun readInputFilesFromDir(inputDirPath: String, fixer: Fixer): Database 
             page.results
                 .stream()
                 .filter { record -> isProperRecord(record) }
-                .map { record -> validateAssumptions(record); fixer.fix(record) }
-                .forEach { record -> database.ingest(recordToBeware(record)) }
+                .map { record -> processor.validate(record); fixer.fix(record) }
+                .forEach { record -> database.ingest(processor.getBeware(record)) }
         }
 
     fixer.assertAllDone()

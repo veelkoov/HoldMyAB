@@ -10,6 +10,7 @@ import java.io.File
 
 class Fixer(fixesFilePath: String) {
     private val fixes: Fixes
+    private val encounteredIgnoredNames = mutableListOf<String>()
 
     init {
         fixes = ObjectMapper(YAMLFactory())
@@ -25,5 +26,19 @@ class Fixer(fixesFilePath: String) {
 
     fun assertAllDone() {
         fixes.fixes.forEach { it.assertDone() }
+    }
+
+    fun isIgnoredName(name: String): Boolean {
+        return if (fixes.ignoredNames.contains(name.lowercase())) {
+            encounteredIgnoredNames.add(name.lowercase())
+
+            true
+        } else {
+            false
+        }
+    }
+
+    fun getUnusedIgnoredNames(): List<String> {
+        return fixes.ignoredNames.filterNot { encounteredIgnoredNames.contains(it) }
     }
 }

@@ -1,55 +1,65 @@
 package vlkv.processing
 
 import vlkv.Beware
+import vlkv.fixes.Fixer
 import vlkv.json.Record
 import vlkv.processing.results.NamesUrls
 
 private const val TAG_RESOLVED = "resolved"
 
-fun recordToBeware(record: Record): Beware {
-    val names = mutableListOf<String>()
-    val urls = mutableListOf<String>()
-    val issues = mutableListOf<String>()
+class RecordProcessor(fixer: Fixer) {
+    private val names: NamesProcessor = NamesProcessor(fixer)
 
-    val fixedTitle = getFixedTitle(record)
-    issues.addAll(fixedTitle.issues)
+    fun getBeware(record: Record): Beware {
+        val names = mutableListOf<String>()
+        val urls = mutableListOf<String>()
+        val issues = mutableListOf<String>()
 
-    extend(names, urls, issues, fixedTitle.result)
-    extend(names, urls, issues, fixWho(record.fields.getWho(), issues))
-    extend(names, urls, issues, fixWhere(record.fields.getWhere(), issues))
+        val fixedTitle = getFixedTitle(record)
+        issues.addAll(fixedTitle.issues)
 
-    val isResolved = isResolved(record)
+        extend(names, urls, issues, fixedTitle.result)
+        extend(names, urls, issues, fixWho(record.fields.getWho(), issues))
+        extend(names, urls, issues, fixWhere(record.fields.getWhere(), issues))
 
-    return Beware(record.id, names.distinct(), urls, record.url, isResolved, record.isBeware(), issues)
-}
+        val isResolved = isResolved(record)
 
-private fun extend(names: MutableList<String>, urls: MutableList<String>, issues: MutableList<String>, input: String) {
-    val (newNames, newUrls, newIssues) = getNamesUrls(input)
-
-    names.addAll(newNames)
-    urls.addAll(newUrls)
-    issues.addAll(newIssues)
-}
-
-internal fun getNamesUrls(input: String): NamesUrls {
-    val (urls, remaining) = Urls.extract(Urls.tidy(input))
-    val names = getNames(remaining)
-
-    return NamesUrls(names.result, urls, names.issues)
-}
-
-internal fun validateAssumptions(record: Record) { // If any of these fire, there may be something I've overseen
-    val description = Regex("<([^>]+) />").replace(record.fields.getDescription(), "<$1>")
-
-    if (description != record.description) {
-        error("Description field is different than the record description")
+        return Beware(record.id, names.distinct(), urls, record.url, isResolved, record.isBeware(), issues)
     }
 
-    if (record.fields.getTitle() != record.title) {
-        error("Title field is different than the record title")
-    }
-}
+    private fun extend(
+        names: MutableList<String>,
+        urls: MutableList<String>,
+        issues: MutableList<String>,
+        input: String
+    ) {
+        val (newNames, newUrls, newIssues) = getNamesUrls(input)
 
-private fun isResolved(record: Record): Boolean {
-    return record.tags.contains(TAG_RESOLVED) || record.fields.isResolved()
+        names.addAll(newNames)
+        urls.addAll(newUrls)
+        issues.addAll(newIssues)
+    }
+
+    private fun getNamesUrls(input: String): NamesUrls {
+        val (urls, remaining) = Urls.extract(Urls.tidy(input))
+        val names = names.getNames(remaining)
+
+        return NamesUrls(names.result, urls, names.issues)
+    }
+
+    internal fun validate(record: Record) { // If any of these fire, there may be something I've overseen
+        val description = Regex("<([^>]+) />").replace(record.fields.getDescription(), "<$1>")
+
+        if (description != record.description) {
+            error("Description field is different than the record description")
+        }
+
+        if (record.fields.getTitle() != record.title) {
+            error("Title field is different than the record title")
+        }
+    }
+
+    private fun isResolved(record: Record): Boolean {
+        return record.tags.contains(TAG_RESOLVED) || record.fields.isResolved()
+    }
 }
