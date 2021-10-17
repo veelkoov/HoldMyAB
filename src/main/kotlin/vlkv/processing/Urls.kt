@@ -15,6 +15,10 @@ object Urls {
         Regex("(https?://)?inkbunny\\.net/") to "https://inkbunny.net/",
         Regex("(https?://)?(www\\.|m\\.)?facebook\\.com/") to "https://www.facebook.com/",
         Regex("(https?://)?([^./\\s]+)(?<!www)\\.deviantart\\.com/") to "https://$2.deviantart.com/",
+
+        // Remove www. from www.username.deviantart.com
+        Regex("(https?://)?www\\.([^./\\s]+)\\.deviantart\\.com/?") to "https://$2.deviantart.com/",
+
         Regex("(https?://)?([^./\\s]+)(?<!www)\\.tumblr\\.com/?") to "https://$2.tumblr.com/",
         Regex("(https?://)?(www\\.)?instagram.com/([^/\\s]+)/?") to "https://www.instagram.com/$3/",
     )
@@ -58,7 +62,7 @@ object Urls {
 
     private val EXPANSIONS = Replacements(
         Regex("([a-z0-9]+) o[fn] DA, FA(?![a-z])", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/ https://www.deviantart.com/$1",
-        Regex("([a-z0-9]+)(@| o[fn] )FA(?![a-z])", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/",
+        Regex("([a-z0-9]+)(@| o[fn] )(FA|Fur ?affinity)(?![a-z])", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/",
         Regex("([a-z0-9]+)(@| o[fn] )DA(?![a-z])", RegexOption.IGNORE_CASE) to "https://www.deviantart.com/$1",
     )
 

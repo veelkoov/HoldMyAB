@@ -33,6 +33,12 @@ internal class NamesProcessorTest {
             setOf(), setOf("https://www.deviantart.com/Abcdefhijk", "https://furaffinity.net/user/Mnopqr/")),
 
         GNUI("Abcd Efghi on facebook", setOf("Abcd Efghi on facebook"), setOf()),
+
+        GNUI("Abcdefghijk -> www.abcdefghijk.deviantart.com, www.furaffinity.net/user/abcdefghijk",
+            setOf("Abcdefghijk ->"),
+            setOf("https://abcdefghijk.deviantart.com/", "https://furaffinity.net/user/abcdefghijk/")),
+
+        GNUI("AbcdefGhijklm on Furaffinity", setOf(), setOf("https://furaffinity.net/user/AbcdefGhijklm/")),
     ).map { (input, expectedNames, expectedUrls) ->
         dynamicTest("getNamesUrls") {
             val result = getNamesUrls(input)
