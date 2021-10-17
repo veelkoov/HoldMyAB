@@ -41,7 +41,7 @@ class Extension : AbstractExtension() {
                 Regex("^https?://www\\.deviantart\\.com/([^/]+)/?$") to "DA: $1",
             ),
             "shorter_ab_url" to ShorterUrlFilter(
-                Regex("^https://artistsbeware.info/beware/[^/]+/[^/]+(cautions?|bewares?)(-archives)?") to "",
+                Regex("^https://artistsbeware.info/beware/.+(/[^/]+/)") to "$1",
             ),
         )
     }
