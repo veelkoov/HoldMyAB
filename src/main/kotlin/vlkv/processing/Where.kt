@@ -11,13 +11,18 @@ private val NON_INFORMATIVES = setOf(
     "discord",
     "deviantart",
     "deviant art",
+    "da:",
+    "personal site:",
+    "of artist",
     "email",
     "etsy",
     "facebook",
     "fur affinity",
     "furaffinity",
     "furaffinity.net",
+    "furbuy",
     "furry amino",
+    "gmail",
     "instagram",
     "paypal",
     "secondlife",
@@ -27,6 +32,12 @@ private val NON_INFORMATIVES = setOf(
     "tumblr",
     "twitter",
     "www.thedealersden.com",
+
+    "anthrocon",
+    "indyfurcon 2011",
+    "furlandia 2018",
+    "megaplex 2017",
+    "further confusion 2017",
 )
 
 fun fixWhere(input: String, issues: MutableList<String>): String {
