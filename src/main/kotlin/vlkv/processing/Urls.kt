@@ -24,11 +24,11 @@ object Urls {
     }
 
     private val LABELS = Removables(
-        Regex("Deviant ?Art( Account)? *[-:] *(?=https://[^.]+\\.deviantart\\.com/)", RegexOption.IGNORE_CASE),
+        Regex("(Deviant ?Art|DA)( Account)? *[-:]? *(?=https://[^.]+\\.deviantart\\.com/)", RegexOption.IGNORE_CASE),
         Regex("Tumblr? *[-:] *(?=https://[^.]+\\.tumblr\\.com/)", RegexOption.IGNORE_CASE),
         Regex("Twitter *[-:] *(?=https://twitter\\.com/)", RegexOption.IGNORE_CASE),
         Regex("YouTube *[-:] *(?=https://www\\.youtube\\.com/)", RegexOption.IGNORE_CASE),
-        Regex("(new |old )?(FA|fur ?affinity)( account)? *[-:] *(?=https://furaffinity\\.net/)", RegexOption.IGNORE_CASE),
+        Regex("(new |old )?(FA|fur ?affinity)( account)? *[-:]? *(?=https://furaffinity\\.net/)", RegexOption.IGNORE_CASE),
         Regex("InkBunny *[-:] *(?=https://inkbunny\\.net/)", RegexOption.IGNORE_CASE),
         Regex("Instagram *[-:] *(?=https://www\\.instagram\\.com/)", RegexOption.IGNORE_CASE),
         Regex("eBay *[-:] *(?=https://www\\.ebay\\.com/)", RegexOption.IGNORE_CASE),
@@ -57,15 +57,16 @@ object Urls {
     }
 
     private val EXPANSIONS = Replacements(
-        Regex("([a-z0-9]+) on DA, FA", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/ https://www.deviantart.com/$1",
-        Regex("([a-z0-9]+)@FA", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/",
+        Regex("([a-z0-9]+) o[fn] DA, FA(?![a-z])", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/ https://www.deviantart.com/$1",
+        Regex("([a-z0-9]+)(@| o[fn] )FA(?![a-z])", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/",
+        Regex("([a-z0-9]+)(@| o[fn] )DA(?![a-z])", RegexOption.IGNORE_CASE) to "https://www.deviantart.com/$1",
     )
 
     private fun expand(input: String): String {
         return EXPANSIONS.run(input)
     }
 
-    fun tidy(input: String): String {
+    internal fun tidy(input: String): String {
         var result = expand(input)
         result = fix(result)
         result = removeLabels(result)
