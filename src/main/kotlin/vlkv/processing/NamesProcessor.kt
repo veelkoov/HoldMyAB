@@ -12,15 +12,15 @@ private val NAMES_SPLIT = Regex("( - |(?<!u)/|,|\n)")
 
 class NamesProcessor(private val fixer: Fixer) {
     fun getNames(input: String): StringList {
-        val invalidNames = mutableListOf<String>()
+        val ignoredNames = mutableListOf<String>()
 
         val names = NAMES_SPLIT
             .split(NAME_REPLACEMENTS.run(input))
             .map { it.trim() }
             .filterNot { it == "" }
             .filter {
-                if (fixer.isIgnoredName(it)) {
-                    invalidNames.add(it)
+                if (fixer.ignoredNames.has(it)) {
+                    ignoredNames.add(it)
 
                     false
                 } else {
@@ -29,10 +29,10 @@ class NamesProcessor(private val fixer: Fixer) {
             }
             .toMutableList()
 
-        val issues: List<String> = if (invalidNames.isEmpty()) {
+        val issues: List<String> = if (ignoredNames.isEmpty()) {
             listOf()
         } else {
-            listOf("Filtered out names: " + invalidNames.joinToString(", "))
+            listOf("Filtered out names: " + ignoredNames.joinToString(", "))
         }
 
         return StringList(names, issues)

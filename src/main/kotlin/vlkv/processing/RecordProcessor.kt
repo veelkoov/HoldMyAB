@@ -8,7 +8,8 @@ import vlkv.processing.results.NamesUrls
 private const val TAG_RESOLVED = "resolved"
 
 class RecordProcessor(fixer: Fixer) {
-    private val names: NamesProcessor = NamesProcessor(fixer)
+    private val names = NamesProcessor(fixer)
+    private val where  = WhereProcessor(fixer)
 
     fun getBeware(record: Record): Beware {
         val names = mutableListOf<String>()
@@ -20,7 +21,7 @@ class RecordProcessor(fixer: Fixer) {
 
         extend(names, urls, issues, fixedTitle.result)
         extend(names, urls, issues, fixWho(record.fields.getWho(), issues))
-        extend(names, urls, issues, fixWhere(record.fields.getWhere(), issues))
+        extend(names, urls, issues, where.fix(record.fields.getWhere(), issues))
 
         val isResolved = isResolved(record)
 

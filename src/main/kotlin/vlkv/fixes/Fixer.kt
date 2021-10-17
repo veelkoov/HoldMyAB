@@ -10,12 +10,16 @@ import java.io.File
 
 class Fixer(fixesFilePath: String) {
     private val fixes: Fixes
-    private val encounteredIgnoredNames = mutableListOf<String>()
+    val ignoredNames: StringList
+    val ignoredWhereLines: StringList
 
     init {
         fixes = ObjectMapper(YAMLFactory())
             .registerModule(KotlinModule())
             .readValue(File(fixesFilePath), Fixes::class.java)
+
+        ignoredNames = StringList(fixes.ignoredNames)
+        ignoredWhereLines = StringList(fixes.ignoredWhereLines)
     }
 
     fun fix(record: Record): Record {
@@ -28,17 +32,7 @@ class Fixer(fixesFilePath: String) {
         fixes.fixes.forEach { it.assertDone() }
     }
 
-    fun isIgnoredName(name: String): Boolean {
-        return if (fixes.ignoredNames.contains(name.lowercase())) {
-            encounteredIgnoredNames.add(name.lowercase())
-
-            true
-        } else {
-            false
-        }
-    }
-
-    fun getUnusedIgnoredNames(): List<String> {
-        return fixes.ignoredNames.filterNot { encounteredIgnoredNames.contains(it) }
+    fun getIgnoredWhere(): List<String> {
+        return fixes.ignoredWhere.toList()
     }
 }
