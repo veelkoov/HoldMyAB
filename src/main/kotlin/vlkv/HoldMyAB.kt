@@ -14,24 +14,24 @@ import java.io.File
 
 
 fun main(args: Array<String>) {
-    if (args.size != 2) {
-        error("Require exactly two arguments: 1. path to the input directory, 2. path to the report file to generate")
+    if (args.size != 3) {
+        error("Require exactly two arguments: 1. path to the fixes.yaml configuration, 2. path to the input directory, 3. path to the report file to generate")
     }
 
-    val inputDirPath = args[0]
-    val outputFilePath = args[1]
+    val fixerConfigPath = args[0]
+    val inputDirPath = args[1]
+    val outputFilePath = args[2]
 
-    val database = readInputFilesFromDir(inputDirPath)
+    val fixer = Fixer(fixerConfigPath)
+    val database = readInputFilesFromDir(inputDirPath, fixer)
     renderToFile(database, outputFilePath)
 
     println("Unused invalid names: " + getUnusedInvalidNames().joinToString(", "))
     println("Finished!")
 }
 
-private fun readInputFilesFromDir(inputDirPath: String): Database {
+private fun readInputFilesFromDir(inputDirPath: String, fixer: Fixer): Database {
     val database = Database()
-
-    val fixer = Fixer("$inputDirPath/fixes.yaml") // TODO: Possibly parametrize
 
     File(inputDirPath).walkTopDown()
         .filter { it.isFile && it.name.endsWith(".json") }
