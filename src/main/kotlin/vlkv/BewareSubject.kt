@@ -4,8 +4,8 @@ import vlkv.processing.getUniqueStrings
 
 class BewareSubject {
     private var names = listOf<String>()
+    private var urls = listOf<String>()
     private val bewares = mutableListOf<Beware>()
-    private val urls = mutableListOf<String>()
     private val issues = mutableListOf<String>()
 
     @Suppress("unused") // Pebble uses it
@@ -32,12 +32,7 @@ class BewareSubject {
         bewares.add(beware)
 
         names = getUniqueStrings(names.plus(beware.names))
-
-        beware.urls.forEach {
-            if (!urls.contains(it)) {
-                urls.add(it)
-            }
-        }
+        urls = getUniqueStrings(urls.plus(beware.urls))
 
         issues.addAll(beware.issues)
     }
