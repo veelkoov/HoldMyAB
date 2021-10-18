@@ -1,16 +1,12 @@
 package vlkv.processing
 
-private val NON_INFORMATIVES = setOf(
-    "artist",
-    "buyer",
+import vlkv.processing.regexes.Removables
+
+private val NON_INFORMATIVES = Removables(
+    Regex("^\\s*(artist|buyer)\\s*(:\\s*|$)", RegexOption.IGNORE_CASE),
 )
 
+@Suppress("UNUSED_PARAMETER") // TODO: Possibly inform about the removal
 fun fixWho(input: String, issues: MutableList<String>): String {
-    if (NON_INFORMATIVES.contains(input.lowercase())) {
-        issues.add("Ignoring who: '$input'")
-
-        return ""
-    }
-
-    return input
+    return NON_INFORMATIVES.run(input)
 }
