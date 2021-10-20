@@ -41,7 +41,7 @@ class RecordProcessor(fixer: Fixer) {
         issues.addAll(newIssues)
     }
 
-    private fun getNamesUrls(input: String): NamesUrls {
+    internal fun getNamesUrls(input: String): NamesUrls {
         val (urls, remaining) = Urls.extract(Urls.tidy(input))
         val names = names.getNames(remaining)
 

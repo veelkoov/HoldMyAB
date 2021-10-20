@@ -4,6 +4,7 @@ import com.mitchellbosecke.pebble.PebbleEngine
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import vlkv.fixes.Fixer
+import vlkv.fixes.yaml.Fixes
 import vlkv.json.Record
 import vlkv.json.RecordsPage
 import vlkv.pebble.Extension
@@ -20,7 +21,7 @@ fun main(args: Array<String>) {
     val inputDirPath = args[1]
     val outputFilePath = args[2]
 
-    val fixer = Fixer(fixerConfigPath)
+    val fixer = Fixer(Fixes.loadFromYaml(fixerConfigPath))
     val database = readInputFilesFromDir(inputDirPath, fixer)
     renderToFile(database, outputFilePath)
 
