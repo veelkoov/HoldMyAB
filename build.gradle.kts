@@ -7,7 +7,7 @@ plugins {
     idea
 }
 
-group = "me.veelkoov"
+group = "vlkv"
 version = "1.0-SNAPSHOT"
 
 repositories {
@@ -41,5 +41,5 @@ tasks.withType<KotlinCompile> {
 }
 
 application {
-    mainClass.set("vlkv.HoldMyAB")
+    mainClass.set("vlkv.HoldMyABKt")
 }
