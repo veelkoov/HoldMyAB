@@ -48,7 +48,11 @@ private val DATA_SETS = listOf(
         setOf("Abcdefghijk ->"),
         setOf("https://abcdefghijk.deviantart.com/", "https://furaffinity.net/user/abcdefghijk/")
     ),
+    GNUI("dA: https://www.deviantart.com/abcdefghij/\r\nPersonal site: https://www.abcdef.gh/ij/klmnopqr/",
+        setOf(), setOf("https://www.deviantart.com/abcdefghij/", "https://www.abcdef.gh/ij/klmnopqr/")),
 
+    GNUI("@AbcdEfhij on Twitter", setOf(), setOf("https://twitter.com/AbcdEfhij")),
+    GNUI("@Abcdefghij_klm on Twitter", setOf(), setOf("https://twitter.com/Abcdefghij_klm")),
     GNUI("AbcdefGhijklm on Furaffinity", setOf(), setOf("https://furaffinity.net/user/AbcdefGhijklm/")),
     GNUI("Abcde_fghijk and Abcdefghijk", setOf("Abcde_fghijk", "Abcdefghijk"), setOf()),
     GNUI("abcdefghijs/ qwertyyu/ abcde", setOf("abcdefghijs", "qwertyyu", "abcde"), setOf()),

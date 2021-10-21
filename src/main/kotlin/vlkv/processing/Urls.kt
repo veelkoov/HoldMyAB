@@ -42,6 +42,7 @@ object Urls {
         Regex("Toyhou\\.se *[-:] *(?=https://toyhou\\.se/)", RegexOption.IGNORE_CASE),
         Regex("Picarto *[-:] *(?=https://picarto\\.tv/)", RegexOption.IGNORE_CASE),
         Regex("Trello *[-:] *(?=https://trello\\.com/)", RegexOption.IGNORE_CASE),
+        Regex("Personal site *[-:] *(?=https://)", RegexOption.IGNORE_CASE),
     )
 
     private fun removeLabels(input: String): String {
@@ -64,6 +65,7 @@ object Urls {
         Regex("([a-z0-9]+) o[fn] DA, FA(?![a-z])", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/ https://www.deviantart.com/$1",
         Regex("([a-z0-9]+)(@| o[fn] )(FA|Fur ?affinity)(?![a-z])", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/",
         Regex("([a-z0-9]+)(@| o[fn] )DA(?![a-z])", RegexOption.IGNORE_CASE) to "https://www.deviantart.com/$1",
+        Regex("@?([a-z0-9_]+)(@| o[fn] )Twitter", RegexOption.IGNORE_CASE) to "https://twitter.com/$1",
     )
 
     private fun expand(input: String): String {
