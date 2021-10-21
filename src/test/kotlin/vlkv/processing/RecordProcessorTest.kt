@@ -50,6 +50,10 @@ private val DATA_SETS = listOf(
     ),
 
     GNUI("AbcdefGhijklm on Furaffinity", setOf(), setOf("https://furaffinity.net/user/AbcdefGhijklm/")),
+    GNUI("Abcde_fghijk and Abcdefghijk", setOf("Abcde_fghijk", "Abcdefghijk"), setOf()),
+    GNUI("abcdefghijs/ qwertyyu/ abcde", setOf("abcdefghijs", "qwertyyu", "abcde"), setOf()),
+    GNUI("Abcdeu/ Abcdu @ Abcdefghu/ Abcdeu @ Abcdefgu", setOf("Abcdeu", "Abcdu @ Abcdefghu", "Abcdeu @ Abcdefgu"), setOf()),
+    GNUI("u/ABCDEFGHIJ_KlMn", setOf("u/ABCDEFGHIJ_KlMn"), setOf()),
 )
 
 @Suppress("unused")
