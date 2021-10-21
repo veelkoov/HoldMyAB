@@ -8,7 +8,7 @@ private val NAME_REPLACEMENTS = Replacements(
     Regex("@[/\\\\](?=[a-z])", RegexOption.IGNORE_CASE) to "@",
 )
 
-private val NAMES_SPLIT = Regex("( - |(?<!u)/|,|\n)")
+private val NAMES_SPLIT = Regex("( - |(?<!u)/|,|\n| aka )")
 
 class NamesProcessor(private val fixer: Fixer) {
     fun getNames(input: String): StringList {

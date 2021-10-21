@@ -17,6 +17,8 @@ private val DATA_SETS = listOf(
     GNUI("@/AbCdEfG", setOf("@AbCdEfG"), setOf()),
     GNUI("@\\AbcdefgH", setOf("@AbcdefgH"), setOf()),
 
+    GNUI("Abcdef, aka Ghijkl", setOf("Abcdef", "Ghijkl"), setOf()),
+
     GNUI(
         "Abcdefghij on DA, FA",
         setOf(), setOf("https://furaffinity.net/user/Abcdefghij/", "https://www.deviantart.com/Abcdefghij")
