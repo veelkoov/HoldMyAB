@@ -30,7 +30,7 @@ object Urls {
     private val LABELS = Removables(
         Regex("(Deviant ?Art|DA)( Account)? *[-:]? *(?=https://[^.]+\\.deviantart\\.com/)", RegexOption.IGNORE_CASE),
         Regex("Tumblr? *[-:] *(?=https://[^.]+\\.tumblr\\.com/)", RegexOption.IGNORE_CASE),
-        Regex("Twitter *[-:] *(?=https://twitter\\.com/)", RegexOption.IGNORE_CASE),
+        Regex("Twitter( alt)? *[-:] *(?=https://twitter\\.com/)", RegexOption.IGNORE_CASE),
         Regex("YouTube *[-:] *(?=https://www\\.youtube\\.com/)", RegexOption.IGNORE_CASE),
         Regex("(new |old )?(FA|fur ?affinity)( account)? *[-:]? *(?=https://furaffinity\\.net/)", RegexOption.IGNORE_CASE),
         Regex("InkBunny *[-:] *(?=https://inkbunny\\.net/)", RegexOption.IGNORE_CASE),
@@ -42,7 +42,7 @@ object Urls {
         Regex("Toyhou\\.se *[-:] *(?=https://toyhou\\.se/)", RegexOption.IGNORE_CASE),
         Regex("Picarto *[-:] *(?=https://picarto\\.tv/)", RegexOption.IGNORE_CASE),
         Regex("Trello *[-:] *(?=https://trello\\.com/)", RegexOption.IGNORE_CASE),
-        Regex("Personal site *[-:] *(?=https://)", RegexOption.IGNORE_CASE),
+        Regex("(Personal site|website) *[-:] *(?=https://)", RegexOption.IGNORE_CASE),
     )
 
     private fun removeLabels(input: String): String {

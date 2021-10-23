@@ -9,7 +9,12 @@ class Fixer(private val fixes: Fixes) {
     val ignoredWhereLines = StringList(fixes.ignoredWhereLines)
 
     fun fix(record: Record): Record {
-        fixes.fixes.forEach { fix: Fix -> fix.apply(record) }
+        fixes.fixes.forEach { fix: Fix ->
+            fix.apply(record)
+            record.title = getFixedString(record.title)
+            record.fields.setWhere(getFixedString(record.fields.getWhere()))
+            record.fields.setWho(getFixedString(record.fields.getWho()))
+        }
 
         return record
     }
@@ -20,5 +25,13 @@ class Fixer(private val fixes: Fixes) {
 
     fun getIgnoredWhere(): List<String> {
         return fixes.ignoredWhere.toList()
+    }
+
+    private fun getFixedString(input: String): String {
+        var result = input // TODO: Possibly report unused
+
+        fixes.removedTextGeneral.forEach { result = result.replace(it, "") }
+
+        return result
     }
 }

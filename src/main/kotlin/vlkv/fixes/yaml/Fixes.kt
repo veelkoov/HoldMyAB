@@ -10,6 +10,7 @@ class Fixes {
     lateinit var ignoredNames: List<String>
     lateinit var ignoredWhere: List<String>
     lateinit var ignoredWhereLines: List<String>
+    lateinit var removedTextGeneral: List<String>
 
     companion object {
         fun loadFromYaml(path: String): Fixes {
