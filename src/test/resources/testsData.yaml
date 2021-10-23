@@ -1,12 +1,73 @@
 tests:
-- input: "@/AbCdEfG"
+#
+# Single/multiple names
+#
+- input: "@/AbCdE01"
   names:
-  - "@AbCdEfG"
+  - "@AbCdE01"
+  urls: []
+
+- input: '@/Abcd123 / @/Abcde_Fgh'
+  names:
+    - '@Abcd123'
+    - '@Abcde_Fgh'
   urls: []
 
 - input: "@\\AbcdefgH"
   names:
   - "@AbcdefgH"
+  urls: []
+
+- input: "Abcde_fghijk and Abcdefghijk"
+  names:
+    - "Abcde_fghijk"
+    - "Abcdefghijk"
+  urls: []
+
+- input: 'Abcdefghij/ abcdefghijklmnop/ @/Abcdefghijk'
+  names:
+    - 'Abcdefghij'
+    - 'abcdefghijklmnop'
+    - '@Abcdefghijk'
+  urls: []
+
+- input: "Abcdeu/ Abcdu @ Abcdefghu/ Abcdeu @ Abcdefgu" # 227
+  names:
+    - "Abcdeu"
+    - "Abcdu @ Abcdefghu"
+    - "Abcdeu @ Abcdefgu"
+  urls: []
+
+- input: "u/ABCDEFGHIJ_KlMn"
+  names:
+    - "u/ABCDEFGHIJ_KlMn"
+  urls: []
+
+- input: 'Abcdef&Ghijk Studio / @Abcdef_ghijkLM / abcdefghijklmnstudio / The Abcdefgh Ijklmno'
+  names:
+    - 'Abcdef&Ghijk Studio'
+    - '@Abcdef_ghijkLM'
+    - 'abcdefghijklmnstudio'
+    - 'The Abcdefgh Ijklmno'
+  urls: []
+
+- input: 'Abcdefghijk/@abcdefghijk'
+  names:
+    - 'Abcdefghijk'
+    - '@abcdefghijk'
+  urls: []
+
+- input: '@AbcdefgHI, @AbcDefghij'
+  names:
+    - '@AbcdefgHI'
+    - '@AbcDefghij'
+  urls: []
+
+- input: 'AbcdeFgHij (aka AbcdEfGhij aka Abcd_Efghijkl)'
+  names:
+    - 'AbcdeFgHij'
+    - 'AbcdEfGhij'
+    - 'Abcd_Efghijkl'
   urls: []
 
 - input: "Abcdef, aka Ghijkl"
@@ -15,22 +76,66 @@ tests:
     - "Ghijkl"
   urls: []
 
+- input: 'Abcdef Ghi Jklmnop (AKA Abcd1234)'
+  names:
+    - 'Abcdef Ghi Jklmnop'
+    - 'Abcd1234'
+  urls: []
+
+- input: 'Abcd efghijk (formerly Abcdefgh)'
+  names:
+    - 'Abcd efghijk'
+    - 'Abcdefgh'
+  urls: []
+
+- input: 'Abcdefghij / AbcdEfghijKlm (formally Abcdef)'
+  names:
+    - 'Abcdefghij'
+    - 'AbcdEfghijKlm'
+    - 'Abcdef'
+  urls: []
+
+- input: 'Abcdef Ghi Jklmnop (Abcd1234)'
+  names:
+    - 'Abcdef Ghi Jklmnop'
+    - 'Abcd1234'
+  urls: []
+
+- input: 'abcdef_ (Abcd)'
+  names:
+    - 'abcdef_'
+    - 'Abcd'
+  urls: []
+
+- input: 'Abcdefgh(abcdefg)'
+  names:
+    - 'Abcdefgh'
+    - 'abcdefg'
+  urls: []
+
+- input: '@Abcd_Efghi_JkL'
+  names:
+    - '@Abcd_Efghi_JkL'
+  urls: []
+
+
+- input: 'Abcd12/@AbcDeFghi/Abcdefghi'
+  names:
+    - 'Abcd12'
+    - '@AbcDeFghi'
+    - 'Abcdefghi'
+  urls: []
+
+
+
+#
+# Expansion of URLs
+#
 - input: "Abcdefghij on DA, FA"
   names: []
   urls:
   - "https://furaffinity.net/user/Abcdefghij/"
   - "https://www.deviantart.com/Abcdefghij"
-
-- input: "Abcdefghij@FA"
-  names: []
-  urls:
-  - "https://furaffinity.net/user/Abcdefghij/"
-
-- input: "DA https://www.deviantart.com/laseros FA https://www.furaffinity.net/user/laseros/"
-  names: []
-  urls:
-  - "https://www.deviantart.com/laseros"
-  - "https://furaffinity.net/user/laseros/"
 
 - input: "abcdefghi on FA, AbcdefgHijkl on DA"
   names: []
@@ -44,6 +149,83 @@ tests:
   - "https://www.deviantart.com/Abcdefhijk"
   - "https://furaffinity.net/user/Mnopqr/"
 
+- input: "Abcdefghij@FA"
+  names: []
+  urls:
+  - "https://furaffinity.net/user/Abcdefghij/"
+
+- input: "AbcdefGhijklm on Furaffinity"
+  names: []
+  urls:
+    - "https://furaffinity.net/user/AbcdefGhijklm/"
+
+- input: "@AbcdeFghij_klm on Twitter"
+  names: []
+  urls:
+    - "https://twitter.com/AbcdeFghij_klm"
+
+
+
+#
+# URL labels
+#
+- input: "dA: https://www.deviantart.com/abcdefghij/\r\nPersonal site: https://www.abcdef.gh/ij/klmnopqr/"
+  names: []
+  urls:
+    - "https://www.deviantart.com/abcdefghij/"
+    - "https://www.abcdef.gh/ij/klmnopqr/"
+
+- input: "DA https://www.deviantart.com/abcdefg FA https://www.furaffinity.net/user/abcdefg/"
+  names: []
+  urls:
+  - "https://www.deviantart.com/abcdefg"
+  - "https://furaffinity.net/user/abcdefg/"
+
+- input: 'FA - https://www.furaffinity.net/user/abcdefg/'
+  names: []
+  urls:
+    - 'https://furaffinity.net/user/abcdefg/'
+
+- input: 'FA: http://www.furaffinity.net/user/abcdefg/'
+  names: []
+  urls:
+    - 'https://furaffinity.net/user/abcdefg/'
+
+- input: 'Facebook : https://www.facebook.com/abcdefgh'
+  names: []
+  urls:
+    - 'https://www.facebook.com/abcdefgh'
+
+- input: 'Facebook: https://www.facebook.com/AbcdefGhijklmn'
+  names: []
+  urls:
+    - 'https://www.facebook.com/AbcdefGhijklmn'
+
+- input: 'Instagram : https://www.instagram.com/theabcdefghij/'
+  names: []
+  urls:
+    - 'https://www.instagram.com/theabcdefghij/'
+
+- input: 'Twitter - https://twitter.com/AbcDefg'
+  names: []
+  urls:
+    - 'https://twitter.com/AbcDefg'
+
+- input: 'Twitter : https://twitter.com/AbcdEfghiJkl?s=09'
+  names: []
+  urls:
+    - 'https://twitter.com/AbcdEfghiJkl'
+
+- input: 'Website: https://www.abcdefhstudios.com/'
+  names: []
+  urls:
+    - 'https://www.abcdefhstudios.com/'
+
+
+
+#
+# Other
+#
 - input: "Abcd Efghi on facebook"
   names:
   - "Abcd Efghi on facebook"
@@ -56,48 +238,8 @@ tests:
   - "https://abcdefghijk.deviantart.com/"
   - "https://furaffinity.net/user/abcdefghijk/"
 
-- input: "dA: https://www.deviantart.com/abcdefghij/\r\nPersonal site: https://www.abcdef.gh/ij/klmnopqr/"
-  names: []
-  urls:
-  - "https://www.deviantart.com/abcdefghij/"
-  - "https://www.abcdef.gh/ij/klmnopqr/"
-
-- input: "@AbcdEfhij on Twitter"
-  names: []
-  urls:
-  - "https://twitter.com/AbcdEfhij"
-
-- input: "@Abcdefghij_klm on Twitter"
-  names: []
-  urls:
-  - "https://twitter.com/Abcdefghij_klm"
-
-- input: "AbcdefGhijklm on Furaffinity"
-  names: []
-  urls:
-  - "https://furaffinity.net/user/AbcdefGhijklm/"
-
-- input: "Abcde_fghijk and Abcdefghijk"
+- input: 'FA: https://www.furaffinity.net/user/abcdefghijklmno/ (Abcdefghijklmno)'
   names:
-  - "Abcde_fghijk"
-  - "Abcdefghijk"
-  urls: []
-
-- input: "abcdefghijs/ qwertyyu/ abcde"
-  names:
-  - "abcdefghijs"
-  - "qwertyyu"
-  - "abcde"
-  urls: []
-
-- input: "Abcdeu/ Abcdu @ Abcdefghu/ Abcdeu @ Abcdefgu"
-  names:
-  - "Abcdeu"
-  - "Abcdu @ Abcdefghu"
-  - "Abcdeu @ Abcdefgu"
-  urls: []
-
-- input: "u/ABCDEFGHIJ_KlMn"
-  names:
-  - "u/ABCDEFGHIJ_KlMn"
-  urls: []
+    - 'Abcdefghijklmno'
+  urls:
+    - 'https://furaffinity.net/user/abcdefghijklmno/'

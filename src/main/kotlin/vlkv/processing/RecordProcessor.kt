@@ -42,7 +42,8 @@ class RecordProcessor(fixer: Fixer) {
     }
 
     internal fun getNamesUrls(input: String): NamesUrls {
-        val (urls, remaining) = Urls.extract(Urls.tidy(input))
+        val withoutBrackets = processBrackets(input)
+        val (urls, remaining) = Urls.extract(Urls.tidy(withoutBrackets))
         val names = names.getNames(remaining)
 
         return NamesUrls(names.result, urls, names.issues)
@@ -62,5 +63,11 @@ class RecordProcessor(fixer: Fixer) {
 
     private fun isResolved(record: Record): Boolean {
         return record.tags.contains(TAG_RESOLVED) || record.fields.isResolved()
+    }
+
+    private val BRACKETS = Regex("\\(([^)]*)\\)")
+
+    private fun processBrackets(input: String): String {
+        return input.replace(BRACKETS, " `ob` $1 `cb`")
     }
 }

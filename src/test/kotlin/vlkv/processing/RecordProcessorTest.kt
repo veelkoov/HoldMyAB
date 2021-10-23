@@ -19,11 +19,12 @@ private val testsData = ObjectMapper(YAMLFactory())
 @Suppress("unused")
 internal class NamesProcessorTest {
     private val processor = RecordProcessor(Fixer(Fixes.empty()))
+    private val singleBadChar = Regex("[^ -~]", RegexOption.IGNORE_CASE)
 
     @TestFactory
     fun testGetNamesUrls(): List<DynamicTest> {
         return testsData.tests.map { testData: TestData ->
-            dynamicTest("getNamesUrls") {
+            dynamicTest("getNamesUrls: " + testData.input.replace(singleBadChar, "?")) {
                 val result = processor.getNamesUrls(testData.input)
 
                 assertEquals(testData.names.toSet(), result.names.toSet())
