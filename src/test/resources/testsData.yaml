@@ -63,6 +63,12 @@ tests:
     - '@AbcDefghij'
   urls: []
 
+- input: 'http://www.furaffinity.net/user/abcdefh/ ; https://inkbunny.net/abcdefghi'
+  names: []
+  urls:
+    - 'https://furaffinity.net/user/abcdefh/'
+    - 'https://inkbunny.net/abcdefghi'
+
 - input: 'AbcdeFgHij (aka AbcdEfGhij aka Abcd_Efghijkl)'
   names:
     - 'AbcdeFgHij'
