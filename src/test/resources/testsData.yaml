@@ -1,0 +1,103 @@
+tests:
+- input: "@/AbCdEfG"
+  names:
+  - "@AbCdEfG"
+  urls: []
+
+- input: "@\\AbcdefgH"
+  names:
+  - "@AbcdefgH"
+  urls: []
+
+- input: "Abcdef, aka Ghijkl"
+  names:
+    - "Abcdef"
+    - "Ghijkl"
+  urls: []
+
+- input: "Abcdefghij on DA, FA"
+  names: []
+  urls:
+  - "https://furaffinity.net/user/Abcdefghij/"
+  - "https://www.deviantart.com/Abcdefghij"
+
+- input: "Abcdefghij@FA"
+  names: []
+  urls:
+  - "https://furaffinity.net/user/Abcdefghij/"
+
+- input: "DA https://www.deviantart.com/laseros FA https://www.furaffinity.net/user/laseros/"
+  names: []
+  urls:
+  - "https://www.deviantart.com/laseros"
+  - "https://furaffinity.net/user/laseros/"
+
+- input: "abcdefghi on FA, AbcdefgHijkl on DA"
+  names: []
+  urls:
+  - "https://www.deviantart.com/AbcdefgHijkl"
+  - "https://furaffinity.net/user/abcdefghi/"
+
+- input: "Mnopqr of FA / Abcdefhijk on DA"
+  names: []
+  urls:
+  - "https://www.deviantart.com/Abcdefhijk"
+  - "https://furaffinity.net/user/Mnopqr/"
+
+- input: "Abcd Efghi on facebook"
+  names:
+  - "Abcd Efghi on facebook"
+  urls: []
+
+- input: "Abcdefghijk -> www.abcdefghijk.deviantart.com, www.furaffinity.net/user/abcdefghijk"
+  names:
+  - "Abcdefghijk ->"
+  urls:
+  - "https://abcdefghijk.deviantart.com/"
+  - "https://furaffinity.net/user/abcdefghijk/"
+
+- input: "dA: https://www.deviantart.com/abcdefghij/\r\nPersonal site: https://www.abcdef.gh/ij/klmnopqr/"
+  names: []
+  urls:
+  - "https://www.deviantart.com/abcdefghij/"
+  - "https://www.abcdef.gh/ij/klmnopqr/"
+
+- input: "@AbcdEfhij on Twitter"
+  names: []
+  urls:
+  - "https://twitter.com/AbcdEfhij"
+
+- input: "@Abcdefghij_klm on Twitter"
+  names: []
+  urls:
+  - "https://twitter.com/Abcdefghij_klm"
+
+- input: "AbcdefGhijklm on Furaffinity"
+  names: []
+  urls:
+  - "https://furaffinity.net/user/AbcdefGhijklm/"
+
+- input: "Abcde_fghijk and Abcdefghijk"
+  names:
+  - "Abcde_fghijk"
+  - "Abcdefghijk"
+  urls: []
+
+- input: "abcdefghijs/ qwertyyu/ abcde"
+  names:
+  - "abcdefghijs"
+  - "qwertyyu"
+  - "abcde"
+  urls: []
+
+- input: "Abcdeu/ Abcdu @ Abcdefghu/ Abcdeu @ Abcdefgu"
+  names:
+  - "Abcdeu"
+  - "Abcdu @ Abcdefghu"
+  - "Abcdeu @ Abcdefgu"
+  urls: []
+
+- input: "u/ABCDEFGHIJ_KlMn"
+  names:
+  - "u/ABCDEFGHIJ_KlMn"
+  urls: []

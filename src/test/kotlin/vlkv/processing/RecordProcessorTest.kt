@@ -1,64 +1,20 @@
 package vlkv.processing
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+import com.fasterxml.jackson.module.kotlin.KotlinModule
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.TestFactory
 import vlkv.fixes.Fixer
 import vlkv.fixes.yaml.Fixes
+import vlkv.tests.TestData
+import vlkv.tests.TestsData
 import kotlin.test.assertEquals
 
-private data class GNUI(
-    val input: String,
-    val expectedNames: Set<String>,
-    val expectedUrls: Set<String>,
-)
-
-private val DATA_SETS = listOf(
-    GNUI("@/AbCdEfG", setOf("@AbCdEfG"), setOf()),
-    GNUI("@\\AbcdefgH", setOf("@AbcdefgH"), setOf()),
-
-    GNUI("Abcdef, aka Ghijkl", setOf("Abcdef", "Ghijkl"), setOf()),
-
-    GNUI(
-        "Abcdefghij on DA, FA",
-        setOf(), setOf("https://furaffinity.net/user/Abcdefghij/", "https://www.deviantart.com/Abcdefghij")
-    ),
-
-    GNUI("Abcdefghij@FA", setOf(), setOf("https://furaffinity.net/user/Abcdefghij/")),
-
-    GNUI(
-        "DA https://www.deviantart.com/laseros FA https://www.furaffinity.net/user/laseros/",
-        setOf(), setOf("https://www.deviantart.com/laseros", "https://furaffinity.net/user/laseros/")
-    ),
-
-    GNUI(
-        "abcdefghi on FA, AbcdefgHijkl on DA",
-        setOf(), setOf("https://www.deviantart.com/AbcdefgHijkl", "https://furaffinity.net/user/abcdefghi/")
-    ),
-
-    GNUI(
-        "Mnopqr of FA / Abcdefhijk on DA",
-        setOf(), setOf("https://www.deviantart.com/Abcdefhijk", "https://furaffinity.net/user/Mnopqr/")
-    ),
-
-    GNUI("Abcd Efghi on facebook", setOf("Abcd Efghi on facebook"), setOf()),
-
-    GNUI(
-        "Abcdefghijk -> www.abcdefghijk.deviantart.com, www.furaffinity.net/user/abcdefghijk",
-        setOf("Abcdefghijk ->"),
-        setOf("https://abcdefghijk.deviantart.com/", "https://furaffinity.net/user/abcdefghijk/")
-    ),
-    GNUI("dA: https://www.deviantart.com/abcdefghij/\r\nPersonal site: https://www.abcdef.gh/ij/klmnopqr/",
-        setOf(), setOf("https://www.deviantart.com/abcdefghij/", "https://www.abcdef.gh/ij/klmnopqr/")),
-
-    GNUI("@AbcdEfhij on Twitter", setOf(), setOf("https://twitter.com/AbcdEfhij")),
-    GNUI("@Abcdefghij_klm on Twitter", setOf(), setOf("https://twitter.com/Abcdefghij_klm")),
-    GNUI("AbcdefGhijklm on Furaffinity", setOf(), setOf("https://furaffinity.net/user/AbcdefGhijklm/")),
-    GNUI("Abcde_fghijk and Abcdefghijk", setOf("Abcde_fghijk", "Abcdefghijk"), setOf()),
-    GNUI("abcdefghijs/ qwertyyu/ abcde", setOf("abcdefghijs", "qwertyyu", "abcde"), setOf()),
-    GNUI("Abcdeu/ Abcdu @ Abcdefghu/ Abcdeu @ Abcdefgu", setOf("Abcdeu", "Abcdu @ Abcdefghu", "Abcdeu @ Abcdefgu"), setOf()),
-    GNUI("u/ABCDEFGHIJ_KlMn", setOf("u/ABCDEFGHIJ_KlMn"), setOf()),
-)
+private val testsData = ObjectMapper(YAMLFactory())
+    .registerModule(KotlinModule.Builder().build())
+    .readValue(ClassLoader.getSystemResourceAsStream("testsData.yaml"), TestsData::class.java)
 
 @Suppress("unused")
 internal class NamesProcessorTest {
@@ -66,12 +22,12 @@ internal class NamesProcessorTest {
 
     @TestFactory
     fun testGetNamesUrls(): List<DynamicTest> {
-        return DATA_SETS.map { (input, expectedNames, expectedUrls) ->
+        return testsData.tests.map { testData: TestData ->
             dynamicTest("getNamesUrls") {
-                val result = processor.getNamesUrls(input)
+                val result = processor.getNamesUrls(testData.input)
 
-                assertEquals(expectedNames, result.names.toSet())
-                assertEquals(expectedUrls, result.urls.toSet())
+                assertEquals(testData.names.toSet(), result.names.toSet())
+                assertEquals(testData.urls.toSet(), result.urls.toSet())
             }
         }
     }
