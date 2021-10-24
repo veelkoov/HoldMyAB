@@ -4,9 +4,46 @@
 <head>
     <title>Artist Beware bewared DB analysis</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <style>{% include 'vlkv/templates/styles.css' %}</style>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container">
+    <h1>Artists Beware data consolidation</h1>
+
+    <div class="row">
+        <div class="col-md-9">
+            <p>
+                All the data presented below comes from <a href="https://artistsbeware.info/">artistsbeware.info</a> ("<em>AB</em>").
+            </p>
+            <p>
+                The data is not live, so some recent changes on <em>AB</em> may not have been reflected here.
+            </p>
+        </div>
+        <div class="col-md-3">
+            <h6>Options</h6>
+
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="checkboxShowIssues">
+                <label class="form-check-label" for="checkboxShowIssues">
+                    Show processing messages
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row g-3 align-items-center">
+        <div class="col-auto">
+            <input class="form-control" type="text" id="searchValue" placeholder="Search for...">
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-primary" type="button" id="searchButton">Search</button>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid pt-4">
     <table class="table table-sm">
         <thead>
             <tr>
@@ -15,10 +52,10 @@
                 <th>Bewares/cautions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="recordsRows">
             {% for subject in subjects %}
                 <tr>
-                    <td>
+                    <td class="names">
                         {% for name in subject.names %}
                             <span class="badge rounded-pill bg-secondary">{{ name }}</span>
                         {% endfor %}
@@ -49,7 +86,7 @@
                     </td>
                 </tr>
                 {% if not subject.issues.empty %}
-                    <tr>
+                    <tr class="issues">
                         <td>
                             Specific processing for the above:
                         </td>
@@ -67,5 +104,7 @@
     </table>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.min.js" integrity="sha512-6ORWJX/LrnSjBzwefdNUyLCMTIsGoNP6NftMy2UAm1JBm6PRZCO1d7OHBStWpVFZLO+RerTvqX/Z9mBFfCJZ4A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>{% include 'vlkv/templates/scripts.js' %}</script>
 </body>
 </html>

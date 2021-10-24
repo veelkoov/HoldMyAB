@@ -1,6 +1,7 @@
 package vlkv
 
 import com.mitchellbosecke.pebble.PebbleEngine
+import com.mitchellbosecke.pebble.loader.ClasspathLoader
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import vlkv.fixes.Fixer
@@ -51,7 +52,7 @@ private fun readInputFilesFromDir(inputDirPath: String, fixer: Fixer): Database 
 }
 
 private fun renderToFile(database: Database, outputFilePath: String) {
-    val engine = PebbleEngine.Builder().extension(Extension()).build()
+    val engine = PebbleEngine.Builder().extension(Extension()).loader(ClasspathLoader()).build()
     val compiledTemplate = engine.getTemplate("vlkv/templates/report.html")
     val outputFile = File(outputFilePath)
 
