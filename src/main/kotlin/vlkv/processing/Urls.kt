@@ -52,6 +52,8 @@ object Urls {
         Regex("https://twitter\\.com/([^/]+)/?", RegexOption.IGNORE_CASE),
         Regex("https://furaffinity\\.net/user/([^/]+)/", RegexOption.IGNORE_CASE),
         Regex("https://www\\.instagram\\.com/([^/]+)/", RegexOption.IGNORE_CASE),
+        Regex("https://([^.]+)\\.deviantart\\.com/", RegexOption.IGNORE_CASE),
+        Regex("https://www\\.deviantart\\.com/([^/]+)/?", RegexOption.IGNORE_CASE),
     )
 
     fun extract(input: String): UrlsExtractionResult {
