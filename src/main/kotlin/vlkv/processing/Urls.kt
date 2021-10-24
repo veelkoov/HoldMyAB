@@ -48,6 +48,12 @@ object Urls {
         Regex("@?([a-z0-9_]+)(@| o[fn] )Twitter", RegexOption.IGNORE_CASE) to "https://twitter.com/$1",
     )
 
+    private val USERNAMES = listOf(
+        Regex("https://twitter\\.com/([^/]+)/?", RegexOption.IGNORE_CASE),
+        Regex("https://furaffinity\\.net/user/([^/]+)/", RegexOption.IGNORE_CASE),
+        Regex("https://www\\.instagram\\.com/([^/]+)/", RegexOption.IGNORE_CASE),
+    )
+
     fun extract(input: String): UrlsExtractionResult {
         val urls = mutableListOf<String>()
         var remaining = input
@@ -60,16 +66,15 @@ object Urls {
         return UrlsExtractionResult(urls.toList(), remaining)
     }
 
-    private val TWITTER = Regex("https://twitter.com/([^/]+)/?", RegexOption.IGNORE_CASE)
-    private val FUR_AFFINITY = Regex("https://furaffinity.net/user/([^/]+)/", RegexOption.IGNORE_CASE)
-
     fun getNamesFromUrls(urls: List<String>): List<String> {
-        val result = mutableListOf<String>()
+        val names = mutableListOf<String>()
 
-        urls.mapNotNull { TWITTER.matchEntire(it)?.groups?.get(1)?.value }.forEach { result.add(it) }
-        urls.mapNotNull { FUR_AFFINITY.matchEntire(it)?.groups?.get(1)?.value }.forEach { result.add(it) }
+        USERNAMES.forEach { regex ->
+            urls.mapNotNull { url -> regex.matchEntire(url)?.groups?.get(1)?.value }
+                .forEach { name -> names.add(name) }
+        }
 
-        return result
+        return names
     }
 
     internal fun tidy(input: String): String {

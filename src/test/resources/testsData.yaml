@@ -218,7 +218,8 @@ tests:
     - 'https://www.facebook.com/AbcdefGhijklmn'
 
 - input: 'Instagram : https://www.instagram.com/theabcdefghij/'
-  names: []
+  names:
+    - 'theabcdefghij'
   urls:
     - 'https://www.instagram.com/theabcdefghij/'
 
