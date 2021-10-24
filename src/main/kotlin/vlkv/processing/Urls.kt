@@ -61,11 +61,13 @@ object Urls {
     }
 
     private val TWITTER = Regex("https://twitter.com/([^/]+)/?", RegexOption.IGNORE_CASE)
+    private val FUR_AFFINITY = Regex("https://furaffinity.net/user/([^/]+)/", RegexOption.IGNORE_CASE)
 
     fun getNamesFromUrls(urls: List<String>): List<String> {
         val result = mutableListOf<String>()
 
         urls.mapNotNull { TWITTER.matchEntire(it)?.groups?.get(1)?.value }.forEach { result.add(it) }
+        urls.mapNotNull { FUR_AFFINITY.matchEntire(it)?.groups?.get(1)?.value }.forEach { result.add(it) }
 
         return result
     }

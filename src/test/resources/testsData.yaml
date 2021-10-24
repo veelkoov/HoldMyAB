@@ -64,7 +64,8 @@ tests:
   urls: []
 
 - input: 'http://www.furaffinity.net/user/abcdefh/ ; https://inkbunny.net/abcdefghi'
-  names: []
+  names:
+    - 'abcdefh'
   urls:
     - 'https://furaffinity.net/user/abcdefh/'
     - 'https://inkbunny.net/abcdefghi'
@@ -137,33 +138,38 @@ tests:
 #
 # Expansion of URLs
 #
-- input: "Abcdefghij on DA, FA"
-  names: []
+- input: 'Abcdefghij on DA, FA'
+  names:
+    - 'Abcdefghij'
   urls:
-  - "https://furaffinity.net/user/Abcdefghij/"
-  - "https://www.deviantart.com/Abcdefghij"
+    - 'https://furaffinity.net/user/Abcdefghij/'
+    - 'https://www.deviantart.com/Abcdefghij'
 
-- input: "abcdefghi on FA, AbcdefgHijkl on DA"
-  names: []
+- input: 'abcdefghi on FA, AbcdefgHijkl on DA'
+  names:
+    - 'abcdefghi'
   urls:
-  - "https://www.deviantart.com/AbcdefgHijkl"
-  - "https://furaffinity.net/user/abcdefghi/"
+    - 'https://www.deviantart.com/AbcdefgHijkl'
+    - 'https://furaffinity.net/user/abcdefghi/'
 
-- input: "Mnopqr of FA / Abcdefhijk on DA"
-  names: []
+- input: 'Mnopqr of FA / Abcdefhijk on DA'
+  names:
+    - 'Mnopqr'
   urls:
-  - "https://www.deviantart.com/Abcdefhijk"
-  - "https://furaffinity.net/user/Mnopqr/"
+    - 'https://www.deviantart.com/Abcdefhijk'
+    - 'https://furaffinity.net/user/Mnopqr/'
 
-- input: "Abcdefghij@FA"
-  names: []
+- input: 'Abcdefghij@FA'
+  names:
+    - 'Abcdefghij'
   urls:
-  - "https://furaffinity.net/user/Abcdefghij/"
+  - 'https://furaffinity.net/user/Abcdefghij/'
 
-- input: "AbcdefGhijklm on Furaffinity"
-  names: []
+- input: 'AbcdefGhijklm on Furaffinity'
+  names:
+    - 'AbcdefGhijklm'
   urls:
-    - "https://furaffinity.net/user/AbcdefGhijklm/"
+    - 'https://furaffinity.net/user/AbcdefGhijklm/'
 
 - input: '@AbcdeFghij_klm on Twitter'
   names:
@@ -179,22 +185,25 @@ tests:
 - input: "dA: https://www.deviantart.com/abcdefghij/\r\nPersonal site: https://www.abcdef.gh/ij/klmnopqr/"
   names: []
   urls:
-    - "https://www.deviantart.com/abcdefghij/"
-    - "https://www.abcdef.gh/ij/klmnopqr/"
+    - 'https://www.deviantart.com/abcdefghij/'
+    - 'https://www.abcdef.gh/ij/klmnopqr/'
 
-- input: "DA https://www.deviantart.com/abcdefg FA https://www.furaffinity.net/user/abcdefg/"
-  names: []
+- input: 'DA https://www.deviantart.com/abcdefg FA https://www.furaffinity.net/user/abcdefg/'
+  names:
+    - 'abcdefg'
   urls:
-  - "https://www.deviantart.com/abcdefg"
-  - "https://furaffinity.net/user/abcdefg/"
+    - 'https://www.deviantart.com/abcdefg'
+    - 'https://furaffinity.net/user/abcdefg/'
 
 - input: 'FA - https://www.furaffinity.net/user/abcdefg/'
-  names: []
+  names:
+    - 'abcdefg'
   urls:
     - 'https://furaffinity.net/user/abcdefg/'
 
 - input: 'FA: http://www.furaffinity.net/user/abcdefg/'
-  names: []
+  names:
+    - 'abcdefg'
   urls:
     - 'https://furaffinity.net/user/abcdefg/'
 
@@ -235,20 +244,22 @@ tests:
 #
 # Other
 #
-- input: "Abcd Efghi on facebook"
+- input: 'Abcd Efghi on facebook'
   names:
-  - "Abcd Efghi on facebook"
+    - 'Abcd Efghi on facebook'
   urls: []
 
-- input: "Abcdefghijk -> www.abcdefghijk.deviantart.com, www.furaffinity.net/user/abcdefghijk"
+- input: 'Abcdefghijk -> www.abcdefghijk.deviantart.com, www.furaffinity.net/user/abcdefghijk'
   names:
-  - "Abcdefghijk ->"
+    - 'Abcdefghijk ->'
+    - 'abcdefghijk'
   urls:
-  - "https://abcdefghijk.deviantart.com/"
-  - "https://furaffinity.net/user/abcdefghijk/"
+    - 'https://abcdefghijk.deviantart.com/'
+    - 'https://furaffinity.net/user/abcdefghijk/'
 
 - input: 'FA: https://www.furaffinity.net/user/abcdefghijklmno/ (Abcdefghijklmno)'
   names:
     - 'Abcdefghijklmno'
+    - 'abcdefghijklmno'
   urls:
     - 'https://furaffinity.net/user/abcdefghijklmno/'
