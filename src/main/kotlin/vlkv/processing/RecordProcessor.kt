@@ -45,8 +45,9 @@ class RecordProcessor(fixer: Fixer) {
         val withoutBrackets = processBrackets(input)
         val (urls, remaining) = Urls.extract(Urls.tidy(withoutBrackets))
         val names = names.getNames(remaining)
+        val namesFromUrls = Urls.getNamesFromUrls(urls)
 
-        return NamesUrls(names.result, urls, names.issues)
+        return NamesUrls(names.result.plus(namesFromUrls), urls, names.issues)
     }
 
     internal fun validate(record: Record) { // If any of these fire, there may be something I've overseen

@@ -23,10 +23,6 @@ object Urls {
         Regex("(https?://)?(www\\.)?instagram.com/([^/\\s]+)/?") to "https://www.instagram.com/$3/",
     )
 
-    private fun fix(input: String): String {
-        return URL_UNIFICATIONS.run(input)
-    }
-
     private val LABELS = Removables(
         Regex("(Deviant ?Art|DA)( Account)? *[-:]? *(?=https://[^.]+\\.deviantart\\.com/)", RegexOption.IGNORE_CASE),
         Regex("Tumblr? *[-:] *(?=https://[^.]+\\.tumblr\\.com/)", RegexOption.IGNORE_CASE),
@@ -45,9 +41,12 @@ object Urls {
         Regex("(Personal site|website) *[-:] *(?=https://)", RegexOption.IGNORE_CASE),
     )
 
-    private fun removeLabels(input: String): String {
-        return LABELS.run(input)
-    }
+    private val EXPANSIONS = Replacements(
+        Regex("([a-z0-9]+) o[fn] DA, FA(?![a-z])", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/ https://www.deviantart.com/$1",
+        Regex("([a-z0-9]+)(@| o[fn] )(FA|Fur ?affinity)(?![a-z])", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/",
+        Regex("([a-z0-9]+)(@| o[fn] )DA(?![a-z])", RegexOption.IGNORE_CASE) to "https://www.deviantart.com/$1",
+        Regex("@?([a-z0-9_]+)(@| o[fn] )Twitter", RegexOption.IGNORE_CASE) to "https://twitter.com/$1",
+    )
 
     fun extract(input: String): UrlsExtractionResult {
         val urls = mutableListOf<String>()
@@ -61,21 +60,20 @@ object Urls {
         return UrlsExtractionResult(urls.toList(), remaining)
     }
 
-    private val EXPANSIONS = Replacements(
-        Regex("([a-z0-9]+) o[fn] DA, FA(?![a-z])", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/ https://www.deviantart.com/$1",
-        Regex("([a-z0-9]+)(@| o[fn] )(FA|Fur ?affinity)(?![a-z])", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/",
-        Regex("([a-z0-9]+)(@| o[fn] )DA(?![a-z])", RegexOption.IGNORE_CASE) to "https://www.deviantart.com/$1",
-        Regex("@?([a-z0-9_]+)(@| o[fn] )Twitter", RegexOption.IGNORE_CASE) to "https://twitter.com/$1",
-    )
+    private val TWITTER = Regex("https://twitter.com/([^/]+)/?", RegexOption.IGNORE_CASE)
 
-    private fun expand(input: String): String {
-        return EXPANSIONS.run(input)
+    fun getNamesFromUrls(urls: List<String>): List<String> {
+        val result = mutableListOf<String>()
+
+        urls.mapNotNull { TWITTER.matchEntire(it)?.groups?.get(1)?.value }.forEach { result.add(it) }
+
+        return result
     }
 
     internal fun tidy(input: String): String {
-        var result = expand(input)
-        result = fix(result)
-        result = removeLabels(result)
+        var result = EXPANSIONS.run(input)
+        result = URL_UNIFICATIONS.run(result)
+        result = LABELS.run(result)
 
         return result
     }

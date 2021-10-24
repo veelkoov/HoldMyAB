@@ -165,10 +165,11 @@ tests:
   urls:
     - "https://furaffinity.net/user/AbcdefGhijklm/"
 
-- input: "@AbcdeFghij_klm on Twitter"
-  names: []
+- input: '@AbcdeFghij_klm on Twitter'
+  names:
+    - 'AbcdeFghij_klm'
   urls:
-    - "https://twitter.com/AbcdeFghij_klm"
+    - 'https://twitter.com/AbcdeFghij_klm'
 
 
 
@@ -213,12 +214,14 @@ tests:
     - 'https://www.instagram.com/theabcdefghij/'
 
 - input: 'Twitter - https://twitter.com/AbcDefg'
-  names: []
+  names:
+    - 'AbcDefg'
   urls:
     - 'https://twitter.com/AbcDefg'
 
 - input: 'Twitter : https://twitter.com/AbcdEfghiJkl?s=09'
-  names: []
+  names:
+    - 'AbcdEfghiJkl'
   urls:
     - 'https://twitter.com/AbcdEfghiJkl'
 
