@@ -2,7 +2,7 @@
 <!--suppress HtmlUnknownTarget -->
 <html lang="en">
 <head>
-    <title>Artist Beware bewared DB analysis</title>
+    <title>Artists Beware data consolidation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <style>{% include 'vlkv/templates/styles.css' %}</style>
 </head>
@@ -74,11 +74,11 @@
                                     <a href="{{ beware.url }}" target="_blank">{{ beware.url|shorter_ab_url }}</a>
 
                                     {%- if beware.resolved -%}
-                                        </s>&nbsp;<span class="badge rounded-pill bg-success">R ❤️</span>
+                                        </s>&nbsp;<span class="badge rounded-pill bg-success">R &heartsuit;</span>
                                     {%- elseif beware.isBeware -%}
-                                        &nbsp;<span class="badge rounded-pill bg-danger">B️</span>
+                                        &nbsp;<span class="badge rounded-pill bg-danger">B</span>
                                     {%- else -%}
-                                    &nbsp;<span class="badge rounded-pill bg-warning">C️</span>
+                                        &nbsp;<span class="badge rounded-pill bg-warning">C</span>
                                     {%- endif -%}
                                 </li>
                             {% endfor %}
