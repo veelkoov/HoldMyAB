@@ -25,7 +25,7 @@
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="checkboxShowIssues">
                 <label class="form-check-label" for="checkboxShowIssues">
-                    Show processing messages
+                    Show boring and useless processing messages
                 </label>
             </div>
         </div>
@@ -86,9 +86,9 @@
                     </td>
                 </tr>
                 {% if not subject.issues.empty %}
-                    <tr class="issues">
+                    <tr class="issues small">
                         <td>
-                            Specific processing for the above:
+                            Processing messages for the row above:
                         </td>
                         <td colspan="2">
                             <ul>
