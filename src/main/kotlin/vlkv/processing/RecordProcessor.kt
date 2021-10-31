@@ -22,6 +22,7 @@ class RecordProcessor(fixer: Fixer) {
         extend(names, urls, issues, fixedTitle.result)
         extend(names, urls, issues, fixWho(record.fields.getWho(), issues))
         extend(names, urls, issues, where.fix(record.fields.getWhere(), issues))
+        names.addAll(filterTags(record.tags))
 
         val isResolved = isResolved(record)
 

@@ -12,7 +12,6 @@ import vlkv.pebble.Extension
 import vlkv.processing.RecordProcessor
 import java.io.File
 
-
 fun main(args: Array<String>) {
     if (args.size != 3) {
         error("Require exactly two arguments: 1. path to the fixes.yaml configuration, 2. path to the input directory, 3. path to the report file to generate")
