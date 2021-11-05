@@ -61,5 +61,11 @@ $(document).ready(function () {
         $row.next().filter('.issues').data('items', names)
     })
 
+    let hash = window.location.hash.slice(1)
+
+    if (hash.startsWith("search:")) {
+        $searchValue.val(hash.substr(7))
+    }
+
     refreshVisibility()
 })
