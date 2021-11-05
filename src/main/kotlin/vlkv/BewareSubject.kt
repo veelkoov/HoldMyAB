@@ -9,23 +9,23 @@ class BewareSubject {
     private val issues = mutableListOf<String>()
 
     @Suppress("unused") // Pebble uses it
-    fun getNames(): List<String> {
-        return names.toList()
+    fun getNamesSorted(): List<String> {
+        return names.toList().sorted()
     }
 
     @Suppress("unused") // Pebble uses it
-    fun getBewares(): List<Beware> {
+    fun getBewaresSorted(): List<Beware> {
         return bewares.sortedBy { it.id }
     }
 
     @Suppress("unused") // Pebble uses it
-    fun getUrls(): List<String> {
-        return urls.toList()
+    fun getUrlsSorted(): List<String> {
+        return urls.toList().sorted()
     }
 
     @Suppress("unused") // Pebble uses it
-    fun getIssues(): List<String> {
-        return issues.toList()
+    fun getIssuesSorted(): List<String> {
+        return issues.toList().sorted()
     }
 
     fun extend(beware: Beware) {

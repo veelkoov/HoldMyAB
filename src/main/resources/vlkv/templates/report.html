@@ -68,18 +68,18 @@
             {% for subject in subjects %}
                 <tr>
                     <td class="names">
-                        {% for name in subject.names %}
+                        {% for name in subject.namesSorted %}
                             <span class="badge rounded-pill bg-secondary">{{ name }}</span>
                         {% endfor %}
                     </td>
                     <td>
-                        {% for url in subject.urls %}
+                        {% for url in subject.urlsSorted %}
                             <a href="{{ url }}" target="_blank"><span class="badge rounded-pill bg-secondary">{{ url|shorter_url }}</span></a>
                         {% endfor %}
                     </td>
                     <td>
                         <ul>
-                            {% for beware in subject.bewares %}
+                            {% for beware in subject.bewaresSorted %}
                                 <li>
                                     {%- if beware.resolved -%}
                                         <span class="badge rounded-pill bg-success">R &heartsuit;</span>&nbsp;<s>
@@ -97,14 +97,14 @@
                         </ul>
                     </td>
                 </tr>
-                {% if not subject.issues.empty %}
+                {% if not subject.issuesSorted.empty %}
                     <tr class="issues small">
                         <td>
                             Processing messages for the row above:
                         </td>
                         <td colspan="2">
                             <ul>
-                                {% for issue in subject.issues %}
+                                {% for issue in subject.issuesSorted %}
                                     <li>{{ issue }}</li>
                                 {% endfor %}
                             </ul>
