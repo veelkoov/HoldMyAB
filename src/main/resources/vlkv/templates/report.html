@@ -46,7 +46,32 @@
         </div>
         <div class="col">
             <button class="btn btn-primary" type="button" id="searchButton">Search</button>
-            <button class="btn btn-secondary" type="button" id="clearButton">Clear</button>
+            <button class="btn btn-secondary me-4" type="button" id="clearButton">Clear</button>
+            <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#searchHints" aria-expanded="false" aria-controls="searchHints">
+                How to search effectively?
+            </button>
+        </div>
+    </div>
+
+    <div class="card collapse mt-4" id="searchHints">
+        <div class="card-header">
+            How to search effectively?
+        </div>
+        <div class="card-body">
+            <ul class="card-text">
+                <li>Searches are case-insensitive, e.g. <code>TheArtist</code> is the same as <code>theARTIST</code> (there are exceptions: non-standard letters, i.a. with diacritics like <code>Ä Ê</code>, and more)</li>
+                <li>Search separately each word in the name, e.g. instead of looking for <code>Artists Beware</code>, search once for <code>Artists</code> and then for <code>Beware</code>, or</li>
+                <li>If the artist's name contains a space, try to look without it, e.g. instead of <code>Artists Beware</code> look for <code>ArtistsBeware</code></li>
+                <li>If the artist's name contains a dash or other character, try to look for particular parts, e.g. instead of looking for <code>Artists-Beware</code> look for <code>Artists</code> and <code>Beware</code> separately</li>
+                <li>Search for the name in singular, e.g. instead of <code>Bewares</code> try looking for <code>Beware</code></li>
+                <li>Try searching without the <code>'s</code>, e.g. instead of <code>Artist's</code> or <code>Artists'</code> try searching <code>Artist</code></li>
+                <li>Removing non-letter characters / decorators may help, e.g. instead of <code>=Artist=</code> or <code>Artist!</code> try looking for <code>Artist</code></li>
+                <li>Do not include <code>the</code>, e.g. instead of <code>The Artist</code> search for <code>Artist</code></li>
+            </ul>
+
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#searchHints" aria-expanded="false" aria-controls="searchHints">
+                OK, got it
+            </button>
         </div>
     </div>
 </div>
