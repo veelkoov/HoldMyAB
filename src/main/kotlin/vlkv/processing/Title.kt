@@ -7,11 +7,11 @@ import vlkv.processing.results.StringResult
 private const val PREFIX_SUBJECTS = "commissioner|client|customer|fursuiter|artist|contest artist participants|resubmit -"
 
 private val BEWARE_REMOVABLES = Removables(
-    Regex("^($PREFIX_SUBJECTS)? ?Beware[ .:-]*", RegexOption.IGNORE_CASE),
+    Regex("^($PREFIX_SUBJECTS)? ?Beware[ .:!-]*", RegexOption.IGNORE_CASE),
 )
 
 private val CAUTION_REMOVABLES = Removables(
-    Regex("^($PREFIX_SUBJECTS)? ?Caution[ .:-]*", RegexOption.IGNORE_CASE),
+    Regex("^($PREFIX_SUBJECTS)? ?Caution[ .:!-]*", RegexOption.IGNORE_CASE),
 )
 
 fun getFixedTitle(record: Record): StringResult {
