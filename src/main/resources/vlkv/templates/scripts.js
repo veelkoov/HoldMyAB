@@ -71,7 +71,7 @@ $(document).ready(function () {
     let hash = window.location.hash.slice(1)
 
     if (hash.startsWith("search:")) {
-        $searchValue.val(hash.substr(7))
+        $searchValue.val(decodeURI(hash.substr(7)))
     }
 
     refreshVisibility()
