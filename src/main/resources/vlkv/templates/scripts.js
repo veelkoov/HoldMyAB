@@ -37,6 +37,13 @@ $(document).ready(function () {
     })
     $searchButton.on('click', function () {
         refreshVisibility()
+        $searchValue.focus()
+    })
+    $('#clearButton').on('click', function () {
+        $searchValue.val('')
+
+        refreshVisibility()
+        $searchValue.focus()
     })
 
     $searchValue.on('keyup', function (event) {
