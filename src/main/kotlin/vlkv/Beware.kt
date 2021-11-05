@@ -6,6 +6,7 @@ data class Beware(
     val urls: List<String>,
     val url: String,
     val resolved: Boolean,
+    val isNsfw: Boolean,
     val isBeware: Boolean,
     val issues: List<String>,
 )

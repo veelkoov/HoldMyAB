@@ -73,6 +73,10 @@
                         {% endfor %}
                     </td>
                     <td>
+                        {% if subject.hasNsfw %}
+                            <span class="badge rounded-pill bg-danger">NSFW/18+</span>
+                        {% endif %}
+
                         {% for url in subject.urlsSorted %}
                             <a href="{{ url }}" target="_blank"><span class="badge rounded-pill bg-secondary">{{ url|shorter_url }}</span></a>
                         {% endfor %}

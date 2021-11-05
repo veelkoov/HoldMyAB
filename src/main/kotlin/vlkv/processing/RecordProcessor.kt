@@ -6,6 +6,7 @@ import vlkv.json.Record
 import vlkv.processing.results.NamesUrls
 
 private const val TAG_RESOLVED = "resolved"
+private const val TAG_NSFW = "nsfw"
 
 class RecordProcessor(fixer: Fixer) {
     private val names = NamesProcessor(fixer)
@@ -24,9 +25,16 @@ class RecordProcessor(fixer: Fixer) {
         extend(names, urls, issues, where.fix(record.fields.getWhere(), issues))
         names.addAll(filterTags(record.tags))
 
-        val isResolved = isResolved(record)
-
-        return Beware(record.id, names.distinct(), urls, record.url, isResolved, record.isBeware(), issues)
+        return Beware(
+            record.id,
+            names.distinct(),
+            urls,
+            record.url,
+            isResolved(record),
+            isNsfw(record),
+            record.isBeware(),
+            issues
+        )
     }
 
     private fun extend(
@@ -65,6 +73,10 @@ class RecordProcessor(fixer: Fixer) {
 
     private fun isResolved(record: Record): Boolean {
         return record.tags.contains(TAG_RESOLVED) || record.fields.isResolved()
+    }
+
+    private fun isNsfw(record: Record): Boolean {
+        return record.tags.contains(TAG_NSFW) || record.fields.isNsfw()
     }
 
     private val BRACKETS = Regex("\\(([^)]*)\\)")

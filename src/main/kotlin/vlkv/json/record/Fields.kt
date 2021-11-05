@@ -19,7 +19,14 @@ data class Fields(
             "Yes", "Resolved" -> true
             "No", "Not Resolved", null -> false // null means no "Yes"
             else -> error("field_17 has unexpected value: '$field_17'")
+        }
+    }
 
+    fun isNsfw(): Boolean {
+        return when (field_16) {
+            "Yes" -> true
+            "No", null -> false // null means no "Yes"
+            else -> error("field_16 has unexpected value: '$field_16'")
         }
     }
 
