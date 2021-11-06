@@ -7,6 +7,7 @@ import vlkv.json.Record
 class Fixer(private val fixes: Fixes) {
     val ignoredNames = StringList(fixes.ignoredNames)
     val ignoredWhereLines = StringList(fixes.ignoredWhereLines)
+    val ignoredTags = StringList(fixes.ignoredTags)
 
     fun fix(record: Record): Record {
         fixes.fixes.forEach { fix: Fix ->

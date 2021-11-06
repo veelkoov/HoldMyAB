@@ -25,8 +25,9 @@ fun main(args: Array<String>) {
     val database = readInputFilesFromDir(inputDirPath, fixer)
     renderToFile(database, outputFilePath)
 
-    println("Unused ignored names: " + fixer.ignoredNames.getUnused().joinToString(", "))
-    println("Unused ignored where lines: " + fixer.ignoredWhereLines.getUnused().joinToString(", "))
+    println("Unused ignored names: " + fixer.ignoredNames.getUnusedList())
+    println("Unused ignored where lines: " + fixer.ignoredWhereLines.getUnusedList())
+    println("Unused ignored tags: " + fixer.ignoredTags.getUnusedList())
     println("Finished!")
 }
 

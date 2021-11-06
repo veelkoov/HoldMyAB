@@ -13,7 +13,7 @@ class StringList(private val list: List<String>) {
         }
     }
 
-    fun getUnused(): List<String> {
-        return list.filterNot { encountered.contains(it) }
+    fun getUnusedList(): String {
+        return list.filterNot { encountered.contains(it) }.joinToString(", ")
     }
 }
