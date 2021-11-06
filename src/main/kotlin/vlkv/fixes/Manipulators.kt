@@ -1,20 +1,51 @@
 package vlkv.fixes
 
+import vlkv.fixes.yaml.Change
 import vlkv.json.Record
 
-interface Manipulator {
-    fun get(record: Record): String
-    fun set(record: Record, newValue: String)
-    fun normalize(input: String): String
+interface Manipulator<T> {
+    fun get(record: Record): T
+    fun set(record: Record, newValue: T)
+    fun updateIfMatches(record: Record, change: Change): Boolean
 }
 
-abstract class StringManipulator: Manipulator {
-    override fun normalize(input: String): String {
+abstract class StringManipulator : Manipulator<String> {
+    private fun normalize(input: String): String {
         return input.replace("\r\n", "\n").trim()
+    }
+
+    override fun updateIfMatches(record: Record, change: Change): Boolean {
+        val recordValue = normalize(get(record))
+        val oldValue = normalize(change.from)
+        val newValue = normalize(change.to)
+
+        return if (recordValue == oldValue) {
+            set(record, newValue)
+            true
+        } else {
+            false
+        }
     }
 }
 
-object TitleManipulator: StringManipulator() {
+abstract class ListManipulator : Manipulator<List<String>> {
+    override fun updateIfMatches(record: Record, change: Change): Boolean {
+        val oldValue = get(record)
+
+        return if (oldValue.contains(change.from)) {
+            val newValue = oldValue.toMutableList()
+            newValue.remove(change.from)
+            newValue.add(change.to)
+
+            set(record, newValue)
+            true
+        } else {
+            false
+        }
+    }
+}
+
+object TitleManipulator : StringManipulator() {
     override fun get(record: Record): String {
         return record.title
     }
@@ -24,7 +55,7 @@ object TitleManipulator: StringManipulator() {
     }
 }
 
-object WhoManipulator: StringManipulator() {
+object WhoManipulator : StringManipulator() {
     override fun get(record: Record): String {
         return record.fields.getWho()
     }
@@ -34,12 +65,22 @@ object WhoManipulator: StringManipulator() {
     }
 }
 
-object WhereManipulator: StringManipulator() {
+object WhereManipulator : StringManipulator() {
     override fun get(record: Record): String {
         return record.fields.getWhere()
     }
 
     override fun set(record: Record, newValue: String) {
         record.fields.setWhere(newValue)
+    }
+}
+
+object TagManipulator : ListManipulator() {
+    override fun get(record: Record): List<String> {
+        return record.tags
+    }
+
+    override fun set(record: Record, newValue: List<String>) {
+        record.tags = newValue
     }
 }

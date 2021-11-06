@@ -1,5 +1,6 @@
 package vlkv.fixes.yaml
 
+import vlkv.fixes.TagManipulator
 import vlkv.fixes.TitleManipulator
 import vlkv.fixes.WhereManipulator
 import vlkv.fixes.WhoManipulator
@@ -19,15 +20,11 @@ class Fix {
                 "title" -> TitleManipulator
                 "who" -> WhoManipulator
                 "where" -> WhereManipulator
+                "tag" -> TagManipulator
                 else -> error("Unsupported `what` in $`in` fix: '${change.what}'")
             }
 
-            val recordValue = manipulator.normalize(manipulator.get(record))
-            val oldValue = manipulator.normalize(change.from)
-            val newValue = manipulator.normalize(change.to)
-
-            if (oldValue == recordValue) {
-                manipulator.set(record, newValue)
+            if (manipulator.updateIfMatches(record, change)) {
                 change.done = true
             }
         }

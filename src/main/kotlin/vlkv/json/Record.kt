@@ -22,7 +22,7 @@ data class Record(
     val prefix: String?,
     val rating: Int,
     val reviews: Int,
-    val tags: List<String>,
+    var tags: List<String>,
     var title: String,
     val topic: String?,
     val url: String,
