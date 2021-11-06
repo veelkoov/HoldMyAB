@@ -22,9 +22,9 @@ class Fix {
                 else -> error("Unsupported `what` in $`in` fix: '${change.what}'")
             }
 
-            val recordValue = normalize(manipulator.get(record))
-            val oldValue = normalize(change.from)
-            val newValue = normalize(change.to)
+            val recordValue = manipulator.normalize(manipulator.get(record))
+            val oldValue = manipulator.normalize(change.from)
+            val newValue = manipulator.normalize(change.to)
 
             if (oldValue == recordValue) {
                 manipulator.set(record, newValue)
@@ -39,9 +39,5 @@ class Fix {
                 error("Unused change: $`in`, '${it.what}', '${it.from}'")
             }
         }
-    }
-
-    private fun normalize(input: String): String {
-        return input.replace("\r\n", "\n").trim()
     }
 }

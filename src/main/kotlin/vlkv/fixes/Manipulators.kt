@@ -5,9 +5,16 @@ import vlkv.json.Record
 interface Manipulator {
     fun get(record: Record): String
     fun set(record: Record, newValue: String)
+    fun normalize(input: String): String
 }
 
-object TitleManipulator: Manipulator {
+abstract class StringManipulator: Manipulator {
+    override fun normalize(input: String): String {
+        return input.replace("\r\n", "\n").trim()
+    }
+}
+
+object TitleManipulator: StringManipulator() {
     override fun get(record: Record): String {
         return record.title
     }
@@ -17,7 +24,7 @@ object TitleManipulator: Manipulator {
     }
 }
 
-object WhoManipulator: Manipulator {
+object WhoManipulator: StringManipulator() {
     override fun get(record: Record): String {
         return record.fields.getWho()
     }
@@ -27,7 +34,7 @@ object WhoManipulator: Manipulator {
     }
 }
 
-object WhereManipulator: Manipulator {
+object WhereManipulator: StringManipulator() {
     override fun get(record: Record): String {
         return record.fields.getWhere()
     }
