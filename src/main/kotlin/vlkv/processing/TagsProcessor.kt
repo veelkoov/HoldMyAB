@@ -1,5 +1,7 @@
 package vlkv.processing
 
+import vlkv.fixes.Fixer
+
 private val IGNORED_TAGS = hashSetOf(
     "2016",
     "2019",
@@ -42,6 +44,8 @@ private val IGNORED_TAGS = hashSetOf(
     "ych",
 )
 
-fun filterTags(input: List<String>): List<String> {
-    return input.filterNot { IGNORED_TAGS.contains(it) }
+class TagsProcessor(val config: Fixer) {
+    fun filter(input: List<String>): List<String> {
+        return input.filterNot { IGNORED_TAGS.contains(it) }
+    }
 }
