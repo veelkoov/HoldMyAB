@@ -5,9 +5,8 @@ import com.mitchellbosecke.pebble.loader.ClasspathLoader
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import vlkv.fixes.Fixer
-import vlkv.fixes.yaml.Fixes
-import vlkv.json.Record
-import vlkv.json.RecordsPage
+import vlkv.input.json.Record
+import vlkv.input.json.RecordsPage
 import vlkv.pebble.Extension
 import vlkv.processing.RecordProcessor
 import java.io.File

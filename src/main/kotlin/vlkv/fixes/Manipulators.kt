@@ -1,7 +1,7 @@
 package vlkv.fixes
 
 import vlkv.fixes.yaml.Change
-import vlkv.json.Record
+import vlkv.input.json.Record
 
 interface Manipulator<T> {
     fun get(record: Record): T

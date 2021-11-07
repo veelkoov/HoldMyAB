@@ -1,9 +1,9 @@
-package vlkv.json.record
+package vlkv.input.json.record
 
 import kotlinx.serialization.Serializable
-import vlkv.json.record.author.CustomFields
-import vlkv.json.record.author.Group
-import vlkv.json.record.author.Rank
+import vlkv.input.json.record.author.CustomFields
+import vlkv.input.json.record.author.Group
+import vlkv.input.json.record.author.Rank
 
 @Serializable
 data class Author(

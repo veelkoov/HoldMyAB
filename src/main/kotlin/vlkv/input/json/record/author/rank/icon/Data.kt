@@ -1,4 +1,4 @@
-package vlkv.json.record.author.rank.icon
+package vlkv.input.json.record.author.rank.icon
 
 import kotlinx.serialization.Serializable
 

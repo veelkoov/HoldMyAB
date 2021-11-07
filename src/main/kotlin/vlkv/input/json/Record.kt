@@ -1,9 +1,9 @@
-package vlkv.json
+package vlkv.input.json
 
 import kotlinx.serialization.Serializable
-import vlkv.json.record.Author
-import vlkv.json.record.Category
-import vlkv.json.record.Fields
+import vlkv.input.json.record.Author
+import vlkv.input.json.record.Category
+import vlkv.input.json.record.Fields
 
 @Serializable
 data class Record(

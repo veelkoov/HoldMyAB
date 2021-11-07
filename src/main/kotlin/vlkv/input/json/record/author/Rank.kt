@@ -1,7 +1,7 @@
-package vlkv.json.record.author
+package vlkv.input.json.record.author
 
 import kotlinx.serialization.Serializable
-import vlkv.json.record.author.rank.Icon
+import vlkv.input.json.record.author.rank.Icon
 
 @Serializable
 data class Rank(

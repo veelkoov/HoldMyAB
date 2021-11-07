@@ -2,7 +2,7 @@ package vlkv.processing
 
 import vlkv.Beware
 import vlkv.fixes.Fixer
-import vlkv.json.Record
+import vlkv.input.json.Record
 import vlkv.processing.results.NamesUrls
 
 private const val TAG_RESOLVED = "resolved"

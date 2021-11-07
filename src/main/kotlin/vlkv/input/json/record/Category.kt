@@ -1,4 +1,4 @@
-package vlkv.json.record
+package vlkv.input.json.record
 
 import kotlinx.serialization.Serializable
 

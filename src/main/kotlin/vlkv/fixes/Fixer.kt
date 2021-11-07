@@ -2,7 +2,7 @@ package vlkv.fixes
 
 import vlkv.fixes.yaml.Fix
 import vlkv.fixes.yaml.Fixes
-import vlkv.json.Record
+import vlkv.input.json.Record
 
 class Fixer(private val fixes: Fixes) {
     val ignoredNames = StringList(fixes.ignoredNames)

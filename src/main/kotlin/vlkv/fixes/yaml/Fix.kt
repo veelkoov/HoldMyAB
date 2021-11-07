@@ -4,7 +4,7 @@ import vlkv.fixes.TagManipulator
 import vlkv.fixes.TitleManipulator
 import vlkv.fixes.WhereManipulator
 import vlkv.fixes.WhoManipulator
-import vlkv.json.Record
+import vlkv.input.json.Record
 
 class Fix {
     lateinit var `in`: String

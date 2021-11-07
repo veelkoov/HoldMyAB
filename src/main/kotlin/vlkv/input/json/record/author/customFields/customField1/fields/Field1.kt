@@ -1,4 +1,4 @@
-package vlkv.json.record.author.customFields.customField1.fields
+package vlkv.input.json.record.author.customFields.customField1.fields
 
 import kotlinx.serialization.Serializable
 

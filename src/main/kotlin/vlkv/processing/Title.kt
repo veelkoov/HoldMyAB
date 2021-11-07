@@ -1,6 +1,6 @@
 package vlkv.processing
 
-import vlkv.json.Record
+import vlkv.input.json.Record
 import vlkv.processing.regexes.Removables
 import vlkv.processing.results.StringResult
 
