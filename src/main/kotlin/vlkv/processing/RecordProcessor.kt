@@ -13,7 +13,11 @@ class RecordProcessor(fixer: Fixer) {
     private val where = WhereProcessor(fixer)
     private val tags = TagsProcessor(fixer)
 
-    fun getBeware(record: Record): Beware {
+    fun getBewares(records: List<Record>): List<Beware> {
+        return records.map{ getBeware(it) }
+    }
+
+    private fun getBeware(record: Record): Beware {
         val names = mutableListOf<String>()
         val urls = mutableListOf<String>()
         val issues = mutableListOf<String>()
@@ -58,18 +62,6 @@ class RecordProcessor(fixer: Fixer) {
         val namesFromUrls = Urls.getNamesFromUrls(urls)
 
         return NamesUrls(names.result.plus(namesFromUrls), urls, names.issues)
-    }
-
-    internal fun validate(record: Record) { // If any of these fire, there may be something I've overseen
-        val description = Regex("<([^>]+) />").replace(record.fields.getDescription(), "<$1>")
-
-        if (description != record.description) {
-            error("Description field is different than the record description")
-        }
-
-        if (record.fields.getTitle() != record.title) {
-            error("Title field is different than the record title")
-        }
     }
 
     private fun isResolved(record: Record): Boolean {

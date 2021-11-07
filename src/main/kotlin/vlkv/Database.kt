@@ -1,9 +1,13 @@
 package vlkv
 
-class Database {
+class Database(bewares: List<Beware>) {
     private val records = HashMap<String, BewareSubject>()
 
-    fun ingest(beware: Beware) {
+    init {
+        bewares.forEach { ingest(it) }
+    }
+
+    private fun ingest(beware: Beware) {
         val subject = getBewareSubject(beware)
 
         beware.names.forEach { records[it.lowercase()] = subject }

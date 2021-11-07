@@ -1,4 +1,4 @@
-package vlkv.pebble
+package vlkv.output.pebble
 
 import com.mitchellbosecke.pebble.extension.AbstractExtension
 import com.mitchellbosecke.pebble.extension.Filter
