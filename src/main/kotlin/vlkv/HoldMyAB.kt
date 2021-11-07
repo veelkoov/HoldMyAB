@@ -57,7 +57,7 @@ private fun renderToFile(database: Database, outputFilePath: String) {
 
     compiledTemplate.evaluate(
         outputFile.writer(), mapOf<String, Any>(
-            "subjects" to database.getRecords(),
+            "subjects" to database.getSortedRecords(),
         )
     )
 }

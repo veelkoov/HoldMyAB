@@ -23,7 +23,7 @@ class Database {
         }
     }
 
-    fun getRecords(): List<BewareSubject> {
+    fun getSortedRecords(): List<BewareSubject> {
         return records.values.distinct().sortedBy { it.getLowestBewareId() }
     }
 }
