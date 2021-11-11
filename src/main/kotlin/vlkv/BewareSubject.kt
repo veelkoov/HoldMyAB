@@ -33,6 +33,11 @@ class BewareSubject {
         return bewares.map { it.isNsfw }.reduce { a, b -> a || b }
     }
 
+    @Suppress("unused") // Pebble uses it
+    fun tagsSorted(): List<String> {
+        return bewares.map { it.tags }.reduce { a, b -> a.plus(b) }.distinct().sorted()
+    }
+
     fun extend(beware: Beware) {
         bewares.add(beware)
 

@@ -80,7 +80,7 @@
     <table class="table table-sm">
         <thead>
             <tr>
-                <th>Names</th>
+                <th>Names/tags</th>
                 <th>Urls</th>
                 <th>Bewares/cautions</th>
             </tr>
@@ -89,6 +89,10 @@
             {% for subject in subjects %}
                 <tr>
                     <td class="names">
+                        {% for tag in subject.tagsSorted %}
+                            <span class="badge rounded-pill bg-secondary text-dark">{{ tag }}</span>
+                        {% endfor %}
+
                         {% for name in subject.namesSorted %}
                             <span class="badge rounded-pill bg-secondary">{{ name }}</span>
                         {% endfor %}

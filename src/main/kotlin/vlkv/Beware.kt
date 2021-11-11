@@ -9,4 +9,5 @@ data class Beware(
     val isNsfw: Boolean,
     val isBeware: Boolean,
     val issues: List<String>,
+    val tags: List<String>,
 )

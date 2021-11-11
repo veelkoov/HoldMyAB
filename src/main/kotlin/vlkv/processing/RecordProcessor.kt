@@ -5,8 +5,12 @@ import vlkv.fixes.Fixer
 import vlkv.input.json.Record
 import vlkv.processing.results.NamesUrls
 
-private const val TAG_RESOLVED = "resolved"
-private const val TAG_NSFW = "nsfw"
+private val BRACKETS = Regex("\\(([^)]*)\\)")
+private val TAG_MAP = mapOf(
+    "artist" to "artist",
+    "client" to "client",
+    "fursuit" to "fursuit",
+)
 
 class RecordProcessor(fixer: Fixer) {
     private val names = NamesProcessor(fixer)
@@ -35,11 +39,18 @@ class RecordProcessor(fixer: Fixer) {
             names.distinct(),
             urls,
             record.url,
-            isResolved(record),
-            isNsfw(record),
+            record.isResolved(),
+            record.isNsfw(),
             record.isBeware(),
-            issues
+            issues,
+            getTags(record),
         )
+    }
+
+    private fun getTags(record: Record): List<String> {
+        return record.tags
+            .filter { TAG_MAP.keys.contains(it) }
+            .map { TAG_MAP[it]!! }
     }
 
     private fun extend(
@@ -63,16 +74,6 @@ class RecordProcessor(fixer: Fixer) {
 
         return NamesUrls(names.result.plus(namesFromUrls), urls, names.issues)
     }
-
-    private fun isResolved(record: Record): Boolean {
-        return record.tags.contains(TAG_RESOLVED) || record.fields.isResolved()
-    }
-
-    private fun isNsfw(record: Record): Boolean {
-        return record.tags.contains(TAG_NSFW) || record.fields.isNsfw()
-    }
-
-    private val BRACKETS = Regex("\\(([^)]*)\\)")
 
     private fun processBrackets(input: String): String {
         return input.replace(BRACKETS, " `ob` $1 `cb`")

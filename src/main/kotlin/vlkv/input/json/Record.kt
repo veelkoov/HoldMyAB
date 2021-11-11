@@ -26,7 +26,7 @@ data class Record(
     var title: String,
     val topic: String?,
     val url: String,
-    val views: Int
+    val views: Int,
 ) {
     fun isBeware(): Boolean {
         if (category.name.contains("beware", true)
@@ -40,5 +40,13 @@ data class Record(
         }
 
         error("Failed to decide if a beware or a caution: $title")
+    }
+
+    fun isResolved(): Boolean {
+        return tags.contains("resolved") || fields.isResolved()
+    }
+
+    fun isNsfw(): Boolean {
+        return tags.contains("nsfw") || fields.isNsfw()
     }
 }
