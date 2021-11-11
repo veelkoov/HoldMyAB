@@ -52,16 +52,16 @@ $(document).ready(function () {
         }
     })
 
-    $('#recordsRows tr').each(function (index, element) {
-        let $row = $(element)
+    $('#recordsRows tr').each(function (rowIndex, rowElement) {
+        let $row = $(rowElement)
         $rows.push($row)
 
         if (isIssuesRow($row)) {
             return
         }
 
-        let names = $row.find('.names span').map(function (index2, element2) {
-            return element2.innerHTML
+        let names = $row.find('.names span:not(.tag)').map(function (nameIndex, nameElement) {
+            return nameElement.innerHTML
         }).toArray().join("\n").toLowerCase()
 
         $row.data('items', names)
