@@ -39,10 +39,24 @@
 
     <hr>
 
-    <div class="row g-3 align-items-center">
+    <div class="row g-3 align-items-center d-none mb-1 additional-search-template">
+        <div class="col-auto">
+            <button class="btn btn-danger font-monospace" type="button">-</button>
+        </div>
         <div class="col">
             <!--suppress HtmlFormInputWithoutLabel -->
-            <input class="form-control" type="text" id="searchValue" placeholder="Search for...">
+            <input class="form-control searched-text" type="text" placeholder="Search simultaneously for...">
+        </div>
+        <div class="col"></div>
+    </div>
+
+    <div class="row g-3 align-items-center">
+        <div class="col-auto">
+            <button class="btn btn-success font-monospace" type="button" id="addSearch">+</button>
+        </div>
+        <div class="col">
+            <!--suppress HtmlFormInputWithoutLabel -->
+            <input class="form-control searched-text" type="text" id="primarySearchField" placeholder="Search for...">
         </div>
         <div class="col">
             <button class="btn btn-primary" type="button" id="searchButton">Search</button>

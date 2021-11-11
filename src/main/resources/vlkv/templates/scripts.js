@@ -1,17 +1,25 @@
 let $rows = []
 let $checkboxShowIssues
-let $searchValue
+let $primarySearchField
 
 function shouldShowIssues() {
     return $checkboxShowIssues.is(':checked')
 }
 
-function rowMatches($row, searchedText) {
-    if ('' === searchedText.trim()) {
+function rowMatchesAny($row, searchedTexts) {
+    if (0 === searchedTexts.length) {
         return true
     }
 
-    return $row.data('items').includes(searchedText)
+    let items = $row.data('items')
+
+    for (let searchedText of searchedTexts) {
+        if (items.includes(searchedText)) {
+            return true
+        }
+    }
+
+    return false
 }
 
 function isIssuesRow($row) {
@@ -19,37 +27,63 @@ function isIssuesRow($row) {
 }
 
 function refreshVisibility() {
-    const searchedText = $searchValue.val().toLowerCase()
+    const searchedTexts = $('input.searched-text')
+        .map((index, element) => element.value.toLowerCase().trim())
+        .toArray().filter(value => '' !== value)
+
     const showIssues = shouldShowIssues()
 
     for (const $row of $rows) {
-        $row.toggle(rowMatches($row, searchedText) && (showIssues || !isIssuesRow($row)))
+        $row.toggle(rowMatchesAny($row, searchedTexts) && (showIssues || !isIssuesRow($row)))
     }
 }
 
-$(document).ready(function () {
-    let $searchButton = $('#searchButton')
-    $checkboxShowIssues = $('#checkboxShowIssues')
-    $searchValue = $('#searchValue')
-
-    $checkboxShowIssues.on('change', function () {
-        refreshVisibility()
-    })
-    $searchButton.on('click', function () {
-        refreshVisibility()
-        $searchValue.focus()
-    })
-    $('#clearButton').on('click', function () {
-        $searchValue.val('')
-
-        refreshVisibility()
-        $searchValue.focus()
-    })
-
-    $searchValue.on('keyup', function (event) {
+function enterInFieldCausesSearch($field) {
+    $field.on('keyup', function (event) {
         if (event.key === 'Enter') {
             refreshVisibility()
         }
+    })
+}
+
+$(document).ready(function () {
+    $checkboxShowIssues = $('#checkboxShowIssues')
+    $checkboxShowIssues.on('change', function () {
+        refreshVisibility()
+    })
+
+    $primarySearchField = $('#primarySearchField')
+    enterInFieldCausesSearch($primarySearchField)
+
+    $('#searchButton').on('click', function () {
+        refreshVisibility()
+        $primarySearchField.focus()
+    })
+
+    $('#clearButton').on('click', function () {
+        $primarySearchField.val('')
+        $('div.additional-search').remove()
+
+        refreshVisibility()
+        $primarySearchField.focus()
+    })
+
+    let $additionalSearchRow = $('div.additional-search-template')
+
+    $('#addSearch').on('click', function () {
+        let $newSearchRow = $additionalSearchRow.clone()
+
+        $newSearchRow
+            .removeClass('d-none')
+            .removeClass('additional-search-template')
+            .addClass('additional-search')
+            .find('button').on('click', function (event) {
+                $(event.target).parents('.additional-search').remove()
+            })
+
+        enterInFieldCausesSearch($newSearchRow.find('input'))
+
+        $additionalSearchRow.after($newSearchRow)
     })
 
     $('#recordsRows tr').each(function (rowIndex, rowElement) {
@@ -71,7 +105,7 @@ $(document).ready(function () {
     let hash = window.location.hash.slice(1)
 
     if (hash.startsWith("search:")) {
-        $searchValue.val(decodeURI(hash.substr(7)))
+        $primarySearchField.val(decodeURI(hash.substr(7)))
     }
 
     refreshVisibility()
