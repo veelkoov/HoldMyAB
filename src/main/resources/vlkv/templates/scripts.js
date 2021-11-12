@@ -57,7 +57,7 @@ function getSearchDataFromHash() {
         return fallbackResult
     }
 
-    let decodedData = decodeURI(hash.slice(7));
+    let decodedData = decodeURIComponent(hash.slice(7));
     console.log("Search setup: decoded value:", decodedData)
 
     fallbackResult = {terms: [decodedData]}
