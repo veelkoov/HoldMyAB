@@ -3,3 +3,7 @@ table ul {
     padding: 0;
     margin: 0;
 }
+
+.names span.found {
+    color: #ffc107;
+}

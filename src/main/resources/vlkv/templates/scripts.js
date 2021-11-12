@@ -27,15 +27,50 @@ function isIssuesRow($row) {
     return $row.is('.issues')
 }
 
+function unmarkMatches($row) {
+    $row.find('.names span:not(.tag) span.found').each(function (idx, element) {
+        $(element).replaceWith(element.innerHTML)
+    })
+}
+
+function markMatches($row, searchedRegexes) {
+    $row.find('.names span:not(.tag)').each(function (idx, element) {
+        let oldHtml = element.innerHTML;
+        let newHtml = oldHtml
+
+        for (let regex of searchedRegexes) {
+            newHtml = newHtml.replace(regex, '<span class="found">$&</span>')
+        }
+
+        if (newHtml !== oldHtml) {
+            element.innerHTML = newHtml
+        }
+    })
+}
+
 function refreshVisibility() {
     const searchedTexts = $('input.searched-text')
         .map((index, element) => element.value.toLowerCase().trim())
         .toArray().filter(value => '' !== value)
 
+    let searchedRegexes = []
+
+    for (let text of searchedTexts) {
+        searchedRegexes.push(new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'))
+    }
+
     const showIssues = shouldShowIssues()
 
     for (const $row of $rows) {
-        $row.toggle(rowMatchesAny($row, searchedTexts) && (showIssues || !isIssuesRow($row)))
+        unmarkMatches($row)
+
+        if (rowMatchesAny($row, searchedTexts) && (showIssues || !isIssuesRow($row))) {
+            $row.show()
+
+            markMatches($row, searchedRegexes)
+        } else {
+            $row.hide()
+        }
     }
 }
 
