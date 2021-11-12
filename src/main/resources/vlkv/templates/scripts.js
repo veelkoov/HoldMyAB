@@ -1,6 +1,7 @@
 let $rows = []
 let $checkboxShowIssues
 let $primarySearchField
+let $additionalSearchRow
 
 function shouldShowIssues() {
     return $checkboxShowIssues.is(':checked')
@@ -38,12 +39,12 @@ function refreshVisibility() {
     }
 }
 
-function enterInFieldCausesSearch($field) {
+function initializeSearchInput($field, searchedText = '') {
     $field.on('keyup', function (event) {
         if (event.key === 'Enter') {
             refreshVisibility()
         }
-    })
+    }).val(searchedText)
 }
 
 function getSearchDataFromHash() {
@@ -109,19 +110,39 @@ function setupSearchBasedOnHash() {
         return
     }
 
-    // TODO: Handle remaining elements
-
     $primarySearchField.val(searchData.terms[0])
+
+    for (let idx = 1; idx < searchData.terms.length; idx++) {
+        addNewSearchRow(searchData.terms[idx])
+    }
+}
+
+function addNewSearchRow(searchedText = '') {
+    let $newSearchRow = $additionalSearchRow.clone()
+
+    $newSearchRow
+        .removeClass('d-none')
+        .removeClass('additional-search-template')
+        .addClass('additional-search')
+        .find('button').on('click', function (event) {
+        $(event.target).parents('.additional-search').remove()
+    })
+
+    initializeSearchInput($newSearchRow.find('input'), searchedText)
+
+    $additionalSearchRow.after($newSearchRow)
 }
 
 $(document).ready(function () {
+    $additionalSearchRow = $('div.additional-search-template')
+
     $checkboxShowIssues = $('#checkboxShowIssues')
     $checkboxShowIssues.on('change', function () {
         refreshVisibility()
     })
 
     $primarySearchField = $('#primarySearchField')
-    enterInFieldCausesSearch($primarySearchField)
+    initializeSearchInput($primarySearchField)
 
     $('#searchButton').on('click', function () {
         refreshVisibility()
@@ -136,23 +157,7 @@ $(document).ready(function () {
         $primarySearchField.focus()
     })
 
-    let $additionalSearchRow = $('div.additional-search-template')
-
-    $('#addSearch').on('click', function () {
-        let $newSearchRow = $additionalSearchRow.clone()
-
-        $newSearchRow
-            .removeClass('d-none')
-            .removeClass('additional-search-template')
-            .addClass('additional-search')
-            .find('button').on('click', function (event) {
-                $(event.target).parents('.additional-search').remove()
-            })
-
-        enterInFieldCausesSearch($newSearchRow.find('input'))
-
-        $additionalSearchRow.after($newSearchRow)
-    })
+    $('#addSearch').on('click', () => addNewSearchRow())
 
     $('#recordsRows tr').each(function (rowIndex, rowElement) {
         let $row = $(rowElement)
