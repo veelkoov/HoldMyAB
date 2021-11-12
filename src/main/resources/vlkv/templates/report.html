@@ -39,7 +39,7 @@
 
     <hr>
 
-    <div class="row g-3 align-items-center d-none mb-1 additional-search-template">
+    <div class="row align-items-center g-2 mb-1 d-none additional-search-template">
         <div class="col-auto">
             <button class="btn btn-danger font-monospace" type="button">-</button>
         </div>
@@ -47,10 +47,9 @@
             <!--suppress HtmlFormInputWithoutLabel -->
             <input class="form-control searched-text" type="text" placeholder="Search simultaneously for...">
         </div>
-        <div class="col"></div>
     </div>
 
-    <div class="row g-3 align-items-center">
+    <div class="row align-items-center g-2 mb-1">
         <div class="col-auto">
             <button class="btn btn-success font-monospace" type="button" id="addSearch">+</button>
         </div>
@@ -58,9 +57,14 @@
             <!--suppress HtmlFormInputWithoutLabel -->
             <input class="form-control searched-text" type="text" id="primarySearchField" placeholder="Search for...">
         </div>
+    </div>
+
+    <div class="row align-items-center g-2">
         <div class="col">
             <button class="btn btn-primary" type="button" id="searchButton">Search</button>
             <button class="btn btn-secondary me-4" type="button" id="clearButton">Clear</button>
+        </div>
+        <div class="col text-end">
             <button class="btn btn-success" type="button" data-bs-toggle="collapse" data-bs-target="#searchHints" aria-expanded="false" aria-controls="searchHints">
                 How to search effectively?
             </button>
