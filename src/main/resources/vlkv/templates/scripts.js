@@ -2,6 +2,7 @@ let $rows = []
 let $checkboxShowIssues
 let $primarySearchField
 let $additionalSearchRow
+let $noMoreResultsAlert
 
 function shouldShowIssues() {
     return $checkboxShowIssues.is(':checked')
@@ -72,6 +73,8 @@ function refreshVisibility() {
             $row.hide()
         }
     }
+
+    $noMoreResultsAlert.toggle(searchedTexts.length > 0)
 }
 
 function initializeSearchInput($field, searchedText = '') {
@@ -170,6 +173,9 @@ function addNewSearchRow(searchedText = '') {
 
 $(document).ready(function () {
     $additionalSearchRow = $('div.additional-search-template')
+
+    $noMoreResultsAlert = $('#noMoreResultsAlert')
+    $noMoreResultsAlert.hide()
 
     $checkboxShowIssues = $('#checkboxShowIssues')
     $checkboxShowIssues.on('change', function () {
