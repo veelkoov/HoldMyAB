@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 import vlkv.input.json.record.Author
 import vlkv.input.json.record.Category
 import vlkv.input.json.record.Fields
+import vlkv.input.json.record.Reaction
 
 @Serializable
 data class Record(
@@ -21,6 +22,7 @@ data class Record(
     val pinned: Boolean,
     val prefix: String?,
     val rating: Int,
+    val reactions: Map<String, List<Reaction>>,
     val reviews: Int,
     var tags: List<String>,
     var title: String,

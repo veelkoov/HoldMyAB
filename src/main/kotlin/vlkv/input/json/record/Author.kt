@@ -32,5 +32,6 @@ data class Author(
     val timeZone: String,
     val title: String?,
     val validating: Boolean,
-    val warningPoints: Int
+    val warningPoints: Int,
+    val allowAdminEmails: Boolean,
 )

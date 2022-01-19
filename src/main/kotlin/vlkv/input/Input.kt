@@ -1,5 +1,6 @@
 package vlkv.input
 
+import kotlinx.serialization.SerializationException
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import vlkv.input.json.Record
@@ -24,7 +25,15 @@ fun readRecordsFrom(inputDirectoryPath: String): List<Record> {
     return result.toList()
 }
 
-private fun getRecordsPageFromJsonFile(it: File) = Json.decodeFromString<RecordsPage>(it.readText())
+private fun getRecordsPageFromJsonFile(it: File): RecordsPage {
+    try {
+        val fixedJson = it.readText().replace("\"reactions\": []", "\"reactions\": {}")
+
+        return Json.decodeFromString(fixedJson)
+    } catch (ex: SerializationException) {
+        throw RuntimeException("Failed to parse file ${it.name}", ex)
+    }
+}
 
 private fun isJsonFile(file: File) = file.isFile && file.name.endsWith(".json")
 
