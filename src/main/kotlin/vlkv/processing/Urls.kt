@@ -8,13 +8,15 @@ object Urls {
         Regex("(?<=\\s|^)www\\.") to "http://www.",
         Regex("(https?://[^\\s]+),\\s*(https?://[^\\s]+)") to "$1 $2",
         Regex("furaffinity\\.com") to "furaffinity.net",
-        Regex("\\?(lang|s|hl|ref|utm_medium)=(en|\\d{2}|pr_profile|copy_link)($|\\s)", RegexOption.MULTILINE) to "",
+        Regex("\\?(lang|s|hl|ref|utm_medium)=(en|\\d{2}|pr_profile|copy_link|yr_purchases)($|\\s)", RegexOption.MULTILINE) to "",
         Regex("(https?://)?(www\\.)?(?<!forums\\.)furaffi?nity\\.net/") to "https://furaffinity.net/",
         Regex("https?://furaffinity\\.net/user/([^/\\s]+)/?") to "https://furaffinity.net/user/$1/",
-        Regex("(https?://)?twitter\\.com/") to "https://twitter.com/",
+        Regex("(https?://)?(mobile\\.)?twitter\\.com/") to "https://twitter.com/",
         Regex("(https?://)?inkbunny\\.net/") to "https://inkbunny.net/",
         Regex("(https?://)?(www\\.|m\\.)?facebook\\.com/") to "https://www.facebook.com/",
         Regex("(https?://)?([^./\\s]+)(?<!www)\\.deviantart\\.com/") to "https://$2.deviantart.com/",
+
+        Regex("(https?://)?www\\.etsy\\.com/([a-z]{2}/)?shop/([^/\\s]+)/?") to "https://www.etsy.com/shop/$3",
 
         // Remove www. from www.username.deviantart.com
         Regex("(https?://)?www\\.([^./\\s]+)\\.deviantart\\.com/?") to "https://$2.deviantart.com/",
@@ -32,6 +34,7 @@ object Urls {
         Regex("InkBunny *[-:] *(?=https://inkbunny\\.net/)", RegexOption.IGNORE_CASE),
         Regex("Instagram *[-:] *(?=https://www\\.instagram\\.com/)", RegexOption.IGNORE_CASE),
         Regex("eBay *[-:] *(?=https://www\\.ebay\\.com/)", RegexOption.IGNORE_CASE),
+        Regex("Etsy *[-:] *(?=https://www\\.etsy\\.com/)", RegexOption.IGNORE_CASE),
         Regex("Facebook *[-:] *(?=https://www\\.facebook\\.com/)", RegexOption.IGNORE_CASE),
         Regex("Patreon *[-:] *(?=https://www\\.patreon\\.com/)", RegexOption.IGNORE_CASE),
         Regex("Weasyl *[-:] *(?=https://www\\.weasyl\\.com/)", RegexOption.IGNORE_CASE),

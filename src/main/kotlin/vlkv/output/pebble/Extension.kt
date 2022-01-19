@@ -40,6 +40,8 @@ class Extension : AbstractExtension() {
                 Regex("^https?://([^.]+)\\.deviantart\\.com/$") to "DA: $1",
                 Regex("^https?://www\\.deviantart\\.com/([^/]+)/?$") to "DA: $1",
 
+                Regex("^https?://www\\.etsy\\.com/shop/([^/]+)$") to "Etsy: $1",
+
                 Regex("^https?://") to "",
             ),
             "shorter_ab_url" to ShorterUrlFilter(
