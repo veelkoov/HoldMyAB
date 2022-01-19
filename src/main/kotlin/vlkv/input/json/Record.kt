@@ -6,6 +6,8 @@ import vlkv.input.json.record.Category
 import vlkv.input.json.record.Fields
 import vlkv.input.json.record.Reaction
 
+private val NSFW_COMMENT_REGEX = Regex("\\(nsfw\\)", RegexOption.IGNORE_CASE)
+
 @Serializable
 data class Record(
     val author: Author,
@@ -49,6 +51,6 @@ data class Record(
     }
 
     fun isNsfw(): Boolean {
-        return tags.contains("nsfw") || fields.isNsfw()
+        return tags.contains("nsfw") || fields.isNsfw() || fields.getWhere().contains(NSFW_COMMENT_REGEX)
     }
 }
