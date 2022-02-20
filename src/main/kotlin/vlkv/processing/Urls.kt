@@ -5,24 +5,43 @@ import vlkv.processing.regexes.Replacements
 
 object Urls {
     private val URL_UNIFICATIONS = Replacements(
+        // Generic
         Regex("(?<=\\s|^)www\\.") to "http://www.",
         Regex("(https?://[^\\s]+),\\s*(https?://[^\\s]+)") to "$1 $2",
-        Regex("furaffinity\\.com") to "furaffinity.net",
+
+        // Random parameters
         Regex("\\?(lang|s|hl|ref|utm_medium)=(en|\\d{2}|pr_profile|copy_link|yr_purchases)($|\\s)", RegexOption.MULTILINE) to "",
-        Regex("(https?://)?(www\\.)?(?<!forums\\.)furaffi?nity\\.net/") to "https://furaffinity.net/",
-        Regex("https?://furaffinity\\.net/user/([^/\\s]+)/?") to "https://furaffinity.net/user/$1/",
-        Regex("(https?://)?(mobile\\.)?twitter\\.com/") to "https://twitter.com/",
-        Regex("(https?://)?inkbunny\\.net/") to "https://inkbunny.net/",
-        Regex("(https?://)?(www\\.|m\\.)?facebook\\.com/") to "https://www.facebook.com/",
+
+        // DeviantArt
         Regex("(https?://)?([^./\\s]+)(?<!www)\\.deviantart\\.com/") to "https://$2.deviantart.com/",
-
-        Regex("(https?://)?www\\.etsy\\.com/([a-z]{2}/)?shop/([^/\\s]+)/?") to "https://www.etsy.com/shop/$3",
-
         // Remove www. from www.username.deviantart.com
         Regex("(https?://)?www\\.([^./\\s]+)\\.deviantart\\.com/?") to "https://$2.deviantart.com/",
 
-        Regex("(https?://)?([^./\\s]+)(?<!www)\\.tumblr\\.com/?") to "https://$2.tumblr.com/",
+        // Etsy
+        Regex("(https?://)?www\\.etsy\\.com/([a-z]{2}/)?shop/([^/\\s]+)/?") to "https://www.etsy.com/shop/$3",
+
+        // Facebook
+        Regex("(https?://)?(www\\.|m\\.)?facebook\\.com/") to "https://www.facebook.com/",
+
+        // Fur Affinity
+        Regex("furaffinity\\.com") to "furaffinity.net",
+        Regex("(https?://)?(www\\.)?(?<!forums\\.)furaffi?nity\\.net/") to "https://furaffinity.net/",
+        Regex("https?://furaffinity\\.net/user/([^/\\s]+)/?") to "https://furaffinity.net/user/$1/",
+
+        // Inkbunny
+        Regex("(https?://)?inkbunny\\.net/") to "https://inkbunny.net/",
+
+        // Instagram
         Regex("(https?://)?(www\\.)?instagram.com/([^/\\s]+)/?") to "https://www.instagram.com/$3/",
+
+        // Patreon
+        Regex("(https?://)?(www\\.)?patreon.com/") to "https://www.patreon.com/",
+
+        // Tumblr
+        Regex("(https?://)?([^./\\s]+)(?<!www)\\.tumblr\\.com/?") to "https://$2.tumblr.com/",
+
+        // Twitter
+        Regex("(https?://)?(mobile\\.)?twitter\\.com/") to "https://twitter.com/",
     )
 
     private val LABELS = Removables(

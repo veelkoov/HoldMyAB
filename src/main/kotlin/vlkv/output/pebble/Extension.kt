@@ -43,6 +43,7 @@ class Extension : AbstractExtension() {
                 Regex("^https?://www\\.etsy\\.com/shop/([^/]+)$") to "Etsy: $1",
 
                 Regex("^https?://") to "",
+                Regex("^([^/]+)/$") to "$1", // Remove trailing slash if there's only domain
             ),
             "shorter_ab_url" to ShorterUrlFilter(
                 Regex("^https://artistsbeware.info/beware/.+(/[^/]+/)") to "$1",
