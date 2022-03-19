@@ -5,6 +5,8 @@ import com.mitchellbosecke.pebble.loader.ClasspathLoader
 import vlkv.Database
 import vlkv.output.pebble.Extension
 import java.io.File
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 fun renderToFile(database: Database, outputFilePath: String) {
     val template = getEngine().getTemplate("vlkv/templates/report.html")
@@ -13,6 +15,7 @@ fun renderToFile(database: Database, outputFilePath: String) {
     template.evaluate(
         outputFile.writer(), mapOf<String, Any>(
             "subjects" to database.getSortedRecords(),
+            "last_update" to ZonedDateTime.now(ZoneId.of("UTC")),
         )
     )
 }

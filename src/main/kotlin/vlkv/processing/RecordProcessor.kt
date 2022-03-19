@@ -10,6 +10,7 @@ private val TAG_MAP = mapOf(
     "artist" to "artist",
     "client" to "client",
     "fursuit" to "fursuit",
+    "musician" to "musician",
 )
 
 class RecordProcessor(fixer: Fixer) {
