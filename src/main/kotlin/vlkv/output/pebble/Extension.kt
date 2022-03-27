@@ -26,6 +26,7 @@ private class ShorterUrlFilter(vararg val regexes: Pair<Regex, String>) : Filter
 
 private class EasyDiffFilter : Filter {
     private val singleNewline = Regex("[\\n ]*\\n +")
+    private val indentSpaces = 4
 
     override fun getArgumentNames() = listOf<String>()
 
@@ -40,7 +41,33 @@ private class EasyDiffFilter : Filter {
             return SafeString("")
         }
 
-        return SafeString(singleNewline.replace(input, "\n"))
+        val indent = StringBuffer("")
+        val output = StringBuffer("")
+
+        for (originalLine in input.split("\n")) {
+            val line = originalLine.trimStart()
+
+            if ("" == line) {
+                continue
+            }
+
+            val closings = line.windowed(2).count { it == "</" }
+            val openings = line.count { it == '<' }.minus(closings)
+
+            if (closings > openings) {
+                indent.setLength(indent.length - (closings - openings) * indentSpaces)
+            }
+
+            output.append(indent)
+            output.append(line)
+            output.append("\n")
+
+            if (openings > closings) {
+                indent.append(" ".repeat((openings - closings) * indentSpaces))
+            }
+        }
+
+        return SafeString(output.toString())
     }
 }
 
