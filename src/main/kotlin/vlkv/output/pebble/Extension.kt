@@ -2,13 +2,12 @@ package vlkv.output.pebble
 
 import com.mitchellbosecke.pebble.extension.AbstractExtension
 import com.mitchellbosecke.pebble.extension.Filter
+import com.mitchellbosecke.pebble.extension.escaper.SafeString
 import com.mitchellbosecke.pebble.template.EvaluationContext
 import com.mitchellbosecke.pebble.template.PebbleTemplate
 
 private class ShorterUrlFilter(vararg val regexes: Pair<Regex, String>) : Filter {
-    override fun getArgumentNames(): List<String> {
-        return listOf()
-    }
+    override fun getArgumentNames() = listOf<String>()
 
     override fun apply(input: Any?, args: Map<String, Any>?, self: PebbleTemplate?, context: EvaluationContext?, lineNumber: Int): String {
         if (input !is String) {
@@ -25,9 +24,29 @@ private class ShorterUrlFilter(vararg val regexes: Pair<Regex, String>) : Filter
     }
 }
 
+private class EasyDiffFilter : Filter {
+    private val singleNewline = Regex("[\\n ]*\\n +")
+
+    override fun getArgumentNames() = listOf<String>()
+
+    override fun apply(
+        input: Any?,
+        args: MutableMap<String, Any>?,
+        self: PebbleTemplate?,
+        context: EvaluationContext?,
+        lineNumber: Int
+    ): SafeString {
+        if (input !is String) {
+            return SafeString("")
+        }
+
+        return SafeString(singleNewline.replace(input, "\n"))
+    }
+}
+
 class Extension : AbstractExtension() {
     override fun getFilters(): Map<String, Filter> {
-        return mapOf<String, Filter>(
+        return mapOf(
             "shorter_url" to ShorterUrlFilter(
                 Regex("https://furaffinity\\.net/user/([^/]+)/?($| )") to "FA: $1",
                 Regex("https://twitter\\.com/([^/]+)($| )") to "TT: $1",
@@ -48,6 +67,7 @@ class Extension : AbstractExtension() {
             "shorter_ab_url" to ShorterUrlFilter(
                 Regex("^https://artistsbeware.info/beware/.+(/[^/]+/)") to "$1",
             ),
+            "easy_diff" to EasyDiffFilter(),
         )
     }
 }
