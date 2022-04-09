@@ -26,7 +26,7 @@ object Urls {
         // Fur Affinity
         Regex("furaffinity\\.com") to "furaffinity.net",
         Regex("(https?://)?(www\\.)?(?<!forums\\.)furaffi?nity\\.net/") to "https://furaffinity.net/",
-        Regex("https?://furaffinity\\.net/user/([^/\\s]+)/?") to "https://furaffinity.net/user/$1/",
+        Regex("https?://furaffinity\\.net/(user|gallery)/([^/\\s]+)/?") to "https://furaffinity.net/user/$2/",
 
         // Inkbunny
         Regex("(https?://)?inkbunny\\.net/") to "https://inkbunny.net/",
