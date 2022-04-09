@@ -1,6 +1,7 @@
 package vlkv
 
 import vlkv.fixes.Fixer
+import vlkv.fixes.yaml.Fixes
 import vlkv.input.readRecordsFrom
 import vlkv.output.renderToFile
 import vlkv.processing.RecordProcessor
@@ -14,7 +15,7 @@ fun main(args: Array<String>) {
     val inputDirPath = args[1]
     val outputFilePath = args[2]
 
-    val fixer = Fixer(fixerConfigPath)
+    val fixer = Fixer(Fixes.loadFromYaml(fixerConfigPath))
     val processor = RecordProcessor(fixer)
 
     val records = readRecordsFrom(inputDirPath)

@@ -27,6 +27,8 @@ class Fixes {
             result.ignoredNames = listOf()
             result.ignoredWhere = listOf()
             result.ignoredWhereLines = listOf()
+            result.removedTextGeneral = listOf()
+            result.ignoredTags = listOf()
 
             return result
         }

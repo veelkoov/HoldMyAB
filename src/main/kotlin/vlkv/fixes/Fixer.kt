@@ -4,9 +4,7 @@ import vlkv.fixes.yaml.Fix
 import vlkv.fixes.yaml.Fixes
 import vlkv.input.json.Record
 
-class Fixer(fixerConfigPath: String) {
-    private val fixes = Fixes.loadFromYaml(fixerConfigPath)
-
+class Fixer(private val fixes: Fixes) {
     val ignoredNames = StringList(fixes.ignoredNames)
     val ignoredWhereLines = StringList(fixes.ignoredWhereLines)
     val ignoredTags = StringList(fixes.ignoredTags)
