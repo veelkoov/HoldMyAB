@@ -180,6 +180,11 @@ tests:
   urls:
     - 'https://twitter.com/AbcdeFghij_klm'
 
+- input: 'AbcdefgHij00.deviantart.com'
+  names:
+    - 'AbcdefgHij00'
+  urls:
+    - 'https://AbcdefgHij00.deviantart.com/'
 
 
 #
@@ -270,3 +275,12 @@ tests:
     - 'abcdefghijklmno'
   urls:
     - 'https://furaffinity.net/user/abcdefghijklmno/'
+
+- input: 'https://twitter.com/abcdefghijkl, https://www.furaffinity.net/user/abcde, http://abcde.deviantart.com'
+  names:
+    - 'abcdefghijkl'
+    - 'abcde'
+  urls:
+    - 'https://twitter.com/abcdefghijkl'
+    - 'https://furaffinity.net/user/abcde'
+    - 'https://abcde.deviantart.com/'

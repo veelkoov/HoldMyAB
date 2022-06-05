@@ -3,6 +3,8 @@ package vlkv.processing
 import vlkv.processing.regexes.Removables
 import vlkv.processing.regexes.Replacements
 
+private val IC = RegexOption.IGNORE_CASE
+
 object Urls {
     private val URL_UNIFICATIONS = Replacements(
         // Generic
@@ -12,10 +14,10 @@ object Urls {
         // Random parameters
         Regex("\\?(lang|s|hl|ref|utm_medium)=(en|\\d{2}|pr_profile|copy_link|yr_purchases)($|\\s)", RegexOption.MULTILINE) to "",
 
-        // DeviantArt
-        Regex("(https?://)?([^./\\s]+)(?<!www)\\.deviantart\\.com/") to "https://$2.deviantart.com/",
         // Remove www. from www.username.deviantart.com
-        Regex("(https?://)?www\\.([^./\\s]+)\\.deviantart\\.com/?") to "https://$2.deviantart.com/",
+        Regex("(https?://)?www\\.([^./\\s]+)\\.deviantart\\.com/?", IC) to "https://$2.deviantart.com/",
+        // DeviantArt
+        Regex("(https?://)?([^./\\s]+)(?<!www)\\.deviantart\\.com/?", IC) to "https://$2.deviantart.com/",
 
         // Etsy
         Regex("(https?://)?www\\.etsy\\.com/([a-z]{2}/)?shop/([^/\\s]+)/?") to "https://www.etsy.com/shop/$3",
@@ -45,44 +47,44 @@ object Urls {
     )
 
     private val LABELS = Removables(
-        Regex("(Deviant ?Art|DA)( Account)? *[-:]? *(?=https://[^.]+\\.deviantart\\.com/)", RegexOption.IGNORE_CASE),
-        Regex("Tumblr? *[-:] *(?=https://[^.]+\\.tumblr\\.com/)", RegexOption.IGNORE_CASE),
-        Regex("Twitter( alt)? *[-:] *(?=https://twitter\\.com/)", RegexOption.IGNORE_CASE),
-        Regex("YouTube *[-:] *(?=https://www\\.youtube\\.com/)", RegexOption.IGNORE_CASE),
-        Regex("(new |old )?(FA|fur ?affinity)( account)? *[-:]? *(?=https://furaffinity\\.net/)", RegexOption.IGNORE_CASE),
-        Regex("InkBunny *[-:] *(?=https://inkbunny\\.net/)", RegexOption.IGNORE_CASE),
-        Regex("Instagram *[-:] *(?=https://www\\.instagram\\.com/)", RegexOption.IGNORE_CASE),
-        Regex("eBay *[-:] *(?=https://www\\.ebay\\.com/)", RegexOption.IGNORE_CASE),
-        Regex("Etsy *[-:] *(?=https://www\\.etsy\\.com/)", RegexOption.IGNORE_CASE),
-        Regex("Facebook *[-:] *(?=https://www\\.facebook\\.com/)", RegexOption.IGNORE_CASE),
-        Regex("Patreon *[-:] *(?=https://www\\.patreon\\.com/)", RegexOption.IGNORE_CASE),
-        Regex("Weasyl *[-:] *(?=https://www\\.weasyl\\.com/)", RegexOption.IGNORE_CASE),
-        Regex("Toyhou\\.se *[-:] *(?=https://toyhou\\.se/)", RegexOption.IGNORE_CASE),
-        Regex("Picarto *[-:] *(?=https://picarto\\.tv/)", RegexOption.IGNORE_CASE),
-        Regex("Trello *[-:] *(?=https://trello\\.com/)", RegexOption.IGNORE_CASE),
-        Regex("(Personal site|website) *[-:] *(?=https://)", RegexOption.IGNORE_CASE),
+        Regex("(Deviant ?Art|DA)( Account)? *[-:]? *(?=https://[^.]+\\.deviantart\\.com/)", IC),
+        Regex("Tumblr? *[-:] *(?=https://[^.]+\\.tumblr\\.com/)", IC),
+        Regex("Twitter( alt)? *[-:] *(?=https://twitter\\.com/)", IC),
+        Regex("YouTube *[-:] *(?=https://www\\.youtube\\.com/)", IC),
+        Regex("(new |old )?(FA|fur ?affinity)( account)? *[-:]? *(?=https://furaffinity\\.net/)", IC),
+        Regex("InkBunny *[-:] *(?=https://inkbunny\\.net/)", IC),
+        Regex("Instagram *[-:] *(?=https://www\\.instagram\\.com/)", IC),
+        Regex("eBay *[-:] *(?=https://www\\.ebay\\.com/)", IC),
+        Regex("Etsy *[-:] *(?=https://www\\.etsy\\.com/)", IC),
+        Regex("Facebook *[-:] *(?=https://www\\.facebook\\.com/)", IC),
+        Regex("Patreon *[-:] *(?=https://www\\.patreon\\.com/)", IC),
+        Regex("Weasyl *[-:] *(?=https://www\\.weasyl\\.com/)", IC),
+        Regex("Toyhou\\.se *[-:] *(?=https://toyhou\\.se/)", IC),
+        Regex("Picarto *[-:] *(?=https://picarto\\.tv/)", IC),
+        Regex("Trello *[-:] *(?=https://trello\\.com/)", IC),
+        Regex("(Personal site|website) *[-:] *(?=https://)", IC),
     )
 
     private val EXPANSIONS = Replacements(
-        Regex("([a-z0-9]+) o[fn] DA, FA(?![a-z])", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/ https://www.deviantart.com/$1",
-        Regex("([a-z0-9]+)(@| o[fn] )(FA|Fur ?affinity)(?![a-z])", RegexOption.IGNORE_CASE) to "https://furaffinity.net/user/$1/",
-        Regex("([a-z0-9]+)(@| o[fn] )DA(?![a-z])", RegexOption.IGNORE_CASE) to "https://www.deviantart.com/$1",
-        Regex("@?([a-z0-9_]+)(@| o[fn] )Twitter", RegexOption.IGNORE_CASE) to "https://twitter.com/$1",
+        Regex("([a-z0-9]+) o[fn] DA, FA(?![a-z])", IC) to "https://furaffinity.net/user/$1/ https://www.deviantart.com/$1",
+        Regex("([a-z0-9]+)(@| o[fn] )(FA|Fur ?affinity)(?![a-z])", IC) to "https://furaffinity.net/user/$1/",
+        Regex("([a-z0-9]+)(@| o[fn] )DA(?![a-z])", IC) to "https://www.deviantart.com/$1",
+        Regex("@?([a-z0-9_]+)(@| o[fn] )Twitter", IC) to "https://twitter.com/$1",
     )
 
     private val USERNAMES = listOf(
-        Regex("https://twitter\\.com/([^/]+)/?", RegexOption.IGNORE_CASE),
-        Regex("https://furaffinity\\.net/user/([^/]+)/", RegexOption.IGNORE_CASE),
-        Regex("https://www\\.instagram\\.com/([^/]+)/", RegexOption.IGNORE_CASE),
-        Regex("https://([^.]+)\\.deviantart\\.com/", RegexOption.IGNORE_CASE),
-        Regex("https://www\\.deviantart\\.com/([^/]+)/?", RegexOption.IGNORE_CASE),
+        Regex("https://twitter\\.com/([^/]+)/?", IC),
+        Regex("https://furaffinity\\.net/user/([^/]+)/", IC),
+        Regex("https://www\\.instagram\\.com/([^/]+)/", IC),
+        Regex("https://([^.]+)\\.deviantart\\.com/", IC),
+        Regex("https://www\\.deviantart\\.com/([^/]+)/?", IC),
     )
 
     fun extract(input: String): UrlsExtractionResult {
         val urls = mutableListOf<String>()
         var remaining = input
 
-        Regex("https?://[^\\s]+", RegexOption.IGNORE_CASE).findAll(input).forEach {
+        Regex("https?://[^\\s,]+", IC).findAll(input).forEach {
             remaining = remaining.replace(it.value, "")
             urls.add(it.value)
         }
