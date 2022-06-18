@@ -8,7 +8,7 @@ import java.io.File
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
-fun renderToFile(database: Database, outputFilePath: String) {
+fun renderHtmlToFile(database: Database, outputFilePath: String) {
     val template = getEngine().getTemplate("vlkv/templates/report.html")
     val outputFile = File(outputFilePath)
 
@@ -18,6 +18,34 @@ fun renderToFile(database: Database, outputFilePath: String) {
             "last_update" to ZonedDateTime.now(ZoneId.of("UTC")),
         )
     )
+}
+
+fun renderTxtToFile(database: Database, outputFilePath: String) {
+    File(outputFilePath).printWriter().use { file ->
+        database.getSortedRecords().forEach { subject ->
+            file.println("=== SUBJECT ===")
+
+            subject.getTagsSorted().forEach { file.println("<$it>") }
+            subject.getNamesSorted().forEach { file.println(it) }
+
+            file.println("=== URLS ===")
+
+            subject.getUrlsSorted().forEach { file.println(it) }
+
+            file.println("=== B/C ===")
+
+            subject.getBewaresSorted().forEach { beware ->
+                beware.allTags.filter { it.contains("archive") }.forEach { file.print("<$it> ") }
+
+                file.print(if (beware.isBeware) "Beware " else "Caution ")
+                file.println(beware.url)
+
+                if (beware.resolved) {
+                    file.println(" - RESOLVED")
+                }
+            }
+        }
+    }
 }
 
 private fun getEngine() = PebbleEngine.Builder()

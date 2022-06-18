@@ -34,8 +34,8 @@ class BewareSubject {
     }
 
     @Suppress("unused") // Pebble uses it
-    fun tagsSorted(): List<String> {
-        return bewares.map { it.tags }.reduce { a, b -> a.plus(b) }.distinct().sorted()
+    fun getTagsSorted(): List<String> {
+        return bewares.map { it.subjectTags }.reduce { a, b -> a.plus(b) }.distinct().sorted()
     }
 
     fun extend(beware: Beware) {

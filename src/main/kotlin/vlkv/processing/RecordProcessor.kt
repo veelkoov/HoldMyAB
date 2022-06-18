@@ -14,9 +14,9 @@ private val TAG_MAP = mapOf(
 )
 
 class RecordProcessor(fixer: Fixer) {
-    private val names = NamesProcessor(fixer)
-    private val where = WhereProcessor(fixer)
-    private val tags = TagsProcessor(fixer)
+    private val namesProcessor = NamesProcessor(fixer)
+    private val whereProcessor = WhereProcessor(fixer)
+    private val tagsProcessor = TagsProcessor(fixer)
 
     fun getBewares(records: List<Record>): List<Beware> {
         return records.map{ getBeware(it) }
@@ -32,8 +32,8 @@ class RecordProcessor(fixer: Fixer) {
 
         extend(names, urls, issues, fixedTitle.result)
         extend(names, urls, issues, fixWho(record.fields.getWho(), issues))
-        extend(names, urls, issues, where.fix(record.fields.getWhere(), issues))
-        names.addAll(tags.filter(record.tags))
+        extend(names, urls, issues, whereProcessor.fix(record.fields.getWhere(), issues))
+        names.addAll(tagsProcessor.filter(record.tags))
 
         return Beware(
             record.id,
@@ -44,11 +44,12 @@ class RecordProcessor(fixer: Fixer) {
             record.isNsfw(),
             record.isBeware(),
             issues,
-            getTags(record),
+            getSubjectTags(record),
+            record.tags,
         )
     }
 
-    private fun getTags(record: Record): List<String> {
+    private fun getSubjectTags(record: Record): List<String> {
         return record.tags
             .filter { TAG_MAP.keys.contains(it) }
             .map { TAG_MAP[it]!! }
@@ -70,7 +71,7 @@ class RecordProcessor(fixer: Fixer) {
     internal fun getNamesUrls(input: String): NamesUrls {
         val withoutBrackets = processBrackets(input)
         val (urls, remaining) = Urls.extract(Urls.tidy(withoutBrackets))
-        val names = names.getNames(remaining)
+        val names = namesProcessor.getNames(remaining)
         val namesFromUrls = Urls.getNamesFromUrls(urls)
 
         return NamesUrls(names.result.plus(namesFromUrls), urls, names.issues)
