@@ -88,6 +88,9 @@ class Extension : AbstractExtension() {
 
                 Regex("^https?://www\\.etsy\\.com/shop/([^/]+)$") to "Etsy: $1",
 
+                Regex("^https://www\\.hentai-foundry\\.com/user/([^/]+)/profile$") to "Hentai Foundry: $1",
+                Regex("^https://([^.]+)\\.tumblr\\.com/$") to "Tumblr: $1",
+
                 Regex("^https?://") to "",
                 Regex("^([^/]+)/$") to "$1", // Remove trailing slash if there's only domain
             ),

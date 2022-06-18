@@ -28,7 +28,12 @@ object Urls {
         // Fur Affinity
         Regex("furaffinity\\.com") to "furaffinity.net",
         Regex("(https?://)?(www\\.)?(?<!forums\\.)furaffi?nity\\.net/") to "https://furaffinity.net/",
-        Regex("https?://furaffinity\\.net/(user|gallery)/([^/\\s]+)/?") to "https://furaffinity.net/user/$2/",
+        Regex("https?://furaffinity\\.net/(user|gallery)/([^,/\\s]+)/?") to "https://furaffinity.net/user/$2/",
+
+        // Hentai Foundry
+        Regex("(https?://)?(www\\.)?hentai-foundry\\.com/profile-([^.]+)\\.php") to "https://www.hentai-foundry.com/user/$3/profile",
+        Regex("(https?://)?(www\\.)?hentai-foundry\\.com/user/([^,/\\s]+)(/profile)?") to "https://www.hentai-foundry.com/user/$3/profile",
+        Regex("(https?://)?(www\\.)?hentai-foundry\\.com/pictures/user/([^,\\s]+)") to "https://www.hentai-foundry.com/user/$3/profile",
 
         // Inkbunny
         Regex("(https?://)?inkbunny\\.net/") to "https://inkbunny.net/",
@@ -73,11 +78,13 @@ object Urls {
     )
 
     private val USERNAMES = listOf(
-        Regex("https://twitter\\.com/([^/]+)/?", IC),
-        Regex("https://furaffinity\\.net/user/([^/]+)/", IC),
-        Regex("https://www\\.instagram\\.com/([^/]+)/", IC),
         Regex("https://([^.]+)\\.deviantart\\.com/", IC),
         Regex("https://www\\.deviantart\\.com/([^/]+)/?", IC),
+        Regex("https://furaffinity\\.net/user/([^/]+)/", IC),
+        Regex("https://www\\.hentai-foundry\\.com/user/([^/]+)/profile", IC),
+        Regex("https://www\\.instagram\\.com/([^/]+)/", IC),
+        Regex("https://([^.]+)\\.tumblr\\.com/", IC),
+        Regex("https://twitter\\.com/([^/]+)/?", IC),
     )
 
     fun extract(input: String): UrlsExtractionResult {

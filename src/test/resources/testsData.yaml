@@ -251,6 +251,24 @@ tests:
     - 'https://www.abcdefhstudios.com/'
 
 
+#
+# Fixing/unifying URLs
+#
+- input: 'http://www.hentai-foundry.com/profile-AbcdefgHijklmnop.php'
+  names: ['AbcdefgHijklmnop']
+  urls:  ['https://www.hentai-foundry.com/user/AbcdefgHijklmnop/profile']
+
+- input: 'http://www.hentai-foundry.com/user/abcdefghijkl'
+  names: ['abcdefghijkl']
+  urls:  ['https://www.hentai-foundry.com/user/abcdefghijkl/profile']
+
+- input: 'http://www.hentai-foundry.com/user/abcdefghijkl/profile'
+  names: ['abcdefghijkl']
+  urls: ['https://www.hentai-foundry.com/user/abcdefghijkl/profile']
+
+- input: 'http://www.hentai-foundry.com/pictures/user/AbcdefGhijk'
+  names: ['AbcdefGhijk']
+  urls:  ['https://www.hentai-foundry.com/user/AbcdefGhijk/profile']
 
 #
 # Other
@@ -282,5 +300,17 @@ tests:
     - 'abcde'
   urls:
     - 'https://twitter.com/abcdefghijkl'
-    - 'https://furaffinity.net/user/abcde'
+    - 'https://furaffinity.net/user/abcde/'
     - 'https://abcde.deviantart.com/'
+
+- input: "www.furaffinity.net/user/Abcdef-Ghijkl\r\nAbcdef-ghijkl.deviantart.com\r\nwww.hentai-foundry.com/user/abcdefghijkl/profile\r\nabcdef-ghijkl.tumblr.com/"
+  names:
+    - 'Abcdef-Ghijkl'
+    - 'Abcdef-ghijkl'
+    - 'abcdef-ghijkl'
+    - 'abcdefghijkl'
+  urls:
+    - 'https://furaffinity.net/user/Abcdef-Ghijkl/'
+    - 'https://Abcdef-ghijkl.deviantart.com/'
+    - 'https://www.hentai-foundry.com/user/abcdefghijkl/profile'
+    - 'https://abcdef-ghijkl.tumblr.com/'

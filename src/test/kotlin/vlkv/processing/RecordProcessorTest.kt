@@ -27,8 +27,10 @@ internal class NamesProcessorTest {
             dynamicTest("getNamesUrls: " + testData.input.replace(singleBadChar, "?")) {
                 val result = processor.getNamesUrls(testData.input)
 
-                assertEquals(testData.names.toSet(), result.names.toSet())
-                assertEquals(testData.urls.toSet(), result.urls.toSet())
+                val expected = listOf(testData.names.toSet(), testData.urls.toSet())
+                val actual = listOf(result.names.toSet(), result.urls.toSet())
+
+                assertEquals(expected, actual)
             }
         }
     }
