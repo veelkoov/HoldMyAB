@@ -9,10 +9,10 @@ object Urls {
     private val URL_UNIFICATIONS = Replacements(
         // Generic
         Regex("(?<=\\s|^)www\\.") to "http://www.",
-        Regex("(https?://[^\\s]+),\\s*(https?://[^\\s]+)") to "$1 $2",
+        Regex("(https?://\\S+),\\s*(https?://\\S+)") to "$1 $2",
 
         // Random parameters
-        Regex("\\?(lang|s|hl|ref|utm_medium)=(en|\\d{2}|pr_profile|copy_link|yr_purchases)($|\\s)", RegexOption.MULTILINE) to "",
+        Regex("\\?(lang|s|hl|ref|utm_medium)=(en|\\d{2}|pr_profile|copy_link|yr_purchases)(&t=[a-zA-Z0-9]+)?($|\\s)", RegexOption.MULTILINE) to "",
 
         // Remove www. from www.username.deviantart.com
         Regex("(https?://)?www\\.([^./\\s]+)\\.deviantart\\.com/?", IC) to "https://$2.deviantart.com/",
@@ -48,7 +48,7 @@ object Urls {
         Regex("(https?://)?([^./\\s]+)(?<!www)\\.tumblr\\.com/?") to "https://$2.tumblr.com/",
 
         // Twitter
-        Regex("(https?://)?(mobile\\.)?twitter\\.com/") to "https://twitter.com/",
+        Regex("(https?://)?(mobile\\.|www\\.)?twitter\\.com/") to "https://twitter.com/",
     )
 
     private val LABELS = Removables(

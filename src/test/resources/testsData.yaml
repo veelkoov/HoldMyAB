@@ -270,6 +270,20 @@ tests:
   names: ['AbcdefGhijk']
   urls:  ['https://www.hentai-foundry.com/user/AbcdefGhijk/profile']
 
+- input: "www.twitter.com/AbcdeFghijklm\r\nwww.twitter.com/AbcdefGhijk\r\nhttps://www.twitch.tv/abcdefghij"
+  names: ['AbcdeFghijklm', 'AbcdefGhijk']
+  urls:
+    - 'https://twitter.com/AbcdeFghijklm'
+    - 'https://twitter.com/AbcdefGhijk'
+    - 'https://www.twitch.tv/abcdefghij'
+
+- input: "https://www.furaffinity.net/user/abc\r\nhttps://www.deviantart.com/abcdefghi\r\nhttps://twitter.com/abcdefghijklm?s=20&t=8WO141xQe1X4i267gscowQ"
+  names: ['abc', 'abcdefghi', 'abcdefghijklm']
+  urls:
+    - 'https://furaffinity.net/user/abc/'
+    - 'https://www.deviantart.com/abcdefghi'
+    - 'https://twitter.com/abcdefghijklm'
+
 #
 # Other
 #
