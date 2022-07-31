@@ -284,6 +284,12 @@ tests:
     - 'https://www.deviantart.com/abcdefghi'
     - 'https://twitter.com/abcdefghijklm'
 
+- input: "Https://twitter.com/@abcde \r\nHttps://twitter.com/@abcdefg"
+  names: ['abcde', 'abcdefg']
+  urls:
+    - 'https://twitter.com/abcde'
+    - 'https://twitter.com/abcdefg'
+
 #
 # Other
 #

@@ -48,7 +48,7 @@ object Urls {
         Regex("(https?://)?([^./\\s]+)(?<!www)\\.tumblr\\.com/?") to "https://$2.tumblr.com/",
 
         // Twitter
-        Regex("(https?://)?(mobile\\.|www\\.)?twitter\\.com/") to "https://twitter.com/",
+        Regex("(https?://)?(mobile\\.|www\\.)?twitter\\.com/@?", IC) to "https://twitter.com/",
     )
 
     private val LABELS = Removables(
@@ -92,7 +92,7 @@ object Urls {
         var remaining = input
 
         Regex("https?://[^\\s,]+", IC).findAll(input).forEach {
-            remaining = remaining.replace(it.value, "")
+            remaining = remaining.replaceFirst(it.value, "")
             urls.add(it.value)
         }
 
