@@ -44,6 +44,8 @@ fun renderTxtToFile(database: Database, outputFilePath: String) {
                     file.println(" - RESOLVED")
                 }
             }
+
+            file.println("")
         }
     }
 }
