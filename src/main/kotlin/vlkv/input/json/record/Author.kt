@@ -34,4 +34,5 @@ data class Author(
     val validating: Boolean,
     val warningPoints: Int,
     val allowAdminEmails: Boolean,
+    val completed: Boolean,
 )

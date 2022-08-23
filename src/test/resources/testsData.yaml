@@ -291,6 +291,16 @@ tests:
     - 'https://twitter.com/abcdefg'
 
 #
+# Splitting data
+#
+- input: 'https://twitter.com/abcdefghi; https://twitter.com/abcdefghijk; https://www.furaffinity.net/user/AbcDefghi/; '
+  names: ['abcdefghi', 'AbcDefghi', 'abcdefghijk']
+  urls:
+    - 'https://twitter.com/abcdefghi'
+    - 'https://twitter.com/abcdefghijk'
+    - 'https://furaffinity.net/user/AbcDefghi/'
+
+#
 # Other
 #
 - input: 'Abcd Efghi on facebook'

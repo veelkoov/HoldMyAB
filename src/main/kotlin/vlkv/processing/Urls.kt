@@ -91,7 +91,7 @@ object Urls {
         val urls = mutableListOf<String>()
         var remaining = input
 
-        Regex("https?://[^\\s,]+", IC).findAll(input).forEach {
+        Regex("https?://[^\\s,;]+", IC).findAll(input).forEach {
             remaining = remaining.replaceFirst(it.value, "")
             urls.add(it.value)
         }
