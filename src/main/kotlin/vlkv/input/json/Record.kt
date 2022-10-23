@@ -14,7 +14,7 @@ data class Record(
     val category: Category,
     val comments: Int,
     val date: String,
-    val description: String,
+    var description: String,
     val featured: Boolean,
     val fields: Fields,
     val hidden: Boolean,
@@ -52,5 +52,19 @@ data class Record(
 
     fun isNsfw(): Boolean {
         return tags.contains("nsfw") || fields.isNsfw() || fields.getWhere().contains(NSFW_COMMENT_REGEX)
+    }
+
+    fun validate() { // If any of these fire, there may be something I've overseen
+        if (description != fields.getDescription()) {
+            error("Description field is different than the record description in $this")
+        }
+
+        if (title != fields.getTitle()) {
+            error("Title field is different than the record title in $this")
+        }
+    }
+
+    override fun toString(): String {
+        return "Record[ID=$id]"
     }
 }

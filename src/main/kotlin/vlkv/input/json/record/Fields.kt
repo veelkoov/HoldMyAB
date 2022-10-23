@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Fields(
-    val field_3: String,
-    val field_4: String,
+    var field_3: String,
+    var field_4: String,
     var field_5: String,
     var field_6: String,
     val field_8: Int,
@@ -38,19 +38,21 @@ data class Fields(
         field_6 = newWhere
     }
 
-    fun getWho(): String {
-        return field_5
-    }
+    fun getWho() = field_5
 
     fun setWho(newWho: String) {
         field_5 = newWho
     }
 
-    fun getTitle(): String {
-        return field_3
+    fun getTitle() = field_3
+
+    fun setTitle(newTitle: String) {
+        field_3 = newTitle
     }
 
-    fun getDescription(): String {
-        return field_4
+    fun getDescription() = field_4
+
+    fun setDescription(newDescription: String) {
+        field_4 = newDescription
     }
 }

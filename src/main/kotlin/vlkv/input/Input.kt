@@ -16,10 +16,7 @@ fun readRecordsFrom(inputDirectoryPath: String): List<Record> {
         .forEach { page ->
             page.results
                 .filter { isProperRecord(it) }
-                .forEach { record ->
-                    validate(record)
-                    result.add(record)
-                }
+                .forEach(result::add)
         }
 
     return result.toList()
@@ -36,18 +33,6 @@ private fun getRecordsPageFromJsonFile(it: File): RecordsPage {
 }
 
 private fun isJsonFile(file: File) = file.isFile && file.name.endsWith(".json")
-
-private fun validate(record: Record) { // If any of these fire, there may be something I've overseen
-    val description = Regex("<([^>]+) />").replace(record.fields.getDescription(), "<$1>")
-
-    if (description != record.description) {
-        error("Description field is different than the record description")
-    }
-
-    if (record.fields.getTitle() != record.title) {
-        error("Title field is different than the record title")
-    }
-}
 
 private const val POSITIVE_REVIEW_REGEXP = "[aAbcDeFghiJlMmnNOoprsStuvy]{3,9} Positive Reviews 20\\d\\d"
 private const val CATEGORY_ID_HIDDEN = 9
