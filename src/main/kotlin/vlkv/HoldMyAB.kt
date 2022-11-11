@@ -1,23 +1,21 @@
 package vlkv
 
 import vlkv.fixes.Fixer
-import vlkv.fixes.yaml.Fixes
+import vlkv.fixes.yaml.DataFixes
+import vlkv.fixes.yaml.GeneralFixes
 import vlkv.input.readRecordsFrom
 import vlkv.output.renderHtmlToFile
 import vlkv.output.renderTxtToFile
 import vlkv.processing.RecordProcessor
 
-fun main(args: Array<String>) {
-    if (args.size != 4) {
-        error("Require exactly four arguments: 1. path to the fixes.yaml configuration, 2. path to the input directory, 3. path to the HTML to generate, 4. path to the TXT report to generate")
-    }
+private const val dataFixesPath = "fixes-data.yaml"
+private const val generalFixesPath = "fixes-general.yaml"
+private const val inputDirPath = "input"
+private const val outputHtmlFilePath = "output/output.html"
+private const val outputTxtFilePath = "output/output.txt"
 
-    val fixerConfigPath = args[0]
-    val inputDirPath = args[1]
-    val outputHtmlFilePath = args[2]
-    val outputTxtFilePath = args[3]
-
-    val fixer = Fixer(Fixes.loadFromYaml(fixerConfigPath))
+fun main() {
+    val fixer = Fixer(DataFixes.loadFromYaml(dataFixesPath), GeneralFixes.loadFromYaml(generalFixesPath))
     val processor = RecordProcessor(fixer)
 
     val records = readRecordsFrom(inputDirPath)

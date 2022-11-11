@@ -290,6 +290,11 @@ tests:
     - 'https://twitter.com/abcde'
     - 'https://twitter.com/abcdefg'
 
+- input: 'https://twitter.com/AbcdEfGhij/with_replies?lang=en'
+  names: [ 'AbcdEfGhij' ]
+  urls:
+    - 'https://twitter.com/AbcdEfGhij'
+
 #
 # Splitting data
 #

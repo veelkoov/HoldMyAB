@@ -1,13 +1,17 @@
 package vlkv.fixes
 
 import vlkv.fixes.yaml.Fix
-import vlkv.fixes.yaml.Fixes
+import vlkv.fixes.yaml.DataFixes
+import vlkv.fixes.yaml.GeneralFixes
 import vlkv.input.json.Record
 
-class Fixer(private val fixes: Fixes) {
-    val ignoredNames = StringList(fixes.ignoredNames)
-    val ignoredWhereLines = StringList(fixes.ignoredWhereLines)
-    val ignoredTags = StringList(fixes.ignoredTags)
+class Fixer(
+    private val dataFixes: DataFixes,
+    private val generalFixes: GeneralFixes,
+) {
+    val ignoredNames = StringList(generalFixes.ignoredNames)
+    val ignoredWhereLines = StringList(generalFixes.ignoredWhereLines)
+    val ignoredTags = StringList(generalFixes.ignoredTags)
 
     fun fix(records: List<Record>): List<Record> {
         return records.map { fix(it) }
@@ -17,7 +21,7 @@ class Fixer(private val fixes: Fixes) {
         resolveHtmlEntities(record)
         record.validate()
 
-        fixes.fixes.forEach { fix: Fix ->
+        dataFixes.fixes.forEach { fix: Fix ->
             fix.apply(record)
             record.title = getFixedString(record.title)
             record.fields.setWhere(getFixedString(record.fields.getWhere()))
@@ -42,17 +46,17 @@ class Fixer(private val fixes: Fixes) {
     }
 
     fun assertAllDone() {
-        fixes.fixes.forEach { it.assertDone() }
+        dataFixes.fixes.forEach { it.assertDone() }
     }
 
     fun getIgnoredWhere(): List<String> {
-        return fixes.ignoredWhere.toList()
+        return generalFixes.ignoredWhere.toList()
     }
 
     private fun getFixedString(input: String): String {
         var result = input // TODO: Possibly report unused
 
-        fixes.removedTextGeneral.forEach { result = result.replace(it, "") }
+        generalFixes.removedTextGeneral.forEach { result = result.replace(it, "") }
 
         return result
     }

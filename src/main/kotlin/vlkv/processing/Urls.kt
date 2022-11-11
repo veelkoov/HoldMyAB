@@ -49,6 +49,7 @@ object Urls {
 
         // Twitter
         Regex("(https?://)?(mobile\\.|www\\.)?twitter\\.com/@?", IC) to "https://twitter.com/",
+        Regex("(https://twitter.com/[^ ]+)/with_replies", IC) to "$1",
     )
 
     private val LABELS = Removables(
