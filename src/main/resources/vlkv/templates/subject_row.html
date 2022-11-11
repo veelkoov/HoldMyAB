@@ -5,7 +5,7 @@
         {% endfor %}
 
         {% for name in subject.namesSorted %}
-            <span class="badge rounded-pill bg-secondary">{{ name }}</span>
+            <span class="badge rounded-pill text-bg-secondary">{{ name }}</span>
         {% endfor %}
     </td>
     <td>
@@ -14,7 +14,7 @@
         {% endif %}
 
         {% for url in subject.urlsSorted %}
-            <a href="{{ url }}" target="_blank"><span class="badge rounded-pill bg-secondary">{{ url|shorter_url }}</span></a>
+            <a href="{{ url }}" target="_blank"><span class="badge rounded-pill text-bg-secondary">{{ url|shorter_url }}</span></a>
         {% endfor %}
     </td>
     <td>
@@ -29,7 +29,7 @@
                         <span class="badge rounded-pill bg-warning">C</span>&nbsp;
                     {%- endif -%}
 
-                    <a href="{{ beware.url }}" target="_blank">{{ beware.url|shorter_ab_url }}</a>
+                    <a href="{{ beware.url }}" target="_blank" class="text-decoration-none">{{ beware.url|shorter_ab_url }}</a>
 
                     {%- if beware.resolved %}</s>{% endif -%}
                 </li>
