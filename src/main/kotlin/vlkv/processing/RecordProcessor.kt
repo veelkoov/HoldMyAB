@@ -10,6 +10,7 @@ private val TAG_MAP = mapOf(
     "artist" to "artist",
     "client" to "client",
     "fursuit" to "fursuit",
+    "kigurumi" to "kigurumi",
     "musician" to "musician",
     "scammer" to "scammer",
 )
