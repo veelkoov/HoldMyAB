@@ -1,6 +1,6 @@
 package vlkv.fixes
 
-import vlkv.fixes.yaml.Change
+import vlkv.configuration.Change
 import vlkv.input.json.Record
 
 interface Manipulator<T> {

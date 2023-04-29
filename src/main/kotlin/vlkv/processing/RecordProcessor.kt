@@ -1,25 +1,20 @@
 package vlkv.processing
 
 import vlkv.Beware
+import vlkv.configuration.Configuration
 import vlkv.fixes.Fixer
 import vlkv.input.json.Record
 import vlkv.processing.results.NamesUrls
 
 private val BRACKETS = Regex("\\(([^)]*)\\)")
-private val TAG_MAP = mapOf( // FIXME why these need to albo be in tags ignored?
-    "artist" to "artist",
-    "client" to "client",
-    "fursuit" to "fursuit",
-    "kigurumi" to "kigurumi",
-    "musician" to "musician",
-    "scammer" to "scammer",
-    "art theft" to "art theft",
-)
 
-class RecordProcessor(fixer: Fixer) {
+class RecordProcessor(
+    private val configuration: Configuration,
+    fixer: Fixer,
+) {
     private val namesProcessor = NamesProcessor(fixer)
     private val whereProcessor = WhereProcessor(fixer)
-    private val tagsProcessor = TagsProcessor(fixer)
+    private val tagsProcessor = TagsProcessor(configuration)
 
     fun getBewares(records: List<Record>): List<Beware> {
         return records.map{ getBeware(it) }
@@ -36,26 +31,20 @@ class RecordProcessor(fixer: Fixer) {
         extend(names, urls, issues, fixedTitle.result)
         extend(names, urls, issues, fixWho(record.fields.getWho(), issues))
         extend(names, urls, issues, whereProcessor.fix(record.fields.getWhere(), issues))
-        names.addAll(tagsProcessor.filter(record.tags))
+        names.addAll(tagsProcessor.getNameTags(record))
 
         return Beware(
             record.id,
+            record.url,
             names.distinct(),
             urls,
-            record.url,
             record.isResolved(),
             record.isNsfw(),
             record.isBeware(),
             issues,
-            getSubjectTags(record),
+            tagsProcessor.getSubjectTags(record),
             record.tags,
         )
-    }
-
-    private fun getSubjectTags(record: Record): List<String> {
-        return record.tags
-            .filter { TAG_MAP.keys.contains(it) }
-            .map { TAG_MAP[it]!! }
     }
 
     private fun extend(

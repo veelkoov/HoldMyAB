@@ -1,17 +1,17 @@
 package vlkv.fixes
 
-import vlkv.fixes.yaml.Fix
-import vlkv.fixes.yaml.DataFixes
-import vlkv.fixes.yaml.GeneralFixes
+import vlkv.configuration.Fix
+import vlkv.configuration.DataFixes
+import vlkv.configuration.Configuration
 import vlkv.input.json.Record
 
 class Fixer(
     private val dataFixes: DataFixes,
-    private val generalFixes: GeneralFixes,
+    private val configuration: Configuration,
 ) {
-    val ignoredNames = StringList(generalFixes.ignoredNames)
-    val ignoredWhereLines = StringList(generalFixes.ignoredWhereLines)
-    val ignoredTags = StringList(generalFixes.ignoredTags)
+    val ignoredNames = StringList(configuration.ignoredNames)
+    val ignoredWhereLines = StringList(configuration.ignoredWhereLines)
+    val ignoredTags = StringList(configuration.ignoredTags)
 
     fun fix(records: List<Record>): List<Record> {
         return records.map { fix(it) }
@@ -50,13 +50,13 @@ class Fixer(
     }
 
     fun getIgnoredWhere(): List<String> {
-        return generalFixes.ignoredWhere.toList()
+        return configuration.ignoredWhere.toList()
     }
 
     private fun getFixedString(input: String): String {
         var result = input // TODO: Possibly report unused
 
-        generalFixes.removedTextGeneral.forEach { result = result.replace(it, "") }
+        configuration.removedTextGeneral.forEach { result = result.replace(it, "") }
 
         return result
     }

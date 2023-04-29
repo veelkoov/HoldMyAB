@@ -2,7 +2,6 @@ package vlkv.output
 
 import com.mitchellbosecke.pebble.PebbleEngine
 import com.mitchellbosecke.pebble.loader.ClasspathLoader
-import vlkv.Beware
 import vlkv.BewareSubject
 import vlkv.Database
 import vlkv.output.pebble.Extension
@@ -55,10 +54,10 @@ fun renderTxtToFile(database: Database, outputFilePath: String) {
             file.println("=== B/C ===")
 
             subject.getBewaresSorted().forEach { beware ->
-                beware.allTags.filter { it.contains("archive") }.forEach { file.print("<$it> ") }
+                beware.tags.filter { it.contains("archive") }.forEach { file.print("<$it> ") }
 
                 file.print(if (beware.isBeware) "Beware " else "Caution ")
-                file.println(beware.url)
+                file.println(beware.abUrl)
 
                 if (beware.resolved) {
                     file.println(" - RESOLVED")

@@ -7,8 +7,8 @@ import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.TestFactory
 import vlkv.fixes.Fixer
-import vlkv.fixes.yaml.DataFixes
-import vlkv.fixes.yaml.GeneralFixes
+import vlkv.configuration.DataFixes
+import vlkv.configuration.Configuration
 import vlkv.tests.RecordProcessorTestData
 import vlkv.tests.RecordProcessorTestsData
 import kotlin.test.assertEquals
@@ -19,7 +19,7 @@ private val testsData = ObjectMapper(YAMLFactory())
 
 @Suppress("unused")
 internal class RecordProcessorTest {
-    private val processor = RecordProcessor(Fixer(DataFixes.empty(), GeneralFixes.empty()))
+    private val processor = RecordProcessor(Configuration.empty(), Fixer(DataFixes.empty(), Configuration.empty()))
     private val singleBadChar = Regex("[^ -~]", RegexOption.IGNORE_CASE)
 
     @TestFactory

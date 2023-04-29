@@ -1,9 +1,18 @@
 package vlkv.processing
 
-import vlkv.fixes.Fixer
+import vlkv.configuration.Configuration
+import vlkv.input.json.Record
 
-class TagsProcessor(val fixer: Fixer) {
-    fun filter(input: List<String>): List<String> {
-        return input.filterNot { fixer.ignoredTags.has(it) }
+class TagsProcessor(private val configuration: Configuration) {
+    fun getNameTags(record: Record): List<String> {
+        return record.tags
+            .filterNot { configuration.ignoredTags.contains(it) }
+            .filterNot { configuration.nonNameTags.contains(it) }
+    }
+
+    fun getSubjectTags(record: Record): List<String> {
+        return record.tags
+            .filterNot { configuration.ignoredTags.contains(it) }
+            .filter { configuration.nonNameTags.contains(it) }
     }
 }
