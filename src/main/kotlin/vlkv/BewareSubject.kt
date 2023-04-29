@@ -8,6 +8,10 @@ class BewareSubject {
     private val bewares = mutableListOf<Beware>()
     private val issues = mutableListOf<String>()
 
+    override fun toString(): String {
+        return "BewareSubject(names=$names, urls=$urls, issues=$issues)"
+    }
+
     @Suppress("unused") // Pebble uses it
     fun getNamesSorted(): List<String> {
         return names.toList().sorted()

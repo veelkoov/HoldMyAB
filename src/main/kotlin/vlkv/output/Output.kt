@@ -2,11 +2,31 @@ package vlkv.output
 
 import com.mitchellbosecke.pebble.PebbleEngine
 import com.mitchellbosecke.pebble.loader.ClasspathLoader
+import vlkv.Beware
+import vlkv.BewareSubject
 import vlkv.Database
 import vlkv.output.pebble.Extension
 import java.io.File
 import java.time.ZoneId
 import java.time.ZonedDateTime
+
+fun dumpDatabaseToFile(database: Database, outputFilePath: String) {
+    File(outputFilePath).printWriter().use { file ->
+        var first = true
+
+        database.getSortedRecords().forEach { subject: BewareSubject ->
+            if (first) {
+                first = false
+            } else {
+                file.println("\n---")
+            }
+
+            file.println(subject)
+
+            subject.getBewaresSorted().forEach(file::println)
+        }
+    }
+}
 
 fun renderHtmlToFile(database: Database, outputFilePath: String) {
     val template = getEngine().getTemplate("vlkv/templates/report.html")

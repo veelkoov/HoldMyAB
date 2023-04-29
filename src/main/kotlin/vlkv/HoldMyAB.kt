@@ -4,6 +4,7 @@ import vlkv.fixes.Fixer
 import vlkv.fixes.yaml.DataFixes
 import vlkv.fixes.yaml.GeneralFixes
 import vlkv.input.readRecordsFrom
+import vlkv.output.dumpDatabaseToFile
 import vlkv.output.renderHtmlToFile
 import vlkv.output.renderTxtToFile
 import vlkv.processing.RecordProcessor
@@ -11,16 +12,19 @@ import vlkv.processing.RecordProcessor
 private const val dataFixesPath = "fixes-data.yaml"
 private const val generalFixesPath = "fixes-general.yaml"
 private const val inputDirPath = "input"
+private const val outputDatabaseFilePath = "output/database.txt"
 private const val outputHtmlFilePath = "output/output.html"
 private const val outputTxtFilePath = "output/output.txt"
 
 fun main() {
     val fixer = Fixer(DataFixes.loadFromYaml(dataFixesPath), GeneralFixes.loadFromYaml(generalFixesPath))
-    val processor = RecordProcessor(fixer)
 
     val records = readRecordsFrom(inputDirPath)
     val fixedRecords = fixer.fix(records)
+
+    val processor = RecordProcessor(fixer)
     val bewares = processor.getBewares(fixedRecords)
+
     val database = Database(bewares)
 
     fixer.assertAllDone()
@@ -29,6 +33,7 @@ fun main() {
     println("Unused ignored where lines: " + fixer.ignoredWhereLines.getUnusedList())
     println("Unused ignored tags: " + fixer.ignoredTags.getUnusedList())
 
+    dumpDatabaseToFile(database, outputDatabaseFilePath)
     renderHtmlToFile(database, outputHtmlFilePath)
     renderTxtToFile(database, outputTxtFilePath)
 
