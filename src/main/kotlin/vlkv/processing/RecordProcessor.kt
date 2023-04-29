@@ -6,13 +6,14 @@ import vlkv.input.json.Record
 import vlkv.processing.results.NamesUrls
 
 private val BRACKETS = Regex("\\(([^)]*)\\)")
-private val TAG_MAP = mapOf(
+private val TAG_MAP = mapOf( // FIXME why these need to albo be in tags ignored?
     "artist" to "artist",
     "client" to "client",
     "fursuit" to "fursuit",
     "kigurumi" to "kigurumi",
     "musician" to "musician",
     "scammer" to "scammer",
+    "art theft" to "art theft",
 )
 
 class RecordProcessor(fixer: Fixer) {
