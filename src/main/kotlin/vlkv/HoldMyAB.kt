@@ -6,7 +6,7 @@ import vlkv.input.readRecordsFrom
 import vlkv.output.dumpDatabaseToFile
 import vlkv.output.renderHtmlToFile
 import vlkv.output.renderTxtToFile
-import vlkv.processing.RecordProcessor
+import vlkv.processing.processors.RecordProcessor
 
 private const val dataFixesPath = "fixes-data.yaml"
 private const val generalFixesPath = "configuration.yaml"

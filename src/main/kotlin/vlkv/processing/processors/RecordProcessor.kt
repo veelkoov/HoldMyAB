@@ -1,9 +1,11 @@
-package vlkv.processing
+package vlkv.processing.processors
 
 import vlkv.Beware
 import vlkv.configuration.Configuration
-import vlkv.fixes.Fixer
 import vlkv.input.json.Record
+import vlkv.processing.Urls
+import vlkv.processing.fixWho
+import vlkv.processing.getFixedTitle
 import vlkv.processing.results.NamesUrls
 
 private val BRACKETS = Regex("\\(([^)]*)\\)")

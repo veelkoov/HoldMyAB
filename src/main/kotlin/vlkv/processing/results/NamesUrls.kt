@@ -1,7 +1,7 @@
 package vlkv.processing.results
 
 data class NamesUrls(
-    var names: List<String>,
-    var urls: List<String>,
-    var issues: List<String>,
+    val names: List<String>,
+    val urls: List<String>,
+    val issues: List<String>,
 )

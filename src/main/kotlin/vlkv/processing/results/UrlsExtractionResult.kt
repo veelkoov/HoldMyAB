@@ -1,4 +1,4 @@
-package vlkv.processing
+package vlkv.processing.results
 
 data class UrlsExtractionResult(
     val urls: List<String>,

@@ -1,4 +1,4 @@
-package vlkv.processing
+package vlkv.processing.processors
 
 import vlkv.configuration.Configuration
 import vlkv.input.json.Record

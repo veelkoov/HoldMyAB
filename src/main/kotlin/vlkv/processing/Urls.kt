@@ -2,6 +2,7 @@ package vlkv.processing
 
 import vlkv.processing.regexes.Removables
 import vlkv.processing.regexes.Replacements
+import vlkv.processing.results.UrlsExtractionResult
 
 private val IC = RegexOption.IGNORE_CASE
 
