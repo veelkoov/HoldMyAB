@@ -9,10 +9,6 @@ class Fixer(
     private val dataFixes: DataFixes,
     private val configuration: Configuration,
 ) {
-    val ignoredNames = StringList(configuration.ignoredNames)
-    val ignoredWhereLines = StringList(configuration.ignoredWhereLines)
-    val ignoredTags = StringList(configuration.ignoredTags)
-
     fun fix(records: List<Record>): List<Record> {
         return records.map { fix(it) }
     }
@@ -45,19 +41,11 @@ class Fixer(
         return result.replace("&gt;", ">").replace("&amp;", "&")
     }
 
-    fun assertAllDone() {
+    fun assertAllDone() { // TODO: Find better place for this
         dataFixes.fixes.forEach { it.assertDone() }
     }
 
-    fun getIgnoredWhere(): List<String> {
-        return configuration.ignoredWhere.toList()
-    }
-
     private fun getFixedString(input: String): String {
-        var result = input // TODO: Possibly report unused
-
-        configuration.removedTextGeneral.forEach { result = result.replace(it, "") }
-
-        return result
+        return configuration.removedTextGeneral.removeFrom(input)
     }
 }

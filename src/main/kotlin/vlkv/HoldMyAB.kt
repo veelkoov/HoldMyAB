@@ -18,21 +18,25 @@ private const val outputTxtFilePath = "output/output.txt"
 fun main() {
     val configuration = Loader.configurationFromYaml(generalFixesPath)
     val dataFixes = Loader.dataFixesFromYaml(dataFixesPath)
-    val fixer = Fixer(dataFixes, configuration)
 
     val records = readRecordsFrom(inputDirPath)
-    val fixedRecords = fixer.fix(records)
 
-    val processor = RecordProcessor(configuration, fixer)
+    val fixer = Fixer(dataFixes, configuration)
+    val fixedRecords = fixer.fix(records)
+    fixer.assertAllDone()
+
+    val processor = RecordProcessor(configuration)
     val bewares = processor.getBewares(fixedRecords)
 
     val database = Database(bewares)
 
-    fixer.assertAllDone()
 
-    println("Unused ignored names: " + fixer.ignoredNames.getUnusedList())
-    println("Unused ignored where lines: " + fixer.ignoredWhereLines.getUnusedList())
-    println("Unused ignored tags: " + fixer.ignoredTags.getUnusedList())
+    println("Unused ignored names: " + configuration.ignoredNames.getUnusedList())
+    println("Unused ignored where: " + configuration.ignoredWhere.getUnusedList())
+    println("Unused ignored where lines: " + configuration.ignoredWhereLines.getUnusedList())
+    println("Unused removed text general: " + configuration.removedTextGeneral.getUnusedList())
+    println("Unused ignored tags: " + configuration.ignoredTags.getUnusedList())
+    println("Unused ignored non-name tags: " + configuration.nonNameTags.getUnusedList())
 
     dumpDatabaseToFile(database, outputDatabaseFilePath)
     renderHtmlToFile(database, outputHtmlFilePath)

@@ -1,11 +1,29 @@
 package vlkv.fixes
 
-class StringList(private val list: List<String>) {
-    private val encountered = mutableListOf<String>()
+class StringList(
+    input: List<String>,
+    private val caseInsensitive: Boolean,
+) {
+    private val stringsNormToOrig: Map<String, String>
+    private val encountered = mutableSetOf<String>()
 
-    fun has(item: String): Boolean {
-        return if (list.contains(item.lowercase())) {
-            encountered.add(item.lowercase())
+    init {
+        stringsNormToOrig = input.associateBy { normalized(it) }
+    }
+
+    private fun normalized(input: String): String {
+        return if (caseInsensitive) {
+            input.lowercase()
+        } else {
+            input
+        }
+    }
+
+    fun contains(checkFor: String): Boolean {
+        val matched = stringsNormToOrig[normalized(checkFor)]
+
+        return if (null != matched) {
+            encountered.add(matched)
 
             true
         } else {
@@ -13,7 +31,44 @@ class StringList(private val list: List<String>) {
         }
     }
 
+    fun containsAll(checkFor: List<String>): Boolean {
+        val checkForNormalized = checkFor.map(this::normalized)
+
+        return if (stringsNormToOrig.keys.containsAll(checkForNormalized)) {
+            encountered.addAll(checkForNormalized.map { stringsNormToOrig[it]!! })
+
+            true
+        } else {
+            false
+        }
+    }
+
+    fun removeFrom(input: String): String {
+        if (caseInsensitive) {
+            error("Case insensitive list doesn't support removal")
+        }
+
+        var result = input
+
+        stringsNormToOrig.values.forEach {
+            val afterReplace = result.replace(it, "")
+
+            if (afterReplace != result) {
+                result = afterReplace
+                encountered.add(it)
+            }
+        }
+
+        return result
+    }
+
     fun getUnusedList(): String {
-        return list.filterNot { encountered.contains(it) }.joinToString(", ")
+        return stringsNormToOrig.values
+            .filterNot { encountered.contains(it) }
+            .joinToString(", ")
+    }
+
+    companion object {
+        fun empty() = StringList(listOf(), false)
     }
 }

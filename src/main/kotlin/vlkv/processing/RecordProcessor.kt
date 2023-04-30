@@ -9,12 +9,11 @@ import vlkv.processing.results.NamesUrls
 private val BRACKETS = Regex("\\(([^)]*)\\)")
 
 class RecordProcessor(
-    private val configuration: Configuration,
-    fixer: Fixer,
+    cfg: Configuration,
 ) {
-    private val namesProcessor = NamesProcessor(fixer)
-    private val whereProcessor = WhereProcessor(fixer)
-    private val tagsProcessor = TagsProcessor(configuration)
+    private val namesProcessor = NamesProcessor(cfg)
+    private val whereProcessor = WhereProcessor(cfg)
+    private val tagsProcessor = TagsProcessor(cfg)
 
     fun getBewares(records: List<Record>): List<Beware> {
         return records.map{ getBeware(it) }

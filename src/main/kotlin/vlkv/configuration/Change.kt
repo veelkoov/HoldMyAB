@@ -5,5 +5,11 @@ data class Change(
     val from: String,
     val to: String,
 ) {
-    var done: Boolean = false
+    private var done: Boolean = false
+
+    fun isDone() = done
+
+    fun markAsDone() {
+        done = true
+    }
 }

@@ -31,9 +31,9 @@ object Loader {
 
         with(result) {
             return Configuration(
-                ignoredNames,
-                ignoredWhere,
-                ignoredWhereLines,
+                ignoredNamesCi,
+                ignoredWhereCi,
+                ignoredWhereLinesCi,
                 removedTextGeneral,
                 ignoredTags,
                 nonNameTags,

@@ -1,4 +1,4 @@
-ignored_names: # Lowercase, or we'll all die
+ignored_names_ci:
   - ':'
   - 'and'
   - 'by proxy'
@@ -42,7 +42,7 @@ ignored_names: # Lowercase, or we'll all die
   - 'tumblr'
   - 'twitter'
 
-ignored_where: # Lowercase, or we'll all die
+ignored_where_ci:
   - 'deviant art'
   - 'deviantart'
   - 'discord'
@@ -69,7 +69,7 @@ ignored_where: # Lowercase, or we'll all die
   - 'www.tumblr.com'
   - 'www.twitter.com'
 
-ignored_where_lines: # Lowercase, or we'll all die
+ignored_where_lines_ci:
   - 'also'
   - "anthrocon dealer's den"
   - 'approached via notes on furaffinity'
@@ -95,7 +95,7 @@ ignored_where_lines: # Lowercase, or we'll all die
   - 'the website does not seem to exist anymore'
   - 'through fa, then through discord dms'
 
-removed_text_general: # Case-sensitive!
+removed_text_general:
   - '(abandoned)'
   - '(active)'
   - '(Artist)'
@@ -114,7 +114,6 @@ removed_text_general: # Case-sensitive!
   - '(private)'
   - '(Queued for Deletion)'
   - '(she got herself banned)'
-  - '(since deactivated/no longer exists)'
   - '(Store Envy link Defunct)'
   - '- Deleted and Purged'
   - 'On Discord, user deleted account.'

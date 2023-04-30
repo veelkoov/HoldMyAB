@@ -1,6 +1,6 @@
 package vlkv.processing
 
-import vlkv.fixes.Fixer
+import vlkv.configuration.Configuration
 import vlkv.processing.regexes.Replacements
 import vlkv.processing.results.StringList
 
@@ -10,7 +10,9 @@ private val NAME_REPLACEMENTS = Replacements(
 
 private val NAMES_SPLIT = Regex("(`ob`|`cb`|(?<!([^a-z]|^)u)/| - |[|;,\n]| (aka|and|or|formerly( known as)?|formally) )", RegexOption.IGNORE_CASE)
 
-class NamesProcessor(private val fixer: Fixer) {
+class NamesProcessor(
+    private val cfg: Configuration,
+) {
     fun getNames(input: String): StringList {
         val ignoredNames = mutableListOf<String>()
 
@@ -19,7 +21,7 @@ class NamesProcessor(private val fixer: Fixer) {
             .map { it.trim() }
             .filterNot { it == "" }
             .filter {
-                if (fixer.ignoredNames.has(it)) {
+                if (cfg.ignoredNames.contains(it)) {
                     ignoredNames.add(it)
 
                     false

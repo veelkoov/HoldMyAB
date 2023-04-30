@@ -25,14 +25,14 @@ data class Fix (
             }
 
             if (manipulator.updateIfMatches(record, change)) {
-                change.done = true
+                change.markAsDone()
             }
         }
     }
 
     fun assertDone() {
         return changes.forEach {
-            if (!it.done) {
+            if (!it.isDone()) {
                 error("Unused change: $`in`, '${it.what}', '${it.from}'")
             }
         }
