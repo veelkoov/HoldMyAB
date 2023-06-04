@@ -72,4 +72,5 @@ fun renderTxtToFile(database: Database, outputFilePath: String) {
 private fun getEngine() = PebbleEngine.Builder()
     .extension(Extension())
     .loader(ClasspathLoader())
+    .strictVariables(true) // What a DUMB default and what a STUPID setting and what an HOPELESS "programmer" (me)
     .build()
