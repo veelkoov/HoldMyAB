@@ -36,6 +36,8 @@ private val DATA_SETS = listOf(
 
     "https://www.patreon.com/AbcdEfghi,\nFur Affinity: http://www.furaffinity.net/user/abcd01/\nDeviant art: https://abcd-efghi.deviantart.com/"
             to "https://www.patreon.com/AbcdEfghi,\nhttps://furaffinity.net/user/abcd01/\nhttps://abcd-efghi.deviantart.com/",
+
+    "https://twitter.com/Abcd12345678?t=1aaaAAAaaAA11aaaaA_1aa&s=09" to "https://twitter.com/Abcd12345678",
 )
 
 @Suppress("unused")

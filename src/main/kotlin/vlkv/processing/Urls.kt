@@ -50,7 +50,8 @@ object Urls {
 
         // Twitter
         Regex("(https?://)?(mobile\\.|www\\.)?twitter\\.com/@?", IC) to "https://twitter.com/",
-        Regex("(https://twitter.com/[^ ]+)/with_replies", IC) to "$1",
+        Regex("(https://twitter.com/[^ \n]+)/with_replies", IC) to "$1",
+        Regex("(https://twitter.com/[^ \n]+)\\?[a-z0-9&=_]*", IC) to "$1", // Remove query
     )
 
     private val LABELS = Removables(
