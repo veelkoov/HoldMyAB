@@ -78,6 +78,9 @@ object Urls {
         Regex("([a-z0-9]+)(@| o[fn] )(FA|Fur ?affinity)(?![a-z])", IC) to "https://furaffinity.net/user/$1/",
         Regex("([a-z0-9]+)(@| o[fn] )DA(?![a-z])", IC) to "https://www.deviantart.com/$1",
         Regex("@?([a-z0-9_]+)(@| o[fn] )Twitter", IC) to "https://twitter.com/$1",
+
+        // FA: username ---> https://furaffinity.net/user/username/
+        Regex("^(FA|Fur ?affinity): ([a-z0-9]+) *[$/]", setOf(IC, RegexOption.MULTILINE)) to "https://furaffinity.net/user/$2/",
     )
 
     private val USERNAMES = listOf(
