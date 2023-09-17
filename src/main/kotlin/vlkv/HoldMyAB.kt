@@ -8,18 +8,11 @@ import vlkv.output.renderHtmlToFile
 import vlkv.output.renderTxtToFile
 import vlkv.processing.processors.RecordProcessor
 
-private const val dataFixesPath = "fixes-data.yaml"
-private const val generalFixesPath = "configuration.yaml"
-private const val inputDirPath = "input"
-private const val outputDatabaseFilePath = "output/database.txt"
-private const val outputHtmlFilePath = "output/output.html"
-private const val outputTxtFilePath = "output/output.txt"
-
 fun main() {
-    val configuration = Loader.configurationFromYaml(generalFixesPath)
-    val dataFixes = Loader.dataFixesFromYaml(dataFixesPath)
+    val configuration = Loader.configurationFromYaml(Paths.generalFixesPath)
+    val dataFixes = Loader.dataFixesFromYaml(Paths.dataFixesPath)
 
-    val records = readRecordsFrom(inputDirPath)
+    val records = readRecordsFrom(Paths.inputDirPath)
 
     val fixer = Fixer(dataFixes, configuration)
     val fixedRecords = fixer.fix(records)
@@ -38,9 +31,9 @@ fun main() {
     println("Unused ignored tags: " + configuration.ignoredTags.getUnusedList())
     println("Unused ignored non-name tags: " + configuration.nonNameTags.getUnusedList())
 
-    dumpDatabaseToFile(database, outputDatabaseFilePath)
-    renderHtmlToFile(database, outputHtmlFilePath)
-    renderTxtToFile(database, outputTxtFilePath)
+    dumpDatabaseToFile(database, Paths.outputDatabaseFilePath)
+    renderHtmlToFile(database, Paths.outputHtmlFilePath)
+    renderTxtToFile(database, Paths.outputTxtFilePath)
 
     println("Finished!")
 }

@@ -19,6 +19,10 @@ fun readRecordsFrom(inputDirectoryPath: String): List<Record> {
                 .forEach(result::add)
         }
 
+    if (result.isEmpty()) {
+        throw RuntimeException("No input records found")
+    }
+
     return result.toList()
 }
 

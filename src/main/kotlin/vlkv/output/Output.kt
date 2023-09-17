@@ -10,6 +10,8 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 
 fun dumpDatabaseToFile(database: Database, outputFilePath: String) {
+    assureParentDirectoryExists(outputFilePath)
+
     File(outputFilePath).printWriter().use { file ->
         var first = true
 
@@ -28,6 +30,8 @@ fun dumpDatabaseToFile(database: Database, outputFilePath: String) {
 }
 
 fun renderHtmlToFile(database: Database, outputFilePath: String) {
+    assureParentDirectoryExists(outputFilePath)
+
     val template = getEngine().getTemplate("vlkv/templates/report.html")
     val outputFile = File(outputFilePath)
 
@@ -40,6 +44,8 @@ fun renderHtmlToFile(database: Database, outputFilePath: String) {
 }
 
 fun renderTxtToFile(database: Database, outputFilePath: String) {
+    assureParentDirectoryExists(outputFilePath)
+
     File(outputFilePath).printWriter().use { file ->
         database.getSortedRecords().forEach { subject ->
             file.println("=== SUBJECT ===")
@@ -74,3 +80,7 @@ private fun getEngine() = PebbleEngine.Builder()
     .loader(ClasspathLoader())
     .strictVariables(true) // What a DUMB default and what a STUPID setting and what an HOPELESS "programmer" (me)
     .build()
+
+private fun assureParentDirectoryExists(outputFilePath: String) {
+    File(outputFilePath).parentFile.mkdirs()
+}
