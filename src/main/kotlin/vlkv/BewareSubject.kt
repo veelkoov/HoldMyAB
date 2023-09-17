@@ -38,11 +38,6 @@ class BewareSubject {
         return issues.toList().sorted()
     }
 
-    @Suppress("unused") // Pebble uses it
-    fun getHasNsfw(): Boolean {
-        return bewares.map { it.isNsfw }.reduce { a, b -> a || b }
-    }
-
     fun extend(beware: Beware) {
         bewares.add(beware)
 
