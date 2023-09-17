@@ -1,0 +1,6 @@
+---
+rules:
+  colons:
+    max-spaces-after: -1  # Let me align
+  line-length:
+    max: 160  # It's 2023

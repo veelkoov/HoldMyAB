@@ -1,351 +1,353 @@
+---
 tests:
-#
-# Single/multiple names
-#
-- input: "@/AbCdE01"
-  names:
-  - "@AbCdE01"
-  urls: []
+  #
+  # Single/multiple names
+  #
+  - input: "@/AbCdE01"
+    names:
+      - "@AbCdE01"
+    urls: []
 
-- input: '@/Abcd123 / @/Abcde_Fgh'
-  names:
-    - '@Abcd123'
-    - '@Abcde_Fgh'
-  urls: []
+  - input: '@/Abcd123 / @/Abcde_Fgh'
+    names:
+      - '@Abcd123'
+      - '@Abcde_Fgh'
+    urls: []
 
-- input: "@\\AbcdefgH"
-  names:
-  - "@AbcdefgH"
-  urls: []
+  - input: "@\\AbcdefgH"
+    names:
+      - "@AbcdefgH"
+    urls: []
 
-- input: "Abcde_fghijk and Abcdefghijk"
-  names:
-    - "Abcde_fghijk"
-    - "Abcdefghijk"
-  urls: []
+  - input: "Abcde_fghijk and Abcdefghijk"
+    names:
+      - "Abcde_fghijk"
+      - "Abcdefghijk"
+    urls: []
 
-- input: 'Abcdefghij/ abcdefghijklmnop/ @/Abcdefghijk'
-  names:
-    - 'Abcdefghij'
-    - 'abcdefghijklmnop'
-    - '@Abcdefghijk'
-  urls: []
+  - input: 'Abcdefghij/ abcdefghijklmnop/ @/Abcdefghijk'
+    names:
+      - 'Abcdefghij'
+      - 'abcdefghijklmnop'
+      - '@Abcdefghijk'
+    urls: []
 
-- input: "Abcdeu/ Abcdu @ Abcdefghu/ Abcdeu @ Abcdefgu" # 227
-  names:
-    - "Abcdeu"
-    - "Abcdu @ Abcdefghu"
-    - "Abcdeu @ Abcdefgu"
-  urls: []
+  - input: "Abcdeu/ Abcdu @ Abcdefghu/ Abcdeu @ Abcdefgu"  # 227
+    names:
+      - "Abcdeu"
+      - "Abcdu @ Abcdefghu"
+      - "Abcdeu @ Abcdefgu"
+    urls: []
 
-- input: "u/ABCDEFGHIJ_KlMn"
-  names:
-    - "u/ABCDEFGHIJ_KlMn"
-  urls: []
+  - input: "u/ABCDEFGHIJ_KlMn"
+    names:
+      - "u/ABCDEFGHIJ_KlMn"
+    urls: []
 
-- input: 'Abcdef&Ghijk Studio / @Abcdef_ghijkLM / abcdefghijklmnstudio / The Abcdefgh Ijklmno'
-  names:
-    - 'Abcdef&Ghijk Studio'
-    - '@Abcdef_ghijkLM'
-    - 'abcdefghijklmnstudio'
-    - 'The Abcdefgh Ijklmno'
-  urls: []
+  - input: 'Abcdef&Ghijk Studio / @Abcdef_ghijkLM / abcdefghijklmnstudio / The Abcdefgh Ijklmno'
+    names:
+      - 'Abcdef&Ghijk Studio'
+      - '@Abcdef_ghijkLM'
+      - 'abcdefghijklmnstudio'
+      - 'The Abcdefgh Ijklmno'
+    urls: []
 
-- input: 'Abcdefghijk/@abcdefghijk'
-  names:
-    - 'Abcdefghijk'
-    - '@abcdefghijk'
-  urls: []
+  - input: 'Abcdefghijk/@abcdefghijk'
+    names:
+      - 'Abcdefghijk'
+      - '@abcdefghijk'
+    urls: []
 
-- input: '@AbcdefgHI, @AbcDefghij'
-  names:
-    - '@AbcdefgHI'
-    - '@AbcDefghij'
-  urls: []
+  - input: '@AbcdefgHI, @AbcDefghij'
+    names:
+      - '@AbcdefgHI'
+      - '@AbcDefghij'
+    urls: []
 
-- input: 'http://www.furaffinity.net/user/abcdefh/ ; https://inkbunny.net/abcdefghi'
-  names:
-    - 'abcdefh'
-  urls:
-    - 'https://furaffinity.net/user/abcdefh/'
-    - 'https://inkbunny.net/abcdefghi'
+  - input: 'http://www.furaffinity.net/user/abcdefh/ ; https://inkbunny.net/abcdefghi'
+    names:
+      - 'abcdefh'
+    urls:
+      - 'https://furaffinity.net/user/abcdefh/'
+      - 'https://inkbunny.net/abcdefghi'
 
-- input: 'AbcdeFgHij (aka AbcdEfGhij aka Abcd_Efghijkl)'
-  names:
-    - 'AbcdeFgHij'
-    - 'AbcdEfGhij'
-    - 'Abcd_Efghijkl'
-  urls: []
+  - input: 'AbcdeFgHij (aka AbcdEfGhij aka Abcd_Efghijkl)'
+    names:
+      - 'AbcdeFgHij'
+      - 'AbcdEfGhij'
+      - 'Abcd_Efghijkl'
+    urls: []
 
-- input: "Abcdef, aka Ghijkl"
-  names:
-    - "Abcdef"
-    - "Ghijkl"
-  urls: []
+  - input: "Abcdef, aka Ghijkl"
+    names:
+      - "Abcdef"
+      - "Ghijkl"
+    urls: []
 
-- input: 'Abcdef Ghi Jklmnop (AKA Abcd1234)'
-  names:
-    - 'Abcdef Ghi Jklmnop'
-    - 'Abcd1234'
-  urls: []
+  - input: 'Abcdef Ghi Jklmnop (AKA Abcd1234)'
+    names:
+      - 'Abcdef Ghi Jklmnop'
+      - 'Abcd1234'
+    urls: []
 
-- input: 'Abcd efghijk (formerly Abcdefgh)'
-  names:
-    - 'Abcd efghijk'
-    - 'Abcdefgh'
-  urls: []
+  - input: 'Abcd efghijk (formerly Abcdefgh)'
+    names:
+      - 'Abcd efghijk'
+      - 'Abcdefgh'
+    urls: []
 
-- input: 'Abcdefghij / AbcdEfghijKlm (formally Abcdef)'
-  names:
-    - 'Abcdefghij'
-    - 'AbcdEfghijKlm'
-    - 'Abcdef'
-  urls: []
+  - input: 'Abcdefghij / AbcdEfghijKlm (formally Abcdef)'
+    names:
+      - 'Abcdefghij'
+      - 'AbcdEfghijKlm'
+      - 'Abcdef'
+    urls: []
 
-- input: 'Abcdef Ghi Jklmnop (Abcd1234)'
-  names:
-    - 'Abcdef Ghi Jklmnop'
-    - 'Abcd1234'
-  urls: []
+  - input: 'Abcdef Ghi Jklmnop (Abcd1234)'
+    names:
+      - 'Abcdef Ghi Jklmnop'
+      - 'Abcd1234'
+    urls: []
 
-- input: 'abcdef_ (Abcd)'
-  names:
-    - 'abcdef_'
-    - 'Abcd'
-  urls: []
+  - input: 'abcdef_ (Abcd)'
+    names:
+      - 'abcdef_'
+      - 'Abcd'
+    urls: []
 
-- input: 'Abcdefgh(abcdefg)'
-  names:
-    - 'Abcdefgh'
-    - 'abcdefg'
-  urls: []
+  - input: 'Abcdefgh(abcdefg)'
+    names:
+      - 'Abcdefgh'
+      - 'abcdefg'
+    urls: []
 
-- input: '@Abcd_Efghi_JkL'
-  names:
-    - '@Abcd_Efghi_JkL'
-  urls: []
-
-
-- input: 'Abcd12/@AbcDeFghi/Abcdefghi'
-  names:
-    - 'Abcd12'
-    - '@AbcDeFghi'
-    - 'Abcdefghi'
-  urls: []
+  - input: '@Abcd_Efghi_JkL'
+    names:
+      - '@Abcd_Efghi_JkL'
+    urls: []
 
 
-
-#
-# Expansion of URLs
-#
-- input: 'Abcdefghij on DA, FA'
-  names:
-    - 'Abcdefghij' # From DA
-    - 'Abcdefghij' # From FA
-  urls:
-    - 'https://furaffinity.net/user/Abcdefghij/'
-    - 'https://www.deviantart.com/Abcdefghij'
-
-- input: 'abcdefghi on FA, AbcdefgHijkl on DA'
-  names:
-    - 'abcdefghi'
-    - 'AbcdefgHijkl'
-  urls:
-    - 'https://www.deviantart.com/AbcdefgHijkl'
-    - 'https://furaffinity.net/user/abcdefghi/'
-
-- input: 'Mnopqr of FA / Abcdefhijk on DA'
-  names:
-    - 'Mnopqr'
-    - 'Abcdefhijk'
-  urls:
-    - 'https://www.deviantart.com/Abcdefhijk'
-    - 'https://furaffinity.net/user/Mnopqr/'
-
-- input: 'Abcdefghij@FA'
-  names:
-    - 'Abcdefghij'
-  urls:
-  - 'https://furaffinity.net/user/Abcdefghij/'
-
-- input: 'AbcdefGhijklm on Furaffinity'
-  names:
-    - 'AbcdefGhijklm'
-  urls:
-    - 'https://furaffinity.net/user/AbcdefGhijklm/'
-
-- input: '@AbcdeFghij_klm on Twitter'
-  names:
-    - 'AbcdeFghij_klm'
-  urls:
-    - 'https://twitter.com/AbcdeFghij_klm'
-
-- input: 'AbcdefgHij00.deviantart.com'
-  names:
-    - 'AbcdefgHij00'
-  urls:
-    - 'https://AbcdefgHij00.deviantart.com/'
+  - input: 'Abcd12/@AbcDeFghi/Abcdefghi'
+    names:
+      - 'Abcd12'
+      - '@AbcDeFghi'
+      - 'Abcdefghi'
+    urls: []
 
 
-#
-# URL labels
-#
-- input: "dA: https://www.deviantart.com/abcdefghij/\r\nPersonal site: https://www.abcdef.gh/ij/klmnopqr/"
-  names:
-    - 'abcdefghij'
-  urls:
-    - 'https://www.deviantart.com/abcdefghij/'
-    - 'https://www.abcdef.gh/ij/klmnopqr/'
 
-- input: 'DA https://www.deviantart.com/abcdefg FA https://www.furaffinity.net/user/abcdefg/'
-  names:
-    - 'abcdefg' # From DA
-    - 'abcdefg' # From FA
-  urls:
-    - 'https://www.deviantart.com/abcdefg'
-    - 'https://furaffinity.net/user/abcdefg/'
+  #
+  # Expansion of URLs
+  #
+  - input: 'Abcdefghij on DA, FA'
+    names:
+      - 'Abcdefghij'  # From DA
+      - 'Abcdefghij'  # From FA
+    urls:
+      - 'https://furaffinity.net/user/Abcdefghij/'
+      - 'https://www.deviantart.com/Abcdefghij'
 
-- input: 'FA - https://www.furaffinity.net/user/abcdefg/'
-  names:
-    - 'abcdefg'
-  urls:
-    - 'https://furaffinity.net/user/abcdefg/'
+  - input: 'abcdefghi on FA, AbcdefgHijkl on DA'
+    names:
+      - 'abcdefghi'
+      - 'AbcdefgHijkl'
+    urls:
+      - 'https://www.deviantart.com/AbcdefgHijkl'
+      - 'https://furaffinity.net/user/abcdefghi/'
 
-- input: 'FA: http://www.furaffinity.net/user/abcdefg/'
-  names:
-    - 'abcdefg'
-  urls:
-    - 'https://furaffinity.net/user/abcdefg/'
+  - input: 'Mnopqr of FA / Abcdefhijk on DA'
+    names:
+      - 'Mnopqr'
+      - 'Abcdefhijk'
+    urls:
+      - 'https://www.deviantart.com/Abcdefhijk'
+      - 'https://furaffinity.net/user/Mnopqr/'
 
-- input: 'Facebook : https://www.facebook.com/abcdefgh'
-  names: []
-  urls:
-    - 'https://www.facebook.com/abcdefgh'
+  - input: 'Abcdefghij@FA'
+    names:
+      - 'Abcdefghij'
+    urls:
+      - 'https://furaffinity.net/user/Abcdefghij/'
 
-- input: 'Facebook: https://www.facebook.com/AbcdefGhijklmn'
-  names: []
-  urls:
-    - 'https://www.facebook.com/AbcdefGhijklmn'
+  - input: 'AbcdefGhijklm on Furaffinity'
+    names:
+      - 'AbcdefGhijklm'
+    urls:
+      - 'https://furaffinity.net/user/AbcdefGhijklm/'
 
-- input: 'Instagram : https://www.instagram.com/theabcdefghij/'
-  names:
-    - 'theabcdefghij'
-  urls:
-    - 'https://www.instagram.com/theabcdefghij/'
+  - input: '@AbcdeFghij_klm on Twitter'
+    names:
+      - 'AbcdeFghij_klm'
+    urls:
+      - 'https://twitter.com/AbcdeFghij_klm'
 
-- input: 'Twitter - https://twitter.com/AbcDefg'
-  names:
-    - 'AbcDefg'
-  urls:
-    - 'https://twitter.com/AbcDefg'
-
-- input: 'Twitter : https://twitter.com/AbcdEfghiJkl?s=09'
-  names:
-    - 'AbcdEfghiJkl'
-  urls:
-    - 'https://twitter.com/AbcdEfghiJkl'
-
-- input: 'Website: https://www.abcdefhstudios.com/'
-  names: []
-  urls:
-    - 'https://www.abcdefhstudios.com/'
+  - input: 'AbcdefgHij00.deviantart.com'
+    names:
+      - 'AbcdefgHij00'
+    urls:
+      - 'https://AbcdefgHij00.deviantart.com/'
 
 
-#
-# Fixing/unifying URLs
-#
-- input: 'http://www.hentai-foundry.com/profile-AbcdefgHijklmnop.php'
-  names: ['AbcdefgHijklmnop']
-  urls:  ['https://www.hentai-foundry.com/user/AbcdefgHijklmnop/profile']
+  #
+  # URL labels
+  #
+  - input: "dA: https://www.deviantart.com/abcdefghij/\r\nPersonal site: https://www.abcdef.gh/ij/klmnopqr/"
+    names:
+      - 'abcdefghij'
+    urls:
+      - 'https://www.deviantart.com/abcdefghij/'
+      - 'https://www.abcdef.gh/ij/klmnopqr/'
 
-- input: 'http://www.hentai-foundry.com/user/abcdefghijkl'
-  names: ['abcdefghijkl']
-  urls:  ['https://www.hentai-foundry.com/user/abcdefghijkl/profile']
+  - input: 'DA https://www.deviantart.com/abcdefg FA https://www.furaffinity.net/user/abcdefg/'
+    names:
+      - 'abcdefg'  # From DA
+      - 'abcdefg'  # From FA
+    urls:
+      - 'https://www.deviantart.com/abcdefg'
+      - 'https://furaffinity.net/user/abcdefg/'
 
-- input: 'http://www.hentai-foundry.com/user/abcdefghijkl/profile'
-  names: ['abcdefghijkl']
-  urls: ['https://www.hentai-foundry.com/user/abcdefghijkl/profile']
+  - input: 'FA - https://www.furaffinity.net/user/abcdefg/'
+    names:
+      - 'abcdefg'
+    urls:
+      - 'https://furaffinity.net/user/abcdefg/'
 
-- input: 'http://www.hentai-foundry.com/pictures/user/AbcdefGhijk'
-  names: ['AbcdefGhijk']
-  urls:  ['https://www.hentai-foundry.com/user/AbcdefGhijk/profile']
+  - input: 'FA: http://www.furaffinity.net/user/abcdefg/'
+    names:
+      - 'abcdefg'
+    urls:
+      - 'https://furaffinity.net/user/abcdefg/'
 
-- input: "www.twitter.com/AbcdeFghijklm\r\nwww.twitter.com/AbcdefGhijk\r\nhttps://www.twitch.tv/abcdefghij"
-  names: ['AbcdeFghijklm', 'AbcdefGhijk']
-  urls:
-    - 'https://twitter.com/AbcdeFghijklm'
-    - 'https://twitter.com/AbcdefGhijk'
-    - 'https://www.twitch.tv/abcdefghij'
+  - input: 'Facebook : https://www.facebook.com/abcdefgh'
+    names: []
+    urls:
+      - 'https://www.facebook.com/abcdefgh'
 
-- input: "https://www.furaffinity.net/user/abc\r\nhttps://www.deviantart.com/abcdefghi\r\nhttps://twitter.com/abcdefghijklm?s=20&t=8WO141xQe1X4i267gscowQ"
-  names: ['abc', 'abcdefghi', 'abcdefghijklm']
-  urls:
-    - 'https://furaffinity.net/user/abc/'
-    - 'https://www.deviantart.com/abcdefghi'
-    - 'https://twitter.com/abcdefghijklm'
+  - input: 'Facebook: https://www.facebook.com/AbcdefGhijklmn'
+    names: []
+    urls:
+      - 'https://www.facebook.com/AbcdefGhijklmn'
 
-- input: "Https://twitter.com/@abcde \r\nHttps://twitter.com/@abcdefg"
-  names: ['abcde', 'abcdefg']
-  urls:
-    - 'https://twitter.com/abcde'
-    - 'https://twitter.com/abcdefg'
+  - input: 'Instagram : https://www.instagram.com/theabcdefghij/'
+    names:
+      - 'theabcdefghij'
+    urls:
+      - 'https://www.instagram.com/theabcdefghij/'
 
-- input: 'https://twitter.com/AbcdEfGhij/with_replies?lang=en'
-  names: [ 'AbcdEfGhij' ]
-  urls:
-    - 'https://twitter.com/AbcdEfGhij'
+  - input: 'Twitter - https://twitter.com/AbcDefg'
+    names:
+      - 'AbcDefg'
+    urls:
+      - 'https://twitter.com/AbcDefg'
 
-#
-# Splitting data
-#
-- input: 'https://twitter.com/abcdefghi; https://twitter.com/abcdefghijk; https://www.furaffinity.net/user/AbcDefghi/; '
-  names: ['abcdefghi', 'AbcDefghi', 'abcdefghijk']
-  urls:
-    - 'https://twitter.com/abcdefghi'
-    - 'https://twitter.com/abcdefghijk'
-    - 'https://furaffinity.net/user/AbcDefghi/'
+  - input: 'Twitter : https://twitter.com/AbcdEfghiJkl?s=09'
+    names:
+      - 'AbcdEfghiJkl'
+    urls:
+      - 'https://twitter.com/AbcdEfghiJkl'
 
-#
-# Other
-#
-- input: 'Abcd Efghi on facebook'
-  names:
-    - 'Abcd Efghi on facebook'
-  urls: []
+  - input: 'Website: https://www.abcdefhstudios.com/'
+    names: []
+    urls:
+      - 'https://www.abcdefhstudios.com/'
 
-- input: 'Abcdefghijk -> www.abcdefghijk.deviantart.com, www.furaffinity.net/user/abcdefghijk'
-  names:
-    - 'Abcdefghijk ->'
-    - 'abcdefghijk' # From DA
-    - 'abcdefghijk' # From FA
-  urls:
-    - 'https://abcdefghijk.deviantart.com/'
-    - 'https://furaffinity.net/user/abcdefghijk/'
 
-- input: 'FA: https://www.furaffinity.net/user/abcdefghijklmno/ (Abcdefghijklmno)'
-  names:
-    - 'Abcdefghijklmno'
-    - 'abcdefghijklmno'
-  urls:
-    - 'https://furaffinity.net/user/abcdefghijklmno/'
+  #
+  # Fixing/unifying URLs
+  #
+  - input: 'http://www.hentai-foundry.com/profile-AbcdefgHijklmnop.php'
+    names: ['AbcdefgHijklmnop']
+    urls:  ['https://www.hentai-foundry.com/user/AbcdefgHijklmnop/profile']
 
-- input: 'https://twitter.com/abcdefghijkl, https://www.furaffinity.net/user/abcde, http://abcde.deviantart.com'
-  names:
-    - 'abcdefghijkl'
-    - 'abcde'
-  urls:
-    - 'https://twitter.com/abcdefghijkl'
-    - 'https://furaffinity.net/user/abcde/'
-    - 'https://abcde.deviantart.com/'
+  - input: 'http://www.hentai-foundry.com/user/abcdefghijkl'
+    names: ['abcdefghijkl']
+    urls:  ['https://www.hentai-foundry.com/user/abcdefghijkl/profile']
 
-- input: "www.furaffinity.net/user/Abcdef-Ghijkl\r\nAbcdef-ghijkl.deviantart.com\r\nwww.hentai-foundry.com/user/abcdefghijkl/profile\r\nabcdef-ghijkl.tumblr.com/"
-  names:
-    - 'Abcdef-Ghijkl'
-    - 'Abcdef-ghijkl'
-    - 'abcdef-ghijkl'
-    - 'abcdefghijkl'
-  urls:
-    - 'https://furaffinity.net/user/Abcdef-Ghijkl/'
-    - 'https://Abcdef-ghijkl.deviantart.com/'
-    - 'https://www.hentai-foundry.com/user/abcdefghijkl/profile'
-    - 'https://abcdef-ghijkl.tumblr.com/'
+  - input: 'http://www.hentai-foundry.com/user/abcdefghijkl/profile'
+    names: ['abcdefghijkl']
+    urls:  ['https://www.hentai-foundry.com/user/abcdefghijkl/profile']
+
+  - input: 'http://www.hentai-foundry.com/pictures/user/AbcdefGhijk'
+    names: ['AbcdefGhijk']
+    urls:  ['https://www.hentai-foundry.com/user/AbcdefGhijk/profile']
+
+  - input: "www.twitter.com/AbcdeFghijklm\r\nwww.twitter.com/AbcdefGhijk\r\nhttps://www.twitch.tv/abcdefghij"
+    names: ['AbcdeFghijklm', 'AbcdefGhijk']
+    urls:
+      - 'https://twitter.com/AbcdeFghijklm'
+      - 'https://twitter.com/AbcdefGhijk'
+      - 'https://www.twitch.tv/abcdefghij'
+
+  - input: "https://www.furaffinity.net/user/abc\r\nhttps://www.deviantart.com/abcdefghi\r\nhttps://twitter.com/abcdefghijklm?s=20&t=8WO141xQe1X4i267gscowQ"
+    names: ['abc', 'abcdefghi', 'abcdefghijklm']
+    urls:
+      - 'https://furaffinity.net/user/abc/'
+      - 'https://www.deviantart.com/abcdefghi'
+      - 'https://twitter.com/abcdefghijklm'
+
+  - input: "Https://twitter.com/@abcde \r\nHttps://twitter.com/@abcdefg"
+    names: ['abcde', 'abcdefg']
+    urls:
+      - 'https://twitter.com/abcde'
+      - 'https://twitter.com/abcdefg'
+
+  - input: 'https://twitter.com/AbcdEfGhij/with_replies?lang=en'
+    names: ['AbcdEfGhij']
+    urls:
+      - 'https://twitter.com/AbcdEfGhij'
+
+  #
+  # Splitting data
+  #
+  - input: 'https://twitter.com/abcdefghi; https://twitter.com/abcdefghijk; https://www.furaffinity.net/user/AbcDefghi/; '
+    names: ['abcdefghi', 'AbcDefghi', 'abcdefghijk']
+    urls:
+      - 'https://twitter.com/abcdefghi'
+      - 'https://twitter.com/abcdefghijk'
+      - 'https://furaffinity.net/user/AbcDefghi/'
+
+  #
+  # Other
+  #
+  - input: 'Abcd Efghi on facebook'
+    names:
+      - 'Abcd Efghi on facebook'
+    urls: []
+
+  - input: 'Abcdefghijk -> www.abcdefghijk.deviantart.com, www.furaffinity.net/user/abcdefghijk'
+    names:
+      - 'Abcdefghijk ->'
+      - 'abcdefghijk'  # From DA
+      - 'abcdefghijk'  # From FA
+    urls:
+      - 'https://abcdefghijk.deviantart.com/'
+      - 'https://furaffinity.net/user/abcdefghijk/'
+
+  - input: 'FA: https://www.furaffinity.net/user/abcdefghijklmno/ (Abcdefghijklmno)'
+    names:
+      - 'Abcdefghijklmno'
+      - 'abcdefghijklmno'
+    urls:
+      - 'https://furaffinity.net/user/abcdefghijklmno/'
+
+  - input: 'https://twitter.com/abcdefghijkl, https://www.furaffinity.net/user/abcde, http://abcde.deviantart.com'
+    names:
+      - 'abcdefghijkl'
+      - 'abcde'
+    urls:
+      - 'https://twitter.com/abcdefghijkl'
+      - 'https://furaffinity.net/user/abcde/'
+      - 'https://abcde.deviantart.com/'
+
+  - input: "www.furaffinity.net/user/Abcdef-Ghijkl\r\nAbcdef-ghijkl.deviantart.com\r\n\
+      www.hentai-foundry.com/user/abcdefghijkl/profile\r\nabcdef-ghijkl.tumblr.com/"
+    names:
+      - 'Abcdef-Ghijkl'
+      - 'Abcdef-ghijkl'
+      - 'abcdef-ghijkl'
+      - 'abcdefghijkl'
+    urls:
+      - 'https://furaffinity.net/user/Abcdef-Ghijkl/'
+      - 'https://Abcdef-ghijkl.deviantart.com/'
+      - 'https://www.hentai-foundry.com/user/abcdefghijkl/profile'
+      - 'https://abcdef-ghijkl.tumblr.com/'
