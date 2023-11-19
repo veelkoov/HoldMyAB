@@ -1,0 +1,301 @@
+### WHAT IS THIS INFORMATION
+#
+# This is data used for https://bewares.getfursu.it/ (navigate to the URL to learn more).
+# In short, it is a search tool based on information available at https://artistsbeware.info/ .
+#
+# !!! IF THE INFORMATION AVAILABLE HERE CANNOT BE FOUND/CONFIRMED ON ARTISTSBEWARE.INFO,  !!!
+# !!! THE INFORMATION HERE MUST BE CONSIDERED FALSE AND/OR A HUMAN ERROR AND/OR OUTDATED. !!!
+#
+# The information here is not intended to be used by humans or other living entities. If you found this using
+# a search engine like Ecosia, Google, Bing, etc., please continue searching.
+# These are instructions for the software generating https://bewares.getfursu.it/ aimed at creating
+# more consistent report. The fact of providing this information here is for the purpose of transparency
+# and software maintainability ("bus factor").
+#
+# Every change applied SHOULD be described in the `why` field.
+# Every change MUST include the original value in the `from` field.
+# If the `from` value differs from the data pulled from artistsbeware.info, the change MUST NOT be applied.
+#
+# Explanation of some fixes:
+#   "(not) expected" - the software expects some typical formatting, order of information.
+#                      Some changes are done to let the report be generated without failures or inconsistencies.
+#
+#   "unusual" - as above, the software was made to handle most of the posts (most typical formatting). The unusual
+#               formatting is changed here to meet the expectations.
+#
+#   "unused" - some of the information is not being used during generation of the report and would obscure it.
+#              It is meaningful only on artistsbeware.info.
+#
+#   "broken URL" - some URLs ("links") in the artistsbeware.info information are broken (as submitted by the authors?).
+#
+#   "typo" - to generate consitsent report, typos need to be fixed. Everynoe makes typos, sometmies.
+---
+fixes:
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/artistbeware-loxy~chan-r953/
+    change:
+      - what: where
+        from: |-
+          https://www.furaffinity.net/user/loxy~chan/
+          Discord: chenchen#4703 (available via their FA)
+          https//www.deviantart.com/ch3nch3n.deviantart.com
+          https://portfolio.commishes.com/user/chenchen
+        to: |-
+          https://www.furaffinity.net/user/loxy~chan/
+          Discord: chenchen#4703 (available via their FA)
+          https://www.deviantart.com/ch3nch3n
+          https://portfolio.commishes.com/user/chenchen
+        why: 'The DA URL is broken.'
+
+  - in: https://artistsbeware.info/beware/archive/artist-beware-archives/beware-spaceinvadersstellarymuffinbutton-r377/
+    change:
+      - what: where
+        from: 'http:///furaffinity.net/user/spaceinvaders'
+        to:   'http://furaffinity.net/user/spaceinvaders'
+        why:  'The URL is broken, it contains triple "/" after "http:".'
+
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/beware-gideon-hoss-r311/
+    change:
+      - what: where
+        from: |-
+          Anthrocon
+          https://gideonscorral.e-junkie.com/?
+          http://www.furaffinity.net/user/gideon%20/
+          https://twitter.com/gideonscorral
+        to: |-
+          Anthrocon
+          https://gideonscorral.e-junkie.com/
+          http://www.furaffinity.net/user/gideon/
+          https://twitter.com/gideonscorral
+        why: 'The %20 in the FA URL should not be there, also removed the obsolete "?" in the first URL, no impact.'
+
+  - in: https://artistsbeware.info/beware/submissions_11/client-cautions/caution-foifouu-i-can%E2%80%99t-remember-my-name-r468/
+    change:
+      - what: tag
+        from: 'cilent'
+        to:   'client'
+        why:  'Typo.'
+
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/beware-zelestin-r318/
+    change:
+      - what: tag
+        from: 'comimssion'
+        to:   'commission'
+        why:  'Typo.'
+
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/beware-underthedarkness-r127/
+    change:
+      - what: tag
+        from: 'comimssion'
+        to:   'commission'
+        why:  'Typo.'
+
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/beware-onnanoko-r129/
+    change:
+      - what: tag
+        from: 'aritst'
+        to:   'artist'
+        why:  'Typo.'
+
+  - in: https://artistsbeware.info/beware/archive/client-bewares-archives/beware-otterman89-r1235/
+    change:
+      - what: who
+        from: 'Beware: Otterman89'
+        to:   'Otterman89'
+        why:  'The "Beware:" is expected in the "title" only, now "where" info.'
+
+  - in: https://artistsbeware.info/beware/submissions/client-bewares/beware-hyperionagxinoosmax-salexander-l-r780/
+    change:
+      - what: who
+        from: 'BEWARE: Hyperion/Agxinoos/Max S./Alexander L.'
+        to:   'Hyperion/Agxinoos/Max S./Alexander L.'
+        why:  'The "BEWARE:" is expected in the "title" only, now "who" info.'
+
+  - in: https://artistsbeware.info/beware/archive/artist-beware-archives_27/caution-thelittlehuskee-r1239/
+    change:
+      - what: who
+        from: 'thelittlehuskee, b0h3m3, huskee-commissions, artist, archive:2013'
+        to:   'thelittlehuskee, b0h3m3, huskee-commissions'
+        why:  'Remove tags from "who" info. The tags are already in "tags" info.'
+
+  - in: https://artistsbeware.info/beware/archive/artist-beware-archives/beware-pirate-cashoozombiepirate-r1260/
+    change:
+      - what: where
+        from: |-
+          www. furaffinity.net/user/Pirate-Cashoo
+          Pirate-cashoo.deviantart.com
+          http://www.hentai-foundry.com/user/zombiepirate/profile
+          http://pirate-cashoo.tumblr.com/
+        to: |-
+          www.furaffinity.net/user/Pirate-Cashoo
+          Pirate-cashoo.deviantart.com
+          http://www.hentai-foundry.com/user/zombiepirate/profile
+          http://pirate-cashoo.tumblr.com/
+        why: 'The space between "www." and "furaffinity.net" breaks the link.'
+
+  - in: https://artistsbeware.info/beware/submissions_11/artist-cautions/caution-neoarcadianx-furaffinity-discord-return_x-twitter-x_arcadian-twitter-r422/
+    change:
+      - what: where
+        from: |-
+          https://www.furaffinity.net/user/neoarcadianx
+          Check out NeoArcadianX🌻 (@Return_X): https://twitter.com/Return_X?s=09
+          Check out NeoArcadianX (@x_arcadian): https://twitter.com/x_arcadian?s=09
+        to: |-
+          https://www.furaffinity.net/user/neoarcadianx
+          NeoArcadianX (@Return_X): https://twitter.com/Return_X?s=09
+          NeoArcadianX (@x_arcadian): https://twitter.com/x_arcadian?s=09
+        why: 'Remove unusual emoticon and "Check out" in the "where" info.'
+
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/beware-commissioning-kasai619-r1443/
+    change:
+      - what: title
+        from: 'Beware Commissioning Kasai619'
+        to:   'Beware Kasai619'
+        why:  'Remove unusual "Commissioning".'
+
+  - in: https://artistsbeware.info/beware/submissions_11/artist-cautions/caution-baasil-lo-la-pahet-orangepekoe-r42/
+    change:
+      - what: where
+        from: |-
+          Baasil [http://www.furaffinity.net/user/baasil/]
+          SpicyBaasil [https://picarto.tv/SpicyBaasil]
+        to: |-
+          Baasil http://www.furaffinity.net/user/baasil/
+          SpicyBaasil https://picarto.tv/SpicyBaasil
+        why: 'Remove unusual square brackets.'
+
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/beware-valleyhearts-valleyheartss-r429/
+    change:
+      - what: title
+        from: 'Beware (Valleyhearts/ Valleyheartss)'
+        to:   'Beware: Valleyhearts / Valleyheartss'
+        why:  'Remove unusual brackets.'
+
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/lenexwants-beware-r202/
+    change:
+      - what: title
+        from: 'Lenexwants beware'
+        to:   'Beware: Lenexwants'
+        why:  'Use expected order and colon.'
+
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/furfancy-review-r167/
+    change:
+      - what: title
+        from: 'Furfancy review'
+        to:   'Beware: Furfancy'
+        why:  'Use expected order and colon, add expected "Beware" based on the category.'
+
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/furfancy-artist-beware-r966/
+    change:
+      - what: title
+        from: 'Furfancy Artist Beware'
+        to:   'Beware: Furfancy Costumes'
+        why:  'Use expected order and colon, remove unusual "Artist".'
+
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/beware-of-this-artist-r249/
+    change:
+      - what: title
+        from: 'Beware of this Artist'
+        to:   'Beware: Lias Ahrwyn'
+        why:  'Use expected order and colon, remove unusual "of this".'
+
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/beware-of-artist-r258/
+    change:
+      - what: title
+        from: 'Beware of Artist'
+        to:   'Beware: DeliciousOrange'
+        why:  'Use expected colon, instead of "of".'
+
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/beware-artist-tattoorexy-r489/
+    change:
+      - what: title
+        from: 'Beware artist: TattooRexy'
+        to:   'Artist beware: TattooRexy'
+        why:  'Use expected order.'
+
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/no-work-or-communication-in-a-year-r267/
+    change:
+      - what: title
+        from: 'No Work or Communication in a Year'
+        to:   'Beware: Ricardo C'
+        why:  'Use expected category and subject based on category and "who" info.'
+
+  - in: https://artistsbeware.info/beware/submissions_11/artist-cautions/caution-voregence-unprofessional-conduct-r324/
+    change:
+      - what: title
+        from: 'Caution: Voregence - unprofessional conduct'
+        to:   'Caution: Voregence'
+        why:  'Remove unexpected comment.'
+
+  - in: https://artistsbeware.info/beware/archive/client-bewares-archives/beware-vaughnblondtail-r74/
+    change:
+      - what: where
+        from: 'Vaughnblondtail -> www.vaughnblondetail.deviantart.com, www.furaffinity.net/user/vaughnblondetail'
+        to:   'Vaughnblondtail / www.vaughnblondetail.deviantart.com, www.furaffinity.net/user/vaughnblondetail'
+        why:  'Remove unusual "->".'
+
+  - in: https://artistsbeware.info/beware/submissions/client-bewares/beware-wolear-yaawween-r983/
+    change:
+      - what: title
+        from: 'BEWARE : wolear \ yaawween'
+        to:   'BEWARE : wolear / yaawween'
+        why:  'Removed unusual "\".'
+      - what: who
+        from: 'wolear \ yaawween'
+        to:   'wolear / yaawween'
+        why:  'Removed unusual "\".'
+
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/caution-roger-starnosekid-warning-abdldiaper-artist-r762/
+    change:
+      - what: title
+        from: 'Beware : Roger / Starnosekid [Warning : ABDL/diaper artist]'
+        to:   'Beware : Roger / Starnosekid'
+        why:  'Removed unusual warning label.'
+
+  - in: https://artistsbeware.info/beware/archive/artist-beware-archives/beware-pirate-cashoo-r853/
+    change:
+      - what: where
+        from: |-
+          http://pirate-cashoo.deviantart.com
+          http://www.furaffinity.net/user/pirate-cashoo
+          http://pirate-cashoo.tumblr.com  (They request commissions here, too)
+          http://www.hentai-foundry.com/user/zombiepirate (WARNING –NSFW  adult site)
+          http://pirate-cashoo.sofurry.com
+        to: |-
+          http://pirate-cashoo.deviantart.com
+          http://www.furaffinity.net/user/pirate-cashoo
+          http://pirate-cashoo.tumblr.com
+          http://www.hentai-foundry.com/user/zombiepirate
+          http://pirate-cashoo.sofurry.com
+        why: 'Removing unused comments.'
+
+  - in: https://artistsbeware.info/beware/archive/artist-beware-archives/beware-dmk-dariuskoopa-r695/
+    change:
+      - what: where
+        from: |-
+          http://www.furaffinity.net/user/dmk / 
+          http://www.furaffinity.net/user/dariuskoopa
+        to: |-
+          http://www.furaffinity.net/user/dmk
+          http://www.furaffinity.net/user/dariuskoopa
+        why: 'Removed unusual non-breakable spaces.'
+
+  - in: https://artistsbeware.info/beware/archive/artist-beware-archives_27/caution-marc-leonhardt-r1291/
+    change:
+      - what: where
+        from: "http://leonhardtworks.com/sitevid.html\r\n(Mod Note: http://leonhardtworks.com/piwigo/ seems to be current)"
+        to:   "http://leonhardtworks.com/sitevid.html\r\nhttp://leonhardtworks.com/piwigo/"
+        why:  'Keep the URL but remove unused comment.'
+
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/beware-obscuraspark-twitter-r1485/
+    change:
+      - what: title
+        from: 'Beware: (@ObscuraSpark Twitter)'
+        to:   'Beware: ObscuraSpark@Twitter'
+        why:  'Format in an expected way.'
+
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/beware-onefurall-r1524/
+    change:
+      - what: who
+        from: 'Onefurall'
+        to:   'Onefurall / One Fur All Studios'
+        why:  'Match getfursu.it record by the official name.'

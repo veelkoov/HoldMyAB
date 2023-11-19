@@ -2,22 +2,22 @@ package vlkv.configuration.yaml
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-class Configuration {
+data class Configuration(
     @JsonProperty("ignored_names_ci")
-    lateinit var ignoredNamesCi: List<String>
+    val ignoredNamesCi: List<String>,
 
     @JsonProperty("ignored_where_ci")
-    lateinit var ignoredWhereCi: List<String>
+    val ignoredWhereCi: List<String>,
 
     @JsonProperty("ignored_where_lines_ci")
-    lateinit var ignoredWhereLinesCi: List<String>
+    val ignoredWhereLinesCi: List<String>,
 
     @JsonProperty("removed_text_general")
-    lateinit var removedTextGeneral: List<String>
+    val removedTextGeneral: List<String>,
 
     @JsonProperty("ignored_tags")
-    lateinit var ignoredTags: List<String>
+    val ignoredTags: List<String>,
 
     @JsonProperty("non_name_tags")
-    lateinit var nonNameTags: List<String>
-}
+    val nonNameTags: List<String>,
+)

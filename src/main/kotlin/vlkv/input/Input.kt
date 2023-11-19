@@ -20,7 +20,8 @@ fun readRecordsFrom(inputDirectoryPath: String): List<Record> {
         }
 
     if (result.isEmpty()) {
-        throw RuntimeException("No input records found")
+        throw RuntimeException("No input records found. Expected JSONs from " +
+                "artistsbeware.info REST GET /cms/records/ endpoint output in '$inputDirectoryPath'.")
     }
 
     return result.toList()

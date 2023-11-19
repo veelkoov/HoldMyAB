@@ -1,6 +1,6 @@
 package vlkv.configuration.yaml
 
-class Fix {
-    lateinit var `in`: String
-    lateinit var change: List<Change>
-}
+data class Fix(
+    val `in`: String,
+    val change: List<Change>,
+)

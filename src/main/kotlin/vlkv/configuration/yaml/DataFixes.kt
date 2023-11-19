@@ -1,5 +1,5 @@
 package vlkv.configuration.yaml
 
-class DataFixes {
-    lateinit var fixes: List<Fix>
-}
+data class DataFixes(
+    val fixes: List<Fix>,
+)
