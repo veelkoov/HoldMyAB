@@ -1,3 +1,17 @@
+table {
+    table-layout: fixed;
+}
+
+td.names, td.urls {
+    width: 33%;
+    overflow: hidden;
+}
+
+td.bewares {
+    width: 34%;
+    overflow: hidden;
+}
+
 table ul {
     list-style: none;
     padding: 0;
@@ -6,4 +20,9 @@ table ul {
 
 .names span.found {
     color: #ffc107;
+}
+
+span.badge.rounded-pill.text-bg-light {
+    color: #212529 !important;
+    background-color: rgb(243, 244, 245) !important;
 }

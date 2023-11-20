@@ -13,6 +13,7 @@ data class Fields(
     val field_16: String?,
     val field_17: String?,
     val field_28: String?,
+    val field_40: YesOrNo?,
 ) {
     fun isResolved(): Boolean {
         return when (field_17) {

@@ -1,29 +1,35 @@
 <tr>
     <td class="names">
         {% for tag in subject.tagsSorted %}
-            <span class="badge rounded-pill bg-secondary text-dark tag">{{ tag }}</span>
+            <span class="badge rounded-pill bg-secondary">{{ tag }}</span>
         {% endfor %}
 
         {% for name in subject.namesSorted %}
-            <span class="badge rounded-pill text-bg-secondary">{{ name }}</span>
+            <span class="badge rounded-pill text-bg-light">{{ name }}</span>
         {% endfor %}
     </td>
-    <td>
+    <td class="urls">
         {% for url in subject.urlsSorted %}
-            <a href="{{ url }}" target="_blank"><span class="badge rounded-pill text-bg-secondary">{{ url|shorter_url }}</span></a>
+            <a href="{{ url }}" target="_blank"><span class="badge rounded-pill text-bg-light">{{ url|shorter_url }}</span></a>
         {% endfor %}
     </td>
-    <td>
+    <td class="bewares">
         <ul>
             {% for beware in subject.bewaresSorted %}
                 <li>
                     {%- if beware.resolved -%}
-                        <span class="badge rounded-pill bg-success">R &heartsuit;</span>&nbsp;<s>
+                        <span class="badge rounded-pill bg-success">R &heartsuit;</span>&nbsp;
                     {%- elseif beware.isBeware -%}
                         <span class="badge rounded-pill bg-danger">B</span>&nbsp;
                     {%- else -%}
                         <span class="badge rounded-pill bg-warning">C</span>&nbsp;
                     {%- endif -%}
+
+                    {%- if beware.isArchive -%}
+                        <span class="badge rounded-pill text-bg-light">archive</span>&nbsp;
+                    {%- endif -%}
+
+                    {%- if beware.resolved %}<s>{% endif -%}
 
                     <a href="{{ beware.abUrl }}" target="_blank" class="text-decoration-none">{{ beware.abUrl|shorter_ab_url }}</a>
 

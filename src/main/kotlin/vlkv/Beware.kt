@@ -11,4 +11,6 @@ data class Beware(
     val issues: List<String>,
     val subjectTags: List<String>,
     val tags: List<String>,
-)
+) {
+    val isArchive: Boolean = abUrl.contains("archive") || tags.any { it.startsWith("archive") }
+}
