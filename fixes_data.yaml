@@ -68,6 +68,19 @@ fixes:
           https://twitter.com/gideonscorral
         why: 'The %20 in the FA URL should not be there, also removed the obsolete "?" in the first URL, no impact.'
 
+  - in: https://artistsbeware.info/beware/archive/artist-beware-archives/beware-rarenskwolfteeths-r1910/
+    change:
+      - what: where
+        from: |-
+          https://www.instagram.com/rarensk/%C2%A0
+          https://picarto.tv/wolfteeths
+          https://www.deviantart.com/ggenericcanis/gallery/all
+        to: |-
+          https://www.instagram.com/rarensk/
+          https://picarto.tv/wolfteeths
+          https://www.deviantart.com/ggenericcanis/gallery/all
+        why: 'The %C2%A0 in the Instagram URL should not be there'
+
   - in: https://artistsbeware.info/beware/submissions_11/client-cautions/caution-foifouu-i-can%E2%80%99t-remember-my-name-r468/
     change:
       - what: tag
@@ -94,6 +107,13 @@ fixes:
       - what: tag
         from: 'aritst'
         to:   'artist'
+        why:  'Typo.'
+
+  - in: https://artistsbeware.info/beware/archive/artist-beware-archives/bewar-yuurikinokina-r1874/
+    change:
+      - what: title
+        from: 'Bewar: Yuurikin/Okina'
+        to:   'Beware: Yuurikin/Okina'
         why:  'Typo.'
 
   - in: https://artistsbeware.info/beware/archive/client-bewares-archives/beware-otterman89-r1235/
@@ -170,6 +190,17 @@ fixes:
         to:   'Beware: Valleyhearts / Valleyheartss'
         why:  'Remove unusual brackets.'
 
+  - in: https://artistsbeware.info/beware/archive/artist-beware-archives/beware-kosian-r1568/
+    change:
+      - what: where
+        from: |-
+          - Furaffinity : https://www.furaffinity.net/user/kosian/
+          - SecondLife shop : Keith (Kiys Rayna)
+        to: |-
+          https://www.furaffinity.net/user/kosian/
+          Keith (Kiys Rayna)
+        why:  'Remove unusual list dashes. Remove labels stripped anyway.'
+
   - in: https://artistsbeware.info/beware/submissions/artist-bewares/lenexwants-beware-r202/
     change:
       - what: title
@@ -225,6 +256,13 @@ fixes:
         from: 'Caution: Voregence - unprofessional conduct'
         to:   'Caution: Voregence'
         why:  'Remove unexpected comment.'
+
+  - in: https://artistsbeware.info/beware/archive/client-bewares-archives/beware-grifsnuff-impersonator-r1668/
+    change:
+      - what: title
+        from: 'Beware: Grifsnuff impersonator'
+        to:   'Beware: Grifsnuff'
+        why:  'Only names/aliases are expected in the title.'
 
   - in: https://artistsbeware.info/beware/archive/client-bewares-archives/beware-vaughnblondtail-r74/
     change:
@@ -299,3 +337,10 @@ fixes:
         from: 'Onefurall'
         to:   'Onefurall / One Fur All Studios'
         why:  'Match getfursu.it record by the official name.'
+
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/beware-gatorbite-r322/
+    change:
+      - what: title
+        from: 'Beware GatorBite'
+        to:   'Beware GatorBite / Tortle'
+        why:  'To match the records early / avoid "Shared alias" exception.'

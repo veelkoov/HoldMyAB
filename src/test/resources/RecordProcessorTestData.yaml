@@ -181,6 +181,12 @@ tests:
     urls:
       - 'https://twitter.com/AbcdeFghij_klm'
 
+  - input: 'AbcdeFghij_klm on Twitter'
+    names:
+      - 'AbcdeFghij_klm'
+    urls:
+      - 'https://twitter.com/AbcdeFghij_klm'
+
   - input: 'AbcdefgHij00.deviantart.com'
     names:
       - 'AbcdefgHij00'

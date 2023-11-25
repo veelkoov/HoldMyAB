@@ -14,6 +14,8 @@ object Urls {
 
         // Random parameters
         Regex("\\?(lang|s|hl|ref|utm_medium)=(en|\\d{2}|pr_profile|copy_link|yr_purchases)(&t=[a-zA-Z0-9]+)?($|\\s)", RegexOption.MULTILINE) to "",
+        Regex("\\?igshid=[A-Za-z0-9%=]+", RegexOption.MULTILINE) to "",
+        Regex("\\?ref=page_internal", RegexOption.MULTILINE) to "",
 
         // Remove www. from www.username.deviantart.com
         Regex("(https?://)?www\\.([^./\\s]+)\\.deviantart\\.com/?", IC) to "https://$2.deviantart.com/",
