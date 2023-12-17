@@ -51,4 +51,16 @@ class BewareSubject {
     fun getLowestBewareId(): Int {
         return bewares.minOf { it.id }
     }
+
+    @Suppress("unused") // Pebble uses it
+    fun getNewLoaf(): Boolean {
+        val isNewLoaf = bewares.any { it.isNewLoaf }
+        val isNotNewLoaf = bewares.any { !it.isNewLoaf }
+
+        if (isNewLoaf && isNotNewLoaf) {
+            throw IllegalStateException("$this is both New Leaf and not")
+        }
+
+        return isNewLoaf
+    }
 }

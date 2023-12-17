@@ -29,7 +29,11 @@ fun readRecordsFrom(inputDirectoryPath: String): List<Record> {
 
 private fun getRecordsPageFromJsonFile(it: File): RecordsPage {
     try {
-        val fixedJson = it.readText().replace("\"reactions\": []", "\"reactions\": {}")
+        var fixedJson = it.readText().replace("\"reactions\": []", "\"reactions\": {}")
+
+        if (!fixedJson.contains("\"field_40\":")) {
+            fixedJson = fixedJson.replace("\"field_28\":", "\"field_40\": null, \"field_28\":")
+        }
 
         return Json.decodeFromString(fixedJson)
     } catch (ex: SerializationException) {

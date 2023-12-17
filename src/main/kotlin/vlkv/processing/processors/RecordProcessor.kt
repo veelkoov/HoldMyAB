@@ -42,6 +42,7 @@ class RecordProcessor(
             record.isResolved(),
             record.isNsfw(),
             record.isBeware(),
+            record.isNewLoaf(),
             issues,
             tagsProcessor.getSubjectTags(record),
             record.tags,

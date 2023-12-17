@@ -48,6 +48,8 @@ data class Record(
         return tags.contains("resolved") || fields.isResolved()
     }
 
+    fun isNewLoaf() = fields.isNewLoaf()
+
     fun isNsfw(): Boolean {
         return tags.contains("nsfw") || fields.isNsfw()
 

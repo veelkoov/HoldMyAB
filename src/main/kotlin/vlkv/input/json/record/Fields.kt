@@ -31,6 +31,8 @@ data class Fields(
         }
     }
 
+    fun isNewLoaf() = field_40 == YesOrNo.Yes
+
     fun getWhere(): String {
         return field_6
     }

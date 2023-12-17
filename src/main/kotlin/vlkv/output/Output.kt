@@ -62,8 +62,7 @@ fun renderTxtToFile(database: Database, outputFilePath: String) {
             subject.getBewaresSorted().forEach { beware ->
                 beware.tags.filter { it.contains("archive") }.forEach { file.print("<$it> ") }
 
-                file.print(if (beware.isBeware) "Beware " else "Caution ")
-                file.println(beware.abUrl)
+                file.println("${beware.getCaption()} ${beware.abUrl}")
 
                 if (beware.resolved) {
                     file.println(" - RESOLVED")

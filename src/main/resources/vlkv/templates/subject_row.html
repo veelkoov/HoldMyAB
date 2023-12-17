@@ -1,5 +1,9 @@
 <tr>
     <td class="names">
+        {% if subject.newLoaf %}
+            <span class="badge rounded-pill bg-success">New Leaf</span>
+        {% endif %}
+
         {% for tag in subject.tagsSorted %}
             <span class="badge rounded-pill bg-secondary">{{ tag }}</span>
         {% endfor %}
