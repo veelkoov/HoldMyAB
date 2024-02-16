@@ -10,7 +10,8 @@ object Paths {
     val dataFixesPath = "fixes_data.yaml"
     val generalFixesPath = "configuration.yaml"
 
-    val inputDirPath = "${base}/input"
+    val oldInputDirPath = "data/2023-12-17/input" // TODO: Automate
+    val newInputDirPath = "${base}/input"
     val outputDatabaseFilePath = "${base}/database.txt"
     val outputHtmlFilePath = "${base}/output.html"
     val outputTxtFilePath = "${base}/output.txt"

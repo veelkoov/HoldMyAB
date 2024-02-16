@@ -1,5 +1,6 @@
 package vlkv
 
+import vlkv.configuration.Configuration
 import vlkv.configuration.Loader
 import vlkv.fixes.Fixer
 import vlkv.input.readRecordsFrom
@@ -10,19 +11,16 @@ import vlkv.processing.processors.RecordProcessor
 
 fun main() {
     val configuration = Loader.configurationFromYaml(Paths.generalFixesPath)
-    val dataFixes = Loader.dataFixesFromYaml(Paths.dataFixesPath)
+    val fixer = createFixer(configuration)
+    val processor = RecordProcessor(configuration)
 
-    val records = readRecordsFrom(Paths.inputDirPath)
+    val newDatabase = createDatabase(Paths.newInputDirPath, fixer, processor)
 
-    val fixer = Fixer(dataFixes, configuration)
-    val fixedRecords = fixer.fix(records)
     fixer.assertAllDone()
 
-    val processor = RecordProcessor(configuration)
-    val bewares = processor.getBewares(fixedRecords)
+    val oldDatabase = createDatabase(Paths.oldInputDirPath, fixer, processor)
 
-    val database = Database(bewares)
-
+    printDifferences(oldDatabase, newDatabase)
 
     println("Unused ignored names: " + configuration.ignoredNames.getUnusedList())
     println("Unused ignored where: " + configuration.ignoredWhere.getUnusedList())
@@ -31,9 +29,115 @@ fun main() {
     println("Unused ignored tags: " + configuration.ignoredTags.getUnusedList())
     println("Unused ignored non-name tags: " + configuration.nonNameTags.getUnusedList())
 
-    dumpDatabaseToFile(database, Paths.outputDatabaseFilePath)
-    renderHtmlToFile(database, Paths.outputHtmlFilePath)
-    renderTxtToFile(database, Paths.outputTxtFilePath)
+    dumpDatabaseToFile(newDatabase, Paths.outputDatabaseFilePath)
+    renderHtmlToFile(newDatabase, Paths.outputHtmlFilePath)
+    renderTxtToFile(newDatabase, Paths.outputTxtFilePath)
 
     println("Finished!")
+}
+
+private fun createFixer(configuration: Configuration): Fixer {
+    val dataFixes = Loader.dataFixesFromYaml(Paths.dataFixesPath)
+
+    return Fixer(dataFixes, configuration)
+}
+
+private fun createDatabase(inputDirectoryPath: String, fixer: Fixer, processor: RecordProcessor): Database {
+    val records = readRecordsFrom(inputDirectoryPath)
+    val fixedRecords = fixer.fix(records)
+    val bewares = processor.getBewares(fixedRecords)
+    val database = Database(bewares)
+
+    return database
+}
+
+private fun printDifferences(oldDatabase: Database, newDatabase: Database) {
+    val oldResult = oldDatabase.getSortedRecords().associateBy { it.getLowestBewareId() }
+    val newResult = newDatabase.getSortedRecords().associateBy { it.getLowestBewareId() }
+
+    oldResult.filterNot { newResult.containsKey(it.key) }.forEach { (_, oldSubject) ->
+        println("VANISHED: $oldSubject")
+    }
+
+    newResult.forEach { (lowestBewareId, newSubject) ->
+        val oldSubject = oldResult[lowestBewareId]
+
+        if (null == oldSubject) {
+            println("ADDED ${newSubject.getNamesSorted().joinToString(" / ")}")
+
+            newSubject.getBewaresSorted().forEach {
+                print(compareBewares(it, null))
+            }
+
+            println()
+        } else {
+            var description = ""
+
+            val newAliases = newSubject.getNamesSorted().minus(oldSubject.getNamesSorted())
+            if (newAliases.isNotEmpty()) {
+                description += "ADDED ALIAS(ES) ${newAliases.joinToString(" / ")}\n"
+            }
+
+            newSubject.getBewaresSorted().forEach { newBeware ->
+                val oldBeware = oldSubject.getBewaresSorted().singleOrNull { it.id == newBeware.id }
+
+                description += compareBewares(newBeware, oldBeware)
+            }
+
+            if ("" != description) {
+                println(oldSubject.getNamesSorted().joinToString(" / "))
+                print(description)
+                println()
+            }
+        }
+    }
+}
+
+fun compareBewares(new: Beware, old: Beware?): String {
+    if (old != null
+        && new.resolved == old.resolved
+        && new.isBeware == old.isBeware
+        && new.isArchive == old.isArchive
+        && new.abUrl == old.abUrl
+    ) {
+        return ""
+    }
+
+    var result = ""
+
+    if (null == old) {
+        result += "ADDED "
+    }
+
+    if (new.resolved && (old == null || !old.resolved)) {
+        result += "RESOLVED "
+    }
+
+    if (null != old && new.isBeware != old.isBeware) {
+        result += "${old.getCaption()} ---> "
+    }
+
+    result += "${new.getCaption()} "
+
+    if (old == null) {
+        if (new.isArchive) {
+            result += "(archive) "
+        }
+    } else {
+        result += if (new.isArchive == old.isArchive) {
+            "(archive) "
+        } else if (new.isArchive) {
+            "(NOW ARCHIVE) "
+        } else {
+            "(NO LONGER ARCHIVE) "
+        }
+    }
+
+    result += new.abUrl + "\n"
+
+    if (old != null && new.abUrl != old.abUrl) {
+        result += "    URL changed from: ${old.abUrl}\n"
+    }
+
+    return result
 }
