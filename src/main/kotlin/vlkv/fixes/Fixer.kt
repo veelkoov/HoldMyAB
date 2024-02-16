@@ -14,9 +14,6 @@ class Fixer(
     }
 
     private fun fix(record: Record): Record {
-        resolveHtmlEntities(record)
-        record.validate()
-
         dataFixes.fixes.forEach { fix: Fix ->
             fix.apply(record)
             record.title = getFixedString(record.title)
@@ -25,20 +22,6 @@ class Fixer(
         }
 
         return record
-    }
-
-    private fun resolveHtmlEntities(record: Record) {
-        record.fields.setWhere(resolveHtmlEntities(record.fields.getWhere()))
-        record.fields.setWho(resolveHtmlEntities(record.fields.getWho()))
-        record.fields.setTitle(resolveHtmlEntities(record.fields.getTitle()))
-        record.fields.setDescription(resolveHtmlEntities(record.fields.getDescription()))
-        record.description = resolveHtmlEntities(record.description)
-    }
-
-    private fun resolveHtmlEntities(input: String): String {
-        val result = Regex("<([^>]+) />").replace(input, "<$1>")
-
-        return result.replace("&gt;", ">").replace("&amp;", "&")
     }
 
     fun assertAllDone() { // TODO: Find better place for this

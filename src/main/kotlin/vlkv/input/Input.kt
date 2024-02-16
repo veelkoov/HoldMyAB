@@ -16,7 +16,11 @@ fun readRecordsFrom(inputDirectoryPath: String): List<Record> {
         .forEach { page ->
             page.results
                 .filter { isProperRecord(it) }
-                .forEach(result::add)
+                .map { resolveHtml(it) }
+                .forEach { record ->
+                    record.validate()
+                    result.add(record)
+                }
         }
 
     if (result.isEmpty()) {
@@ -25,6 +29,22 @@ fun readRecordsFrom(inputDirectoryPath: String): List<Record> {
     }
 
     return result.toList()
+}
+
+private fun resolveHtml(record: Record): Record {
+    record.fields.setWhere(resolveHtmlEntities(record.fields.getWhere()))
+    record.fields.setWho(resolveHtmlEntities(record.fields.getWho()))
+    record.fields.setTitle(resolveHtmlEntities(record.fields.getTitle()))
+    record.fields.setDescription(resolveHtmlEntities(record.fields.getDescription()))
+    record.description = resolveHtmlEntities(record.description)
+
+    return record
+}
+
+private fun resolveHtmlEntities(input: String): String {
+    val result = Regex("<([^>]+) />").replace(input, "<$1>")
+
+    return result.replace("&gt;", ">").replace("&amp;", "&")
 }
 
 private fun getRecordsPageFromJsonFile(it: File): RecordsPage {
