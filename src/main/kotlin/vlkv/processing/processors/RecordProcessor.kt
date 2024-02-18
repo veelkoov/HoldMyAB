@@ -4,8 +4,6 @@ import vlkv.Beware
 import vlkv.configuration.Configuration
 import vlkv.input.json.Record
 import vlkv.processing.Urls
-import vlkv.processing.fixWho
-import vlkv.processing.getFixedTitle
 import vlkv.processing.results.NamesUrls
 
 private val BRACKETS = Regex("\\(([^)]*)\\)")
@@ -14,7 +12,6 @@ class RecordProcessor(
     cfg: Configuration,
 ) {
     private val namesProcessor = NamesProcessor(cfg)
-    private val whereProcessor = WhereProcessor(cfg)
     private val tagsProcessor = TagsProcessor(cfg)
 
     fun getBewares(records: List<Record>): List<Beware> {
@@ -26,12 +23,9 @@ class RecordProcessor(
         val urls = mutableListOf<String>()
         val issues = mutableListOf<String>()
 
-        val fixedTitle = getFixedTitle(record)
-        issues.addAll(fixedTitle.issues)
-
-        extend(names, urls, issues, fixedTitle.result)
-        extend(names, urls, issues, fixWho(record.fields.getWho(), issues))
-        extend(names, urls, issues, whereProcessor.fix(record.fields.getWhere(), issues))
+        extend(names, urls, issues, record.title)
+        extend(names, urls, issues, record.who)
+        extend(names, urls, issues, record.where)
         names.addAll(tagsProcessor.getNameTags(record))
 
         return Beware(
@@ -64,7 +58,7 @@ class RecordProcessor(
 
     internal fun getNamesUrls(input: String): NamesUrls {
         val withoutBrackets = processBrackets(input)
-        val (urls, remaining) = Urls.extract(Urls.tidy(withoutBrackets))
+        val (urls, remaining) = Urls.extract(withoutBrackets)
         val names = namesProcessor.getNames(remaining)
         val namesFromUrls = Urls.getNamesFromUrls(urls)
 

@@ -9,8 +9,8 @@ data class Configuration(
     @JsonProperty("ignored_where_ci")
     val ignoredWhereCi: List<String>,
 
-    @JsonProperty("ignored_where_lines_ci")
-    val ignoredWhereLinesCi: List<String>,
+    @JsonProperty("ignored_where_lines")
+    val ignoredWhereLines: List<String>,
 
     @JsonProperty("removed_text_general")
     val removedTextGeneral: List<String>,

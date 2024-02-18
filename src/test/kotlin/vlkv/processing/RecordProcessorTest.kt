@@ -6,8 +6,6 @@ import com.fasterxml.jackson.module.kotlin.KotlinModule
 import org.junit.jupiter.api.DynamicTest
 import org.junit.jupiter.api.DynamicTest.dynamicTest
 import org.junit.jupiter.api.TestFactory
-import vlkv.fixes.Fixer
-import vlkv.configuration.DataFixes
 import vlkv.configuration.Configuration
 import vlkv.processing.processors.RecordProcessor
 import vlkv.tests.RecordProcessorTestData
@@ -18,7 +16,6 @@ private val testsData = ObjectMapper(YAMLFactory())
     .registerModule(KotlinModule.Builder().build())
     .readValue(ClassLoader.getSystemResourceAsStream("RecordProcessorTestData.yaml"), RecordProcessorTestsData::class.java)
 
-@Suppress("unused")
 internal class RecordProcessorTest {
     private val processor = RecordProcessor(Configuration.empty())
     private val singleBadChar = Regex("[^ -~]", RegexOption.IGNORE_CASE)
