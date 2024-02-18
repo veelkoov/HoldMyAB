@@ -3,6 +3,7 @@ package vlkv.configuration
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.fasterxml.jackson.module.kotlin.KotlinModule
+import vlkv.Paths
 import java.io.File
 import vlkv.configuration.yaml.Configuration as YamlConfiguration
 import vlkv.configuration.yaml.DataFixes as YamlDataFixes
@@ -33,11 +34,13 @@ object Loader {
             return Configuration(
                 ignoredNamesCi,
                 ignoredWhereCi,
-                ignoredWhereLinesCi,
+                ignoredWhereLines,
                 removedTextGeneral,
                 ignoredTags,
                 nonNameTags,
             )
         }
     }
+
+    fun loadDefaultConfiguration() = configurationFromYaml(Paths.generalFixesPath)
 }

@@ -2,7 +2,8 @@ package vlkv
 
 import vlkv.configuration.Configuration
 import vlkv.configuration.Loader
-import vlkv.fixes.Fixer
+import vlkv.fixes.AutoFixer
+import vlkv.fixes.ManualFixer
 import vlkv.input.readRecordsFrom
 import vlkv.output.dumpDatabaseToFile
 import vlkv.output.renderHtmlToFile
@@ -10,15 +11,16 @@ import vlkv.output.renderTxtToFile
 import vlkv.processing.processors.RecordProcessor
 
 fun main() {
-    val configuration = Loader.configurationFromYaml(Paths.generalFixesPath)
-    val fixer = createFixer(configuration)
+    val configuration = Loader.loadDefaultConfiguration()
+    val manualFixer = createManualFixer(configuration)
+    val autoFixer = AutoFixer(configuration)
     val processor = RecordProcessor(configuration)
 
-    val newDatabase = createDatabase(Paths.newInputDirPath, fixer, processor)
+    val newDatabase = createDatabase(Paths.newInputDirPath, manualFixer, autoFixer, processor)
 
-    fixer.assertAllDone()
+    manualFixer.assertAllDone()
 
-    val oldDatabase = createDatabase(Paths.oldInputDirPath, fixer, processor)
+    val oldDatabase = createDatabase(Paths.oldInputDirPath, manualFixer, autoFixer, processor)
 
     printDifferences(oldDatabase, newDatabase)
 
@@ -36,16 +38,24 @@ fun main() {
     println("Finished!")
 }
 
-private fun createFixer(configuration: Configuration): Fixer {
+private fun createManualFixer(configuration: Configuration): ManualFixer {
     val dataFixes = Loader.dataFixesFromYaml(Paths.dataFixesPath)
 
-    return Fixer(dataFixes, configuration)
+    return ManualFixer(configuration, dataFixes)
 }
 
-private fun createDatabase(inputDirectoryPath: String, fixer: Fixer, processor: RecordProcessor): Database {
-    val records = readRecordsFrom(inputDirectoryPath)
-    val fixedRecords = fixer.fix(records)
-    val bewares = processor.getBewares(fixedRecords)
+private fun createDatabase(
+    inputDirectoryPath: String,
+    manualFixer: ManualFixer,
+    autoFixer: AutoFixer,
+    processor: RecordProcessor,
+): Database {
+    var records = readRecordsFrom(inputDirectoryPath)
+
+    records = manualFixer.fix(records)
+    records = autoFixer.fix(records)
+
+    val bewares = processor.getBewares(records)
     val database = Database(bewares)
 
     return database

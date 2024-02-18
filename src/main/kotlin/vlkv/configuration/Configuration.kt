@@ -13,14 +13,14 @@ data class Configuration(
     constructor(
         ignoredNamesCI: List<String>,
         ignoredWhereCI: List<String>,
-        ignoredWhereLinesCI: List<String>,
+        ignoredWhereLines: List<String>,
         removedTextGeneral: List<String>,
         ignoredTags: List<String>,
         nonNameTags: List<String>,
     ) : this(
         StringList(ignoredNamesCI, true),
         StringList(ignoredWhereCI, true),
-        StringList(ignoredWhereLinesCI, true),
+        StringList(ignoredWhereLines, false),
         StringList(removedTextGeneral, false),
         StringList(ignoredTags, false),
         StringList(nonNameTags, false),
