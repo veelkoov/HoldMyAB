@@ -16,6 +16,8 @@ fun main() {
     val autoFixer = AutoFixer(configuration)
     val processor = RecordProcessor(configuration)
 
+    println("Generating report for ${Paths.newInputDirPath}, compared to ${Paths.oldInputDirPath}")
+
     val newDatabase = createDatabase(Paths.newInputDirPath, manualFixer, autoFixer, processor)
 
     manualFixer.assertAllDone()

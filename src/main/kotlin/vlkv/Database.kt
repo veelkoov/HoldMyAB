@@ -23,7 +23,11 @@ class Database(bewares: List<Beware>) {
         } else if (existing.count() == 1) {
             existing.single()
         } else {
-            error("Shared alias: " + existing.joinToString(" AND ") { it.getNamesSorted().joinToString(" aka ") })
+            error("Shared alias: " + existing.joinToString(" AND ") {
+                it.getNamesSorted().joinToString(" aka ")
+            } + ". URIs: " + existing.joinToString(", ") {
+                it.getBewaresSorted().joinToString(", ") { bIt -> bIt.abUrl }
+            })
         }
     }
 
