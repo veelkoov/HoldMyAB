@@ -79,18 +79,18 @@ data class Record(
             error("Title field is different than the record title in $this")
         }
 
-        var beware = false
-        var caution = false
-
-        if (tags.contains("beware") || isBeware() || title.contains("beware", ignoreCase = true)) {
-            beware = true
-        }
-
-        if (tags.contains("caution") || !isBeware() || title.contains("caution", ignoreCase = true)) {
-            caution = true
-        }
-
         // TODO: Require sync https://github.com/veelkoov/HoldMyAB/issues/2
+        // var beware = false
+        // var caution = false
+        //
+        // if (tags.contains("beware") || isBeware() || title.contains("beware", ignoreCase = true)) {
+        //     beware = true
+        // }
+        //
+        // if (tags.contains("caution") || !isBeware() || title.contains("caution", ignoreCase = true)) {
+        //     caution = true
+        // }
+        //
         // if (beware && caution) {
         //     print("${url}\n${category.name}\n$title | $tags\n\n")
         //     error("The record is a caution, but the title was a beware: $this")
