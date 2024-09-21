@@ -51,13 +51,16 @@ object Urls {
         Regex("(https?://)?([^./\\s]+)(?<!www)\\.tumblr\\.com/?") to "https://$2.tumblr.com/",
 
         // Twitter
-        Regex("(https?://)?(mobile\\.|www\\.)?twitter\\.com/@?", IC) to "https://twitter.com/",
+        Regex("(https?://)?(mobile\\.|www\\.)?(twitter|x)\\.com/@?", IC) to "https://twitter.com/",
         Regex("(https://twitter.com/[^ \n]+)/with_replies", IC) to "$1",
         Regex("(https://twitter.com/[^ \n]+)\\?[a-z0-9&=_]*", IC) to "$1", // Remove query
+
+        // WhatsApp
+        Regex("(https://)?whatsapp\\.com", IC) to "https://whatsapp.com"
     )
 
     private val LABELS = Removables(
-        Regex("(Deviant ?Art|DA)( Account)? *[-:]? *(?=https://[^.]+\\.deviantart\\.com/)", IC),
+        Regex("(Deviant ?Art|DA)( Account| alt)? *[-:]? *(?=https://[^.]+\\.deviantart\\.com/)", IC),
         Regex("Tumblr? *[-:] *(?=https://[^.]+\\.tumblr\\.com/)", IC),
         Regex("Twitter( alt)? *[-:] *(?=https://twitter\\.com/)", IC),
         Regex("YouTube *[-:] *(?=https://www\\.youtube\\.com/)", IC),

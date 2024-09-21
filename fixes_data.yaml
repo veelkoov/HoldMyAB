@@ -344,3 +344,10 @@ fixes:
         from: 'Beware GatorBite'
         to:   'Beware GatorBite / Tortle'
         why:  'To match the records early / avoid "Shared alias" exception.'
+
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/artist-beware-dog-bone-xenoforge-r49/
+    change:
+      - what: title
+        from: 'Artist Beware - Dog-bone / Xenoforge'
+        to:   'Artist Beware - Dog-bone / Xenoforge / Leachymonster'
+        why:  'To match the records early / avoid "Shared alias" exception.'
