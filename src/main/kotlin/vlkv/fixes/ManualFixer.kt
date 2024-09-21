@@ -5,9 +5,9 @@ import vlkv.configuration.DataFixes
 import vlkv.configuration.Configuration
 import vlkv.input.json.Record
 
-class Fixer(
-    private val dataFixes: DataFixes,
+class ManualFixer(
     private val configuration: Configuration,
+    private val dataFixes: DataFixes,
 ) {
     fun fix(records: List<Record>): List<Record> {
         return records.map { fix(it) }
@@ -16,9 +16,10 @@ class Fixer(
     private fun fix(record: Record): Record {
         dataFixes.fixes.forEach { fix: Fix ->
             fix.apply(record)
+
             record.title = getFixedString(record.title)
-            record.fields.setWhere(getFixedString(record.fields.getWhere()))
-            record.fields.setWho(getFixedString(record.fields.getWho()))
+            record.where = getFixedString(record.where)
+            record.who = getFixedString(record.who)
         }
 
         return record

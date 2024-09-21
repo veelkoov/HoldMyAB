@@ -6,11 +6,8 @@ data class Configuration(
     @JsonProperty("ignored_names_ci")
     val ignoredNamesCi: List<String>,
 
-    @JsonProperty("ignored_where_ci")
-    val ignoredWhereCi: List<String>,
-
-    @JsonProperty("ignored_where_lines_ci")
-    val ignoredWhereLinesCi: List<String>,
+    @JsonProperty("ignored_where_lines")
+    val ignoredWhereLines: List<String>,
 
     @JsonProperty("removed_text_general")
     val removedTextGeneral: List<String>,
@@ -20,4 +17,7 @@ data class Configuration(
 
     @JsonProperty("non_name_tags")
     val nonNameTags: List<String>,
+
+    @JsonProperty("title_prefix_strip_regex_ci")
+    val titlePrefixStripRegexCi: String,
 )

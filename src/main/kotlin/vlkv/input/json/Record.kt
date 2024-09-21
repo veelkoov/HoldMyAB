@@ -30,6 +30,18 @@ data class Record(
     val url: String,
     val views: Int,
 ) {
+    var where: String
+        get() = fields.field_6
+        set(value) {
+            fields.field_6 = value
+        }
+
+    var who: String
+        get() = fields.field_5
+        set(value) {
+            fields.field_5 = value
+        }
+
     fun isBeware(): Boolean {
         if (category.name.contains("beware", true)
             && !category.name.contains("caution", true)
@@ -66,6 +78,23 @@ data class Record(
         if (title != fields.getTitle()) {
             error("Title field is different than the record title in $this")
         }
+
+        // TODO: Require sync https://github.com/veelkoov/HoldMyAB/issues/2
+        // var beware = false
+        // var caution = false
+        //
+        // if (tags.contains("beware") || isBeware() || title.contains("beware", ignoreCase = true)) {
+        //     beware = true
+        // }
+        //
+        // if (tags.contains("caution") || !isBeware() || title.contains("caution", ignoreCase = true)) {
+        //     caution = true
+        // }
+        //
+        // if (beware && caution) {
+        //     print("${url}\n${category.name}\n$title | $tags\n\n")
+        //     error("The record is a caution, but the title was a beware: $this")
+        // }
     }
 
     override fun toString(): String {

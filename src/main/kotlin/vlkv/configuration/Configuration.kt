@@ -4,26 +4,26 @@ import vlkv.fixes.StringList
 
 data class Configuration(
     val ignoredNames: StringList,
-    val ignoredWhere: StringList,
     val ignoredWhereLines: StringList,
     val removedTextGeneral: StringList,
     val ignoredTags: StringList,
     val nonNameTags: StringList,
+    val titlePrefixStripRegexCi: String,
 ) {
     constructor(
         ignoredNamesCI: List<String>,
-        ignoredWhereCI: List<String>,
-        ignoredWhereLinesCI: List<String>,
+        ignoredWhereLines: List<String>,
         removedTextGeneral: List<String>,
         ignoredTags: List<String>,
         nonNameTags: List<String>,
+        titlePrefixStripRegexCi: String,
     ) : this(
         StringList(ignoredNamesCI, true),
-        StringList(ignoredWhereCI, true),
-        StringList(ignoredWhereLinesCI, true),
+        StringList(ignoredWhereLines, false),
         StringList(removedTextGeneral, false),
         StringList(ignoredTags, false),
         StringList(nonNameTags, false),
+        titlePrefixStripRegexCi,
     )
 
     companion object {
@@ -33,7 +33,7 @@ data class Configuration(
             listOf(),
             listOf(),
             listOf(),
-            listOf(),
+            "(?=a)a", // Never matches
         )
     }
 }
