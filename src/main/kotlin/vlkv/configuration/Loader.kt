@@ -33,7 +33,6 @@ object Loader {
         with(result) {
             return Configuration(
                 ignoredNamesCi,
-                ignoredWhereCi,
                 ignoredWhereLines,
                 removedTextGeneral,
                 ignoredTags,

@@ -2,11 +2,9 @@ package vlkv.fixes
 
 import vlkv.configuration.Configuration
 import vlkv.input.json.Record
-import vlkv.processing.Urls
-import vlkv.processing.regexes.Removables
 
 class AutoFixer(
-    private val configuration: Configuration,
+    val configuration: Configuration,
 ) {
     private val whereFixer = AutoWhereFixer(configuration)
     private val titleFixer = AutoTitleFixer(configuration)

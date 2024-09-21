@@ -40,8 +40,6 @@ ignored_names_ci:
   - 'tumblr:'
   - 'twitter'
 
-ignored_where_ci: []
-
 ignored_where_lines:
   - "Anthrocon Dealer's Den"
   - "Further Confusion 2017 - Dealer's Table (Purchase Transaction)"

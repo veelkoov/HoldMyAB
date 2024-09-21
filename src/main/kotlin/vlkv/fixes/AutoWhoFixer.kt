@@ -5,7 +5,7 @@ import vlkv.processing.Urls
 import vlkv.processing.regexes.Removables
 
 class AutoWhoFixer(
-    private val configuration: Configuration,
+    val configuration: Configuration,
 ) {
 
     private val NON_INFORMATIVES = Removables(

@@ -6,9 +6,6 @@ data class Configuration(
     @JsonProperty("ignored_names_ci")
     val ignoredNamesCi: List<String>,
 
-    @JsonProperty("ignored_where_ci")
-    val ignoredWhereCi: List<String>,
-
     @JsonProperty("ignored_where_lines")
     val ignoredWhereLines: List<String>,
 

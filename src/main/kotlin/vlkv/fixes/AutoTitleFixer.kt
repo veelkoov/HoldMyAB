@@ -5,7 +5,7 @@ import vlkv.processing.Urls
 import vlkv.processing.regexes.Removables
 
 class AutoTitleFixer(
-    private val configuration: Configuration,
+    val configuration: Configuration,
 ) {
     fun fix(input: String): String {
         var result = input

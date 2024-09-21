@@ -4,7 +4,6 @@ import vlkv.fixes.StringList
 
 data class Configuration(
     val ignoredNames: StringList,
-    val ignoredWhere: StringList,
     val ignoredWhereLines: StringList,
     val removedTextGeneral: StringList,
     val ignoredTags: StringList,
@@ -12,14 +11,12 @@ data class Configuration(
 ) {
     constructor(
         ignoredNamesCI: List<String>,
-        ignoredWhereCI: List<String>,
         ignoredWhereLines: List<String>,
         removedTextGeneral: List<String>,
         ignoredTags: List<String>,
         nonNameTags: List<String>,
     ) : this(
         StringList(ignoredNamesCI, true),
-        StringList(ignoredWhereCI, true),
         StringList(ignoredWhereLines, false),
         StringList(removedTextGeneral, false),
         StringList(ignoredTags, false),
@@ -28,7 +25,6 @@ data class Configuration(
 
     companion object {
         fun empty() = Configuration(
-            listOf(),
             listOf(),
             listOf(),
             listOf(),

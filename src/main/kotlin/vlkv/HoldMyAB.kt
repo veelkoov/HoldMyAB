@@ -27,7 +27,6 @@ fun main() {
     printDifferences(oldDatabase, newDatabase)
 
     println("Unused ignored names: " + configuration.ignoredNames.getUnusedList())
-    println("Unused ignored where: " + configuration.ignoredWhere.getUnusedList())
     println("Unused ignored where lines: " + configuration.ignoredWhereLines.getUnusedList())
     println("Unused removed text general: " + configuration.removedTextGeneral.getUnusedList())
     println("Unused ignored tags: " + configuration.ignoredTags.getUnusedList())
