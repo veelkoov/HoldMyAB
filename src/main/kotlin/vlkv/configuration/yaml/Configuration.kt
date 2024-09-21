@@ -17,4 +17,7 @@ data class Configuration(
 
     @JsonProperty("non_name_tags")
     val nonNameTags: List<String>,
+
+    @JsonProperty("title_prefix_strip_regex_ci")
+    val titlePrefixStripRegexCi: String,
 )

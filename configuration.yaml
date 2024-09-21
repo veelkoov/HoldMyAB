@@ -174,3 +174,5 @@ non_name_tags:
   - 'musician'
   - 'scammer'
   - 'impersonation'
+
+title_prefix_strip_regex_ci: ^(commissioner|client|customer|fursuiter|artist|contest artist participants|resubmit -)? ?(Beware|Caution)[ .:!-]*

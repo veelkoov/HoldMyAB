@@ -8,6 +8,7 @@ data class Configuration(
     val removedTextGeneral: StringList,
     val ignoredTags: StringList,
     val nonNameTags: StringList,
+    val titlePrefixStripRegexCi: String,
 ) {
     constructor(
         ignoredNamesCI: List<String>,
@@ -15,12 +16,14 @@ data class Configuration(
         removedTextGeneral: List<String>,
         ignoredTags: List<String>,
         nonNameTags: List<String>,
+        titlePrefixStripRegexCi: String,
     ) : this(
         StringList(ignoredNamesCI, true),
         StringList(ignoredWhereLines, false),
         StringList(removedTextGeneral, false),
         StringList(ignoredTags, false),
         StringList(nonNameTags, false),
+        titlePrefixStripRegexCi,
     )
 
     companion object {
@@ -30,6 +33,7 @@ data class Configuration(
             listOf(),
             listOf(),
             listOf(),
+            "(?=a)a", // Never matches
         )
     }
 }

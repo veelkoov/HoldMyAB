@@ -17,6 +17,5 @@ class AutoTitleFixer(
         return result
     }
 
-    private val prefixSubjects = "commissioner|client|customer|fursuiter|artist|contest artist participants|resubmit -"
-    private val removables = Removables(Regex("^($prefixSubjects)? ?(Beware|Caution)[ .:!-]*", RegexOption.IGNORE_CASE))
+    private val removables = Removables(Regex(configuration.titlePrefixStripRegexCi, RegexOption.IGNORE_CASE))
 }

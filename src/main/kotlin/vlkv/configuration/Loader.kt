@@ -37,6 +37,7 @@ object Loader {
                 removedTextGeneral,
                 ignoredTags,
                 nonNameTags,
+                titlePrefixStripRegexCi,
             )
         }
     }
