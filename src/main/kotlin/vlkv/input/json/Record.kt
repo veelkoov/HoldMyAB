@@ -90,11 +90,11 @@ data class Record(
             caution = true
         }
 
-        if (beware && caution) {
-            print("${url}\n${category.name}\n$title | $tags\n\n")
-            // error("The record is a caution, but the title was a beware: $this")
-            // TODO: Require sync
-        }
+        // TODO: Require sync https://github.com/veelkoov/HoldMyAB/issues/2
+        // if (beware && caution) {
+        //     print("${url}\n${category.name}\n$title | $tags\n\n")
+        //     error("The record is a caution, but the title was a beware: $this")
+        // }
     }
 
     override fun toString(): String {
