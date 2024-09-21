@@ -7,10 +7,11 @@ import vlkv.processing.regexes.Removables
 class AutoWhoFixer(
     val configuration: Configuration,
 ) {
-
+    // TODO: https://github.com/veelkoov/HoldMyAB/issues/4
     private val NON_INFORMATIVES = Removables(
         Regex("^\\s*(artist|buyer)\\s*(:\\s*|$)", RegexOption.IGNORE_CASE),
     )
+
     fun fix(input: String): String {
         var result = input
 

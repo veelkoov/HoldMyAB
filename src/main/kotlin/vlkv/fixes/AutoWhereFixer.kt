@@ -42,6 +42,7 @@ class AutoWhereFixer(
         return result
     }
 
+    // TODO: https://github.com/veelkoov/HoldMyAB/issues/3
     private val uselessWhereWholeParts = listOf(
         "(on |via )?discord( messages?| dms?| chat)?",
         "art commissions discord",
@@ -68,6 +69,7 @@ class AutoWhereFixer(
         "(on |via )?(( and |, )?(Twitter|Tumblr|Furry Amino|Instagram|PayPal|Deviant ?Art))+",
     )
 
+    // TODO: https://github.com/veelkoov/HoldMyAB/issues/3
     private val uselessWhereFragments = listOf(
         "^(links:|where:)",
 
