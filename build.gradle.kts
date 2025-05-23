@@ -1,13 +1,13 @@
 plugins {
-    kotlin("jvm") version "1.9.10"
-    kotlin("plugin.serialization") version "1.9.10"
+    kotlin("jvm") version "2.1.21"
+    kotlin("plugin.serialization") version "2.1.21"
 
     application
     idea
 }
 
 kotlin {
-    jvmToolchain(17)
+    jvmToolchain(21)
 }
 
 group = "vlkv"
