@@ -135,12 +135,14 @@ fun compareBewares(new: Beware, old: Beware?): String {
             result += "(archive) "
         }
     } else {
-        result += if (new.isArchive == old.isArchive) {
+        result += if (new.isArchive && old.isArchive) {
             "(archive) "
         } else if (new.isArchive) {
             "(NOW ARCHIVE) "
-        } else {
+        } else if (old.isArchive) {
             "(NO LONGER ARCHIVE) "
+        } else {
+            ""
         }
     }
 

@@ -41,6 +41,8 @@ ignored_names_ci:
   - 'trello with an insane backlog:'
   - 'tumblr:'
   - 'twitter'
+  - 'Twitter handle'
+  - 'publicly available Twitter display name'
 
 ignored_where_lines:
   - "Anthrocon Dealer's Den"
@@ -97,6 +99,7 @@ removed_text_general:
   - '(gore warning)'
   - '(inactive)'
   - '(just in case)'
+  - '(link is now down, but this is where I commissioned them)'
   - '(new account)'
   - '(now deactivated)'
   - '(old account)'
@@ -114,7 +117,8 @@ removed_text_general:
   - 'New:'
   - 'Card:'
   - 'On Discord, user deleted account.'
-  - 'Telegram communications: '
+  - 'Telegram communications:'
+  - 'Telegram:'
   - 'Toyhouse:'
   - 'Trello List:'
   - 'Twitch:'
@@ -124,6 +128,7 @@ removed_text_general:
   - 'nsfw art featured here:'
 
 ignored_tags:
+  - 'undelivered product'
   - '2016'
   - '2019'
   - '2020'
@@ -141,6 +146,7 @@ ignored_tags:
   - 'archives:2011'  # Should get fixed on AB!
   - 'archives:2014'  # Should get fixed on AB!
   - 'art trade'
+  - 'artist ghosted'  # FIXME: Split or use as artist?
   - 'beware'
   - 'business organization'
   - 'caution'
@@ -159,7 +165,9 @@ ignored_tags:
   - 'nsfw'
   - 'other'
   - 'patreon'
+  - 'puppet commission'
   - 'plush'
+  - 'refund'
   - 'repost'
   - 'resolved'
   - 'sensitive content'
@@ -168,12 +176,16 @@ ignored_tags:
   - 'trade'
   - 'writer'
   - 'ych'
+  - 'incomplete work'
+  - 'undelivered refund'  # TODO
+  - 'undelivered commission'  # TODO
 
 non_name_tags:
   - 'art theft'
   - 'artist'
   - 'client'
   - 'fursuit'
+  - 'ghosting'
   - 'kigurumi'
   - 'musician'
   - 'scammer'

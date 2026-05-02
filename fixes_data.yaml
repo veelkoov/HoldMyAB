@@ -289,6 +289,13 @@ fixes:
         to:   'Beware : Roger / Starnosekid'
         why:  'Removed unusual warning label.'
 
+  - in: https://artistsbeware.info/beware/submissions/artist-bewares/beware-baasil-r2090/
+    change:
+      - what: who
+        from: 'Baasil [http://www.furaffinity.net/user/baasil/] SpicyBaasil [https://picarto.tv/SpicyBaasil]'
+        to:   'Baasil http://www.furaffinity.net/user/baasil/ SpicyBaasil https://picarto.tv/SpicyBaasil'
+        why:  'Removed unusual square brackets.'
+
   - in: https://artistsbeware.info/beware/archive/artist-beware-archives/beware-pirate-cashoo-r853/
     change:
       - what: where
